@@ -13,7 +13,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CoffeeShopManager.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController: ControllerBase
