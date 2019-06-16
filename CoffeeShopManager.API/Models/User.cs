@@ -1,3 +1,5 @@
+using System;
+
 namespace CoffeeShopManager.API.Models
 {
     public class User
@@ -9,5 +11,9 @@ namespace CoffeeShopManager.API.Models
         public byte[] PasswordHash { get; set; }
 
         public byte[] PasswordSalt { get; set; }
+
+        public int AccessCode { get; set; }
+
+        public int StaffId { get; set; }
     }
 }
