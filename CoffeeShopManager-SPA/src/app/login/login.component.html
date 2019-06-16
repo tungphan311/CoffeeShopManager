@@ -1,0 +1,16 @@
+<form #loginForm="ngForm" (ngSubmit)="login()">
+    <h2 class="text-center text-primary">Đăng nhập</h2>
+    <hr>
+    
+    <div class="form-group">
+        <label>Tên đăng nhập</label>
+        <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required [(ngModel)]="model.username">
+    </div>
+
+    <div class="form-group">
+        <label>Mật khẩu</label>
+        <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required [(ngModel)]="model.password">
+    </div>
+
+    <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+</form>

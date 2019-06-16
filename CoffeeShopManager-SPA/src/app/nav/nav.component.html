@@ -1,21 +1,36 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-  <div class="container">
+  <div class="container"  >
     <a class="navbar-brand" href="#">Tiệm cafe ABC</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Lập hoá đơn</a>
+      <li class="nav-item" routerLinkActive="router-link-active">
+        <a class="nav-link" [routerLink]="['/bill']">
+          Lập hoá đơn
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Quản lý lý lịch</a>
+      <li class="nav-item" routerLinkActive="router-link-active">
+        <a class="nav-link" [routerLink]="['/staff']">
+          Quản lý lý lịch
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Quản lý thu chi</a>
+      <li class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
+        <a class="nav-link dropdown-toggle" dropdownToggle>Quản lý thu chi</a>
+
+        <div class="dropdown-menu" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/receipt']" >
+            Quản lý phiếu thu
+          </a>
+          <a class="dropdown-item" [routerLink]="['/payment']" >
+            Quản lý phiếu chi
+          </a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Quản lý thành viên</a>
+      <li class="nav-item" routerLinkActive="router-link-active">
+        <a class="nav-link" [routerLink]="['/member']">
+          Quản lý thành viên
+        </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" routerLinkActive="router-link-active">
         <a class="nav-link" href="#">Quản lý nguyên liệu</a>
       </li>
     </ul>
@@ -31,12 +46,6 @@
         <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
       </div>
     </div>
-
-    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
-      <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required [(ngModel)]="model.username">
-      <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required [(ngModel)]="model.password">
-      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-    </form>
   </div>
     
 </nav>
