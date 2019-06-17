@@ -14,6 +14,8 @@ namespace CoffeeShopManager.API.Models
 
         public int AccessCode { get; set; }
 
+        public Staff Staff { get; set; }
+
         public int StaffId { get; set; }
     }
 }
