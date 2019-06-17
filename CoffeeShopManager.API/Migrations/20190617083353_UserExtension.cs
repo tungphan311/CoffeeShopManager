@@ -2,15 +2,17 @@
 
 namespace CoffeeShopManager.API.Migrations
 {
-    public partial class ExtendedUser : Migration
+    public partial class UserExtension : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.DropTable(
+                name: "Values");
+
+            migrationBuilder.AddColumn<string>(
                 name: "AccessCode",
                 table: "Users",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "StaffId",
@@ -64,7 +66,8 @@ namespace CoffeeShopManager.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Url = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    StaffId = table.Column<int>(nullable: false)
+                    StaffId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,13 +78,23 @@ namespace CoffeeShopManager.API.Migrations
                         principalTable: "Staffs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Photos_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_StaffId",
                 table: "Photos",
-                column: "StaffId",
-                unique: true);
+                column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_UserId",
+                table: "Photos",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staffs_TeamId",
@@ -107,6 +120,19 @@ namespace CoffeeShopManager.API.Migrations
             migrationBuilder.DropColumn(
                 name: "StaffId",
                 table: "Users");
+
+            migrationBuilder.CreateTable(
+                name: "Values",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Values", x => x.Id);
+                });
         }
     }
 }

@@ -27,10 +27,13 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.Property<string>("Url");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("StaffId")
-                        .IsUnique();
+                    b.HasIndex("StaffId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Photos");
                 });
@@ -78,7 +81,7 @@ namespace CoffeeShopManager.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccessCode");
+                    b.Property<string>("AccessCode");
 
                     b.Property<byte[]>("PasswordHash");
 
@@ -90,16 +93,19 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StaffId");
-
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.Photo", b =>
                 {
                     b.HasOne("CoffeeShopManager.API.Models.Staff", "Staff")
-                        .WithOne("Photo")
-                        .HasForeignKey("CoffeeShopManager.API.Models.Photo", "StaffId")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CoffeeShopManager.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -108,14 +114,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.HasOne("CoffeeShopManager.API.Models.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CoffeeShopManager.API.Models.User", b =>
-                {
-                    b.HasOne("CoffeeShopManager.API.Models.Staff", "Staff")
-                        .WithMany()
-                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

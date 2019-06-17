@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeShopManager.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190616180439_ExtendedUser")]
-    partial class ExtendedUser
+    [Migration("20190617083353_UserExtension")]
+    partial class UserExtension
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,10 +29,13 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.Property<string>("Url");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("StaffId")
-                        .IsUnique();
+                    b.HasIndex("StaffId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Photos");
                 });
@@ -80,7 +83,7 @@ namespace CoffeeShopManager.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccessCode");
+                    b.Property<string>("AccessCode");
 
                     b.Property<byte[]>("PasswordHash");
 
@@ -95,23 +98,16 @@ namespace CoffeeShopManager.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CoffeeShopManager.API.Models.Value", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Values");
-                });
-
             modelBuilder.Entity("CoffeeShopManager.API.Models.Photo", b =>
                 {
                     b.HasOne("CoffeeShopManager.API.Models.Staff", "Staff")
-                        .WithOne("Photo")
-                        .HasForeignKey("CoffeeShopManager.API.Models.Photo", "StaffId")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CoffeeShopManager.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

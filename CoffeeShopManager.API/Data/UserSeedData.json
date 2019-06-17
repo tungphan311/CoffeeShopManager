@@ -1,0 +1,20 @@
+[
+    {
+        "Username": "admin",
+        "Password": "password",
+        "AccessCode": "admin",
+        "StaffId": 0
+    },
+    {
+        "Username": "tungpt",
+        "Password": "password",
+        "AccessCode": "manager",
+        "StaffId": 0
+    },
+    {
+        "Username": "hoanglv",
+        "Password": "password",
+        "AccessCode": "cashier",
+        "StaffId": 0
+    }
+]

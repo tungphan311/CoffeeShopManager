@@ -12,9 +12,7 @@ namespace CoffeeShopManager.API.Models
 
         public byte[] PasswordSalt { get; set; }
 
-        public int AccessCode { get; set; }
-
-        public Staff Staff { get; set; }
+        public string AccessCode { get; set; }
 
         public int StaffId { get; set; }
     }

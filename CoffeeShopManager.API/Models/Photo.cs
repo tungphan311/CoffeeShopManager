@@ -11,5 +11,9 @@ namespace CoffeeShopManager.API.Models
         public Staff Staff { get; set; }
 
         public int StaffId { get; set; }
+
+        public User User { get; set; }
+
+        public int UserId { get; set; }
     }
 }

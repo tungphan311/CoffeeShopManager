@@ -10,6 +10,7 @@ export class AuthService {
   baseUrl = 'http://localhost:5000/api/auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  accessCode: string;
 
   constructor(private http: HttpClient) { }
 
