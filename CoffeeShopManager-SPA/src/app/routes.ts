@@ -6,6 +6,8 @@ import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { AuthGuard } from './_guard/auth.guard';
+import { Product_reportComponent } from './product_report/product_report.component';
+import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,7 +20,9 @@ export const appRoutes: Routes = [
             { path: 'staff', component: StaffsComponent },    
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
-            { path: 'member', component: MembersComponent }
+            { path: 'member', component: MembersComponent },
+            { path: 'product_report', component: Product_reportComponent},
+            { path: 'revenue_report', component: Revenue_reportComponent}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }
