@@ -20,7 +20,7 @@ export class Product_reportComponent implements OnInit {
   this.chartData = {
       labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
       datasets: [{
-          label: '# of Votes',
+          label: '',
           data: [12, 19, 3, 5, 2, 3],
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',

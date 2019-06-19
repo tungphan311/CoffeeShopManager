@@ -1,3 +1,12 @@
+
+
+
+
 <div id="content">
+  <h2 class="text-center text-primary">Thống kê doanh thu</h2>
+
+  <button type="button" class="btn btn-info" (click)="sortByDate()">Doanh thu theo ngày</button>
+  <button type="button" class="btn btn-primary" (click)="sortByWeek()">Doanh thu theo tuần</button>
+  <button type="button" class="btn btn-success" (click)="sortByMonth()">Doanh thu theo tháng</button>
   <canvas #chart></canvas>
 </div>
