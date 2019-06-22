@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Chart from 'chart.js';
+import * as XLSX from 'xlsx';
+
+type AOA = any[][];
+
 @Component({
   selector: 'app-revenue_report',
   templateUrl: './revenue_report.component.html',
@@ -7,70 +11,46 @@ import Chart from 'chart.js';
 })
 export class Revenue_reportComponent implements OnInit {
 
-  @ViewChild("chart")
+  @ViewChild('chart')
   public refChart: ElementRef;
 
   public chartData: any;
   chart: any;
   ctx: any;
   myChart: any;
+  monthLabels: any;
+  monthData: any;
+  weekLabels: any;
+  weekData: any;
+  dateLabels: any;
+  dateData: any;
+  data: AOA = [ [1, 2], [3, 4] ];
+  fileName = 'SheetJS.xlsx';
+  count: number;
 
   public constructor() {
     this.chartData = {};
+    this.monthLabels = ['4', '5', '6', '7', '8', '9'];
+    this.monthData = [12, 19, 3, 5, 2, 3];
+    this.weekLabels = ['4', '5', '6', '7', '8', '9'];
+    this.weekData = [12, 19, 3, 5, 2, 3];
+    this.dateLabels = ['4', '5', '6', '7', '8', '9'];
+    this.dateData = [12, 19, 3, 5, 2, 3];
+    this.count = 0;
 }
 
   public ngOnInit() {
-  // this.chartData = {
-  //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-  //     datasets: [{
-  //         label: 'Doanh thu (triệu đồng)',
-  //         data: [12, 19, 3, 5, 2, 3],
-  //         backgroundColor: [
-  //             'rgba(255, 99, 132, 0.2)',
-  //             'rgba(54, 162, 235, 0.2)',
-  //             'rgba(255, 206, 86, 0.2)',
-  //             'rgba(75, 192, 192, 0.2)',
-  //             'rgba(153, 102, 255, 0.2)',
-  //             'rgba(255, 159, 64, 0.2)'
-  //         ],
-  //         borderColor: [
-  //             'rgba(255,99,132,1)',
-  //             'rgba(54, 162, 235, 1)',
-  //             'rgba(255, 206, 86, 1)',
-  //             'rgba(75, 192, 192, 1)',
-  //             'rgba(153, 102, 255, 1)',
-  //             'rgba(255, 159, 64, 1)'
-  //         ],
-  //         borderWidth: 1
-  //     }]
-  // };
-}
 
-public ngAfterViewInit() {
-  // let chart = this.refChart.nativeElement;
-  // let ctx = chart.getContext("2d");
-  // let myChart = new Chart(ctx, {
-  //     type: 'bar',
-  //     data: this.chartData,
-  //     options: {
-  //         scales: {
-  //             yAxes: [{
-  //                 ticks: {
-  //                     beginAtZero: true
-  //                 }
-  //             }]
-  //         }
-  //     }
-  // });
 }
 
 sortByMonth() {
-  console.log('month')
+  this.count = 1;
+  console.log('month');
   this.chartData = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: this.monthLabels,
     datasets: [{
         label: 'Doanh thu (triệu đồng)',
-        data: [12, 19, 3, 5, 2, 3],
+        data: this.monthData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -94,12 +74,13 @@ sortByMonth() {
   this.drawChart();
 }
 sortByWeek() {
-  console.log('week')
+  this.count = 2;
+  console.log('week');
   this.chartData = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: this.weekLabels,
     datasets: [{
         label: 'Doanh thu (triệu đồng)',
-        data: [1, 2, 3, 4, 2, 3],
+        data: this.weekData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -122,12 +103,13 @@ sortByWeek() {
   this.drawChart();
 }
 sortByDate() {
-  console.log('date')
+  this.count = 3;
+  console.log('date');
   this.chartData = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: this.dateLabels,
     datasets: [{
         label: 'Doanh thu (triệu đồng)',
-        data: [4, 5, 6, 7, 8, 9],
+        data: this.dateData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -149,9 +131,41 @@ sortByDate() {
 };
   this.drawChart();
 }
+report() {
+
+  switch (this.count)
+  {
+    case 1:
+      {
+        this.data = [this.monthLabels, this.monthData];
+        this.exportToExcel();
+        break;
+      }
+    case 2:
+      {
+        this.data = [this.weekLabels, this.weekData];
+        this.exportToExcel();
+        break;
+      }
+    case 3:
+      {
+        this.data = [this.dateLabels, this.dateData];
+        this.exportToExcel();
+        break;
+      }
+    default:
+    {
+      break;
+    }
+  }
+
+
+
+
+}
 drawChart() {
   this.chart = this.refChart.nativeElement;
-  this.ctx = this.chart.getContext("2d");
+  this.ctx = this.chart.getContext('2d');
   this.myChart = new Chart(this.ctx, {
       type: 'bar',
       data: this.chartData,
@@ -167,14 +181,16 @@ drawChart() {
       }
   });
   this.chartData = [];
-  this.removeData(this.chart);
 }
-removeData(chart) {
-  chart.data.labels.pop();
-  chart.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
-  });
-  chart.update();
+exportToExcel() {
+  const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+
+  /* generate workbook and add the worksheet */
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+  /* save to file */
+  XLSX.writeFile(wb, this.fileName);
 }
 }
 
