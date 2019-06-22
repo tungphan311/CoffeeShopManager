@@ -4,6 +4,10 @@ import * as XLSX from 'xlsx';
 
 type AOA = any[][];
 
+
+//Muon chay duoc report voi xuat ra excel thi phai chay 2 lenh sau
+// npm install xlsx --save
+// npm install chart.js --save
 @Component({
   selector: 'app-revenue_report',
   templateUrl: './revenue_report.component.html',
