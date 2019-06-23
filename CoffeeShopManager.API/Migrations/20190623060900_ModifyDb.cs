@@ -21,33 +21,32 @@ namespace CoffeeShopManager.API.Migrations
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
+                name: "ProductDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductId = table.Column<int>(nullable: false),
+                    Size = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductDetails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    SizeID = table.Column<string>(nullable: true),
-                    TypeOfProductID = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Price = table.Column<string>(nullable: true),
                     Photo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sizes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,19 +60,6 @@ namespace CoffeeShopManager.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teams", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TypeOfProducts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TypeOfProducts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,16 +97,13 @@ namespace CoffeeShopManager.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ProductDetails");
+
+            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Sizes");
-
-            migrationBuilder.DropTable(
                 name: "Staffs");
-
-            migrationBuilder.DropTable(
-                name: "TypeOfProducts");
 
             migrationBuilder.DropTable(
                 name: "Teams");

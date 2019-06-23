@@ -25,27 +25,25 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.Property<string>("Photo");
 
-                    b.Property<string>("Price");
-
-                    b.Property<string>("SizeID");
-
-                    b.Property<string>("TypeOfProductID");
-
                     b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("CoffeeShopManager.API.Models.Size", b =>
+            modelBuilder.Entity("CoffeeShopManager.API.Models.ProductDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<int>("Price");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<string>("Size");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("ProductDetails");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.Staff", b =>
@@ -86,18 +84,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("CoffeeShopManager.API.Models.TypeOfProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfProducts");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.User", b =>
