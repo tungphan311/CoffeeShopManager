@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using CoffeeShopManager.API.Data.Users;
+using CoffeeShopManager.API.Data;
 using CoffeeShopManager.API.Dto;
 using CoffeeShopManager.API.Models;
 using Microsoft.AspNetCore.Mvc;

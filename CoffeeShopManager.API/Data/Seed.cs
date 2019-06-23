@@ -15,17 +15,8 @@ namespace CoffeeShopManager.API.Data
 
         public void SeedUser()
         {
-            var userData = System.IO.File.ReadAllText("Data/Seed/UserSeedData.json");
+            var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
             var users = JsonConvert.DeserializeObject<List<User>>(userData);
-
-            var productType = System.IO.File.ReadAllText("Data/Seed/ProductTypeSeedData.json");
-            var types = JsonConvert.DeserializeObject<List<ProductType>>(productType);
-
-            var productData = System.IO.File.ReadAllText("Data/Seed/ProductSeedData.json");
-            var products = JsonConvert.DeserializeObject<List<Product>>(productData);
-
-            var productDetailData = System.IO.File.ReadAllText("Data/Seed/ProductDetailSeedData.json");
-            var details = JsonConvert.DeserializeObject<List<ProductDetail>>(productDetailData);
 
             foreach (var user in users)
             {
@@ -34,23 +25,9 @@ namespace CoffeeShopManager.API.Data
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
+                user.Username = user.Username.ToLower();
 
                 _context.Users.Add(user);
-            }
-
-            foreach (var type in types)
-            {
-                _context.ProductTypes.Add(type);
-            }
-
-            foreach (var product in products)
-            {
-                _context.Products.Add(product);
-            }
-
-            foreach (var detail in details)
-            {
-                _context.ProductDetails.Add(detail);
             }
 
             _context.SaveChanges();

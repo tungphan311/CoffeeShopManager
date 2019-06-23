@@ -5,7 +5,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using CoffeeShopManager.API.Data.Users;
 using CoffeeShopManager.API.Data;
 using CoffeeShopManager.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,7 +40,7 @@ namespace CoffeeShopManager.API
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<Data.Users.IAppRepository, Data.Users.AppRepository>();
+            services.AddScoped<IAppRepository, AppRepository>();
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
@@ -83,7 +82,7 @@ namespace CoffeeShopManager.API
             }
 
             //app.UseHttpsRedirection();
-            //seeder.SeedUser();
+            seeder.SeedUser();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

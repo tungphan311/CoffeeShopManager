@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoffeeShopManager.API.Models;
 
-namespace CoffeeShopManager.API.Data.Users
+namespace CoffeeShopManager.API.Data
 {
     public interface IAppRepository
     {
@@ -15,8 +15,5 @@ namespace CoffeeShopManager.API.Data.Users
         Task<IEnumerable<User>> GetUsers();
 
         Task<User> GetUser(int id);
-
-        Task<Staff> GetStaff(int id);
-        Task<IEnumerable<Staff>> GetStaffs();
     }
 }

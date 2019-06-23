@@ -1,32 +1,26 @@
 [
     {
         "Name": "Cà phê sữa",
-        "TypeId": 1,
         "Photo": "https://product.hstatic.net/1000075078/product/cfs_master.jpg"
     },
     {
         "Name": "Cà phê đen",
-        "TypeId": 1,
         "Photo": "https://product.hstatic.net/1000075078/product/vnese_coffee_master.jpg"
     },
     {
         "Name": "Bạc sỉu",
-        "TypeId": 1,
         "Photo": "https://product.hstatic.net/1000075078/product/white_vnese_coffee_9968c1184d7f4634a9bb9fce7b5ff313_master.jpg"
     },
     {
         "Name": "Americano",
-        "TypeId": 1,
         "Photo": "https://product.hstatic.net/1000075078/product/americano_master.jpg"
     },
     {
         "Name": "Caramel Capuchino",
-        "TypeId": 1,
         "Photo": "https://product.hstatic.net/1000075078/product/caramel_macchiato_b6f694f469794e12b04a91845f5fce2d_master.jpg"
     },
     {
-        "Name": "Sô-cô-la đá",
-        "TypeId": 1,
-        "Photo": "https://product.hstatic.net/1000075078/product/iced_chocolate_master.jpg"
+        "Name": "Espresso",
+        "Photo": "https://product.hstatic.net/1000075078/product/espresso_master.jpg"
     }
 ]
