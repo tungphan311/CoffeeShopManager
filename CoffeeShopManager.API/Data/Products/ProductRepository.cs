@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeShopManager.API.Data
+namespace CoffeeShopManager.API.Data.Products
 {
-    public class AppRepository : IAppRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly DataContext _context;
-        public AppRepository(DataContext context)
+        public ProductRepository(DataContext context)
         {
             _context = context;
         }
@@ -22,18 +22,18 @@ namespace CoffeeShopManager.API.Data
             _context.Remove(entity);
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<Product> GetProduct(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-            return user;
+            return product;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<Product>> GetProducts()
         {
-            var users = await _context.Users.ToListAsync();
+            var products = await _context.Products.ToListAsync();
 
-            return users;
+            return products;
         }
 
         public async Task<bool> SaveAll()
