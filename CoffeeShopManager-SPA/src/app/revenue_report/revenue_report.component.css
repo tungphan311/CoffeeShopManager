@@ -1,0 +1,10 @@
+#content {
+    margin: auto;
+    width: 1024px;
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+.btn {
+    padding: 10px;
+    margin: 10px;
+}

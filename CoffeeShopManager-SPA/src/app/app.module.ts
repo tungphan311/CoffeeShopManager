@@ -23,6 +23,8 @@ import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guard/auth.guard';
+import { Product_reportComponent } from './product_report/product_report.component';
+import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { AuthGuard } from './_guard/auth.guard';
       StaffsComponent,
       ReceiptsComponent,
       PaymentsComponent,
-      MembersComponent
+      MembersComponent,
+      Product_reportComponent,
+      Revenue_reportComponent
    ],
    imports: [
       BrowserModule,
