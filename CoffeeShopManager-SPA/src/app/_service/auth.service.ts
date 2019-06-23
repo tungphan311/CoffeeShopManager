@@ -12,7 +12,6 @@ export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-  userId: any;
   accessCode = '';
 
   constructor(
@@ -28,10 +27,6 @@ export class AuthService {
           if (user) {
             localStorage.setItem('token', user.token);
             this.decodedToken = this.jwtHelper.decodeToken(user.token);
-            this.userId = this.decodedToken.nameid;
-            this.userService.getUser(this.userId).subscribe(result => {
-              this.accessCode = result.accessCode;
-            });
           }
         })
       );
