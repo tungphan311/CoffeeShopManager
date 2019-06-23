@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeShopManager.API.Data
+namespace CoffeeShopManager.API.Data.Users
 {
-    public class AppRepository : IAppRepository
+    public class AppRepository: IAppRepository
     {
         private readonly DataContext _context;
         public AppRepository(DataContext context)

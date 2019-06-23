@@ -12,12 +12,12 @@ import { Revenue_reportComponent } from './revenue_report/revenue_report.compone
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     {
-        path: '', 
+        path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
             { path: 'bill', component: BillsComponent },
-            { path: 'staff', component: StaffsComponent },    
+            { path: 'staff', component: StaffsComponent },
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
             { path: 'member', component: MembersComponent },
@@ -26,4 +26,4 @@ export const appRoutes: Routes = [
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' }
-]
+];
