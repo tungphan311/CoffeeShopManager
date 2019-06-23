@@ -8,6 +8,15 @@ import { AuthService } from '../_service/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  elements: any = [
+    {id: 1, ten: 'Phan Thanh Tùng', mssv: '1652....'},
+    {id: 2, ten: 'Nguyễn Đăng Quang', mssv: '1652....'},   
+    {id: 3, ten: 'Nguyễn Ngọc Nghĩa', mssv: '1652....'},
+    {id: 4, ten: 'Lê Việt Hoàng', mssv: '1652....'},
+  ];
+
+  headElements = ['ID', 'Tên', 'MSSV'];
+
   registerMode = false;
   values: any;
 

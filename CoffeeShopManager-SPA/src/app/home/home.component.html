@@ -16,7 +16,7 @@
     </div>
   </div> -->
 
-  <div *ngIf="!loggedIn()" class="container">
+  <!-- <div *ngIf="!loggedIn()" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
         <app-login (cancelRegister)="cancelRegisterMode($event)"></app-login>
@@ -24,4 +24,19 @@
     </div>
   </div>  
 </div>
+ -->
 
+ <table mdbTable>
+  <thead class="blue white-text">
+    <tr>
+      <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of elements">
+      <th scope="row">{{el.id}}</th>
+      <td>{{el.ten}}</td>
+      <td>{{el.mssv}}</td>
+    </tr>
+  </tbody>
+</table>
