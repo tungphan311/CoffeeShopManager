@@ -2,17 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api/auth/';
+  baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-  accessCode: string;
+  userId: any;
+  accessCode = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+  ) { }
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model)
@@ -22,7 +28,10 @@ export class AuthService {
           if (user) {
             localStorage.setItem('token', user.token);
             this.decodedToken = this.jwtHelper.decodeToken(user.token);
-            console.log(this.decodedToken);
+            this.userId = this.decodedToken.nameid;
+            this.userService.getUser(this.userId).subscribe(result => {
+              this.accessCode = result.accessCode;
+            });
           }
         })
       );

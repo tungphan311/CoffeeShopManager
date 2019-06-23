@@ -41,7 +41,7 @@ namespace CoffeeShopManager.API
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAppRepository, AppRepository>();
-            services.AddAutoMapper();
+            //services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

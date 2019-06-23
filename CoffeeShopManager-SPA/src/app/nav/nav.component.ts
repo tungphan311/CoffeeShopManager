@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   // @ViewChild('login') login: LoginComponent;
   model: any = {};
+  accessCode = '';
 
   constructor(
     public authService: AuthService,
@@ -23,6 +24,7 @@ export class NavComponent implements OnInit {
   }
 
   loggedIn() {
+    this.accessCode = this.authService.accessCode;
     return this.authService.loggedIn();
   }
 
