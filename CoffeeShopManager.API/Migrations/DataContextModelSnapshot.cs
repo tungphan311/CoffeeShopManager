@@ -16,6 +16,30 @@ namespace CoffeeShopManager.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
+            modelBuilder.Entity("CoffeeShopManager.API.Models.Member", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("Photo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Members");
+                });
+
             modelBuilder.Entity("CoffeeShopManager.API.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -24,6 +48,8 @@ namespace CoffeeShopManager.API.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("Photo");
+
+                    b.Property<int>("TypeId");
 
                     b.HasKey("Id");
 
@@ -46,12 +72,26 @@ namespace CoffeeShopManager.API.Migrations
                     b.ToTable("ProductDetails");
                 });
 
+            modelBuilder.Entity("CoffeeShopManager.API.Models.ProductType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductTypes");
+                });
+
             modelBuilder.Entity("CoffeeShopManager.API.Models.Staff", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email");
 
@@ -64,8 +104,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.Property<string>("Photo");
 
                     b.Property<int>("TeamId");
-
-                    b.Property<int>("YearOfBirth");
 
                     b.HasKey("Id");
 
