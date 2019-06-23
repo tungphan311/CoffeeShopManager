@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./staffs.component.css']
 })
 export class StaffsComponent implements OnInit {
+  dataSource  = [];
+  tableColumns: string[] = ['id', 'name', 'teamId', 'gender', 'dateOfBirth', 'phone', 'email', 'address', 'photo'];
 
   constructor() { }
 

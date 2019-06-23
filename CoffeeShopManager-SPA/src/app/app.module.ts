@@ -27,6 +27,7 @@ import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 import { UserService } from './_service/user.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -63,7 +64,8 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      BrowserAnimationsModule
    ],
    providers: [
       AuthService,
