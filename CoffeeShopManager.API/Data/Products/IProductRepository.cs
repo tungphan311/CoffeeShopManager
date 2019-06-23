@@ -6,7 +6,7 @@ namespace CoffeeShopManager.API.Data.Products
 {
     public interface IProductRepository
     {
-         void Add<T>(T entity) where T: class;
+        void Add<T>(T entity) where T: class;
 
         void Delete<T>(T entity) where T: class;
 

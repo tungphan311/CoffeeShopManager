@@ -9,8 +9,11 @@ namespace CoffeeShopManager.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForViewDto>();
+            
             CreateMap<Staff, StaffForListDto>();
             CreateMap<Staff, StaffForDetailDto>();
+
+            CreateMap<Product, ProductForViewDto>();
         }
     }
 }

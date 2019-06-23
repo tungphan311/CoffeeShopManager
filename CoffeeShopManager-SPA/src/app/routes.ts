@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { BillsComponent } from './bills/bills.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
@@ -8,6 +7,7 @@ import { StaffsComponent } from './staffs/staffs.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
+import { BillsComponent } from './CreateBills/bills/bills.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },

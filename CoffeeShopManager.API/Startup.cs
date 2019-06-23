@@ -21,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using CoffeeShopManager.API.Data.Products;
 
 namespace CoffeeShopManager.API
 {
@@ -42,6 +43,7 @@ namespace CoffeeShopManager.API
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<Data.Users.IAppRepository, Data.Users.AppRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {

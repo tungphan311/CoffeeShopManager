@@ -17,7 +17,6 @@ import { ListsComponent } from './lists/lists.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
-import { BillsComponent } from './bills/bills.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
@@ -27,6 +26,8 @@ import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 import { UserService } from './_service/user.service';
+import { ProductComponent } from './CreateBills/product/product.component';
+import { BillsComponent } from './CreateBills/bills/bills.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -47,7 +48,8 @@ export function tokenGetter() {
       PaymentsComponent,
       MembersComponent,
       Product_reportComponent,
-      Revenue_reportComponent
+      Revenue_reportComponent,
+      ProductComponent
    ],
    imports: [
       BrowserModule,
