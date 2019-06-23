@@ -29,9 +29,6 @@ import { Revenue_reportComponent } from './revenue_report/revenue_report.compone
 import { UserService } from './_service/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-   MatSortModule, MatTableModule } from '@angular/material';
-
 export function tokenGetter() {
    return localStorage.getItem('token');
 }
@@ -55,11 +52,6 @@ export function tokenGetter() {
    ],
    imports: [
       BrowserModule,
-      MatInputModule,
-      MatTableModule,
-      MatPaginatorModule,
-      MatSortModule,
-      MatProgressSpinnerModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
@@ -74,7 +66,6 @@ export function tokenGetter() {
          }
       }),
       BrowserAnimationsModule
-
    ],
    providers: [
       AuthService,
