@@ -14,7 +14,8 @@ namespace CoffeeShopManager.API.Data
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Product> Products {get; set;}
-        public DbSet<Size> Sizes {get; set;}
-        public DbSet<TypeOfProduct> TypeOfProducts {get; set;}
+        public DbSet<ProductDetail> ProductDetails { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<Member> Members { get; set; }
     }
 }

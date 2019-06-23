@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../_service/auth.service';
-import { LoginComponent } from '../login/login.component';
 import { AlertifyService } from '../_service/alertify.service';
 import { Router } from '@angular/router';
+import { UserService } from '../_service/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-nav',
@@ -10,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  // @ViewChild('login') login: LoginComponent;
+  // @ViewChild('app') app: AppComponent;
   model: any = {};
-  accessCode = '';
+  public accessCode = '';
+  jwtHelper = new JwtHelperService();
 
   constructor(
     public authService: AuthService,
@@ -21,10 +24,14 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+  }
+
+  getAccessCode(): string {
+    return this.authService.accessCode;
   }
 
   loggedIn() {
-    this.accessCode = this.authService.accessCode;
     return this.authService.loggedIn();
   }
 

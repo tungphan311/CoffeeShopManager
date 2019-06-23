@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeShopManager.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190623044404_ModifyDb")]
+    [Migration("20190623064753_ModifyDb")]
     partial class ModifyDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,30 @@ namespace CoffeeShopManager.API.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+
+            modelBuilder.Entity("CoffeeShopManager.API.Models.Member", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("Photo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Members");
+                });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.Product", b =>
                 {
@@ -27,18 +51,30 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.Property<string>("Photo");
 
-                    b.Property<string>("Price");
-
-                    b.Property<string>("SizeID");
-
-                    b.Property<string>("TypeOfProductID");
+                    b.Property<int>("TypeId");
 
                     b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("CoffeeShopManager.API.Models.Size", b =>
+            modelBuilder.Entity("CoffeeShopManager.API.Models.ProductDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Price");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<string>("Size");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductDetails");
+                });
+
+            modelBuilder.Entity("CoffeeShopManager.API.Models.ProductType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -47,7 +83,7 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("ProductTypes");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.Staff", b =>
@@ -56,6 +92,8 @@ namespace CoffeeShopManager.API.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email");
 
@@ -68,8 +106,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.Property<string>("Photo");
 
                     b.Property<int>("TeamId");
-
-                    b.Property<int>("YearOfBirth");
 
                     b.HasKey("Id");
 
@@ -88,18 +124,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("CoffeeShopManager.API.Models.TypeOfProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfProducts");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.User", b =>

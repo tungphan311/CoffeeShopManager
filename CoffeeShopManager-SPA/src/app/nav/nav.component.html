@@ -8,12 +8,12 @@
           Lập hoá đơn
         </a>
       </li>
-      <li class="nav-item" routerLinkActive="router-link-active">
-        <a *ngIf="accessCode == 'admin'" class="nav-link" [routerLink]="['/staff']">
+      <li *ngIf="getAccessCode() == 'admin'" class="nav-item" routerLinkActive="router-link-active">
+        <a class="nav-link" [routerLink]="['/staff']">
           Quản lý lý lịch
         </a>
       </li>
-      <li *ngIf="accessCode != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
+      <li *ngIf="getAccessCode() != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
         <a class="nav-link dropdown-toggle" dropdownToggle>Quản lý thu chi</a>
 
         <div class="dropdown-menu" *dropdownMenu>
@@ -25,7 +25,7 @@
           </a>
         </div>
       </li>
-      <li *ngIf="accessCode != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
+      <li *ngIf="getAccessCode() != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
         <a class="nav-link dropdown-toggle" dropdownToggle>Thống kê</a>
 
         <div class="dropdown-menu" *dropdownMenu>
@@ -42,7 +42,7 @@
           Quản lý thành viên
         </a>
       </li>
-      <li *ngIf="accessCode != 'cashier'" class="nav-item" routerLinkActive="router-link-active">
+      <li *ngIf="getAccessCode() != 'cashier'" class="nav-item" routerLinkActive="router-link-active">
         <a class="nav-link" href="#">Quản lý nguyên liệu</a>
       </li>
     </ul>
