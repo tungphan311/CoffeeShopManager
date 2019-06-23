@@ -1,16 +1,19 @@
+using System.Collections.Generic;
+
 namespace CoffeeShopManager.API.Models
 {
     public class Product
     {
-        public string Id { get; set;}
+        public int Id { get; set;}
         
-        public string sizeID {get; set;}
+        public string SizeID {get; set;}
 
-        public string typeOfProductID {get; set;}
+        public string TypeOfProductID {get; set;}
 
-        public string name {get; set;}
+        public string Name {get; set;}
 
-        public string price {get; set;}
+        public string Price {get; set;}
 
+        public string Photo { get; set; }
     }
 }
