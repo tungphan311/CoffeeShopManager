@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CoffeeShopManager.API.Data.Users;
 using CoffeeShopManager.API.Data;
 using CoffeeShopManager.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -40,7 +41,7 @@ namespace CoffeeShopManager.API
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IAppRepository, AppRepository>();
+            services.AddScoped<Data.Users.IAppRepository, Data.Users.AppRepository>();
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
