@@ -29,11 +29,25 @@ namespace CoffeeShopManager.API.Data
             return user;
         }
 
+        public async Task<Staff> GetStaff(int id)
+        {
+            var staff = await _context.Staffs.FirstOrDefaultAsync(u => u.Id == id);
+
+            return staff;
+        }
+
         public async Task<IEnumerable<User>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
 
             return users;
+        }
+
+        public async Task<IEnumerable<Staff>> GetStaffs()
+        {
+            var staffs = await _context.Staffs.ToListAsync();
+
+            return staffs;
         }
 
         public async Task<bool> SaveAll()
