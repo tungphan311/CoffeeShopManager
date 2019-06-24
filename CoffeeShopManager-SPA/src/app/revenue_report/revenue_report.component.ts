@@ -40,11 +40,11 @@ export class Revenue_reportComponent implements OnInit {
     // filter by 6 nearest days
     // filter by 6 nearest weeks
     // this is temp data:
-    this.monthLabels = ['4', '5', '6', '7', '8', '9'];
+    this.monthLabels = [ '4', '5', '6', '7', '8', '9'];
     this.monthData = [12, 19, 3, 5, 2, 3];
-    this.weekLabels = ['4', '5', '6', '7', '8', '9'];
+    this.weekLabels = [ '4', '5', '6', '7', '8', '9'];
     this.weekData = [12, 19, 3, 5, 2, 3];
-    this.dateLabels = ['4', '5', '6', '7', '8', '9'];
+    this.dateLabels = [ '4', '5', '6', '7', '8', '9'];
     this.dateData = [12, 19, 3, 5, 2, 3];
     this.count = 0;
 }
@@ -55,7 +55,6 @@ export class Revenue_reportComponent implements OnInit {
 
 sortByMonth() {
   this.count = 1;
-  console.log('month');
   this.chartData = {
     labels: this.monthLabels,
     datasets: [{
@@ -85,7 +84,6 @@ sortByMonth() {
 }
 sortByWeek() {
   this.count = 2;
-  console.log('week');
   this.chartData = {
     labels: this.weekLabels,
     datasets: [{
@@ -114,7 +112,6 @@ sortByWeek() {
 }
 sortByDate() {
   this.count = 3;
-  console.log('date');
   this.chartData = {
     labels: this.dateLabels,
     datasets: [{
@@ -148,22 +145,38 @@ report() {
     case 1:
       {
         this.fileName = 'BaoCaoDoanhThuTheoThang.xlsx';
+        this.monthData.unshift("Doanh Thu");
+        this.monthLabels.unshift("Tháng");
         this.data = [this.monthLabels, this.monthData];
         this.exportToExcel();
+
+        this.monthData.shift();
+        this.monthLabels.shift();
         break;
       }
     case 2:
       {
         this.fileName = 'BaoCaoDoanhThuTheoTuan.xlsx';
+        this.weekData.unshift("Doanh Thu");
+        this.weekLabels.unshift("Tuần");
         this.data = [this.weekLabels, this.weekData];
         this.exportToExcel();
+
+        this.weekData.shift();
+        this.weekLabels.shift();
+
         break;
       }
     case 3:
       {
         this.fileName = 'BaoCaoDoanhThuTheoNgay.xlsx';
+        this.dateData.unshift("Doanh Thu");
+        this.dateLabels.unshift("Ngày");
         this.data = [this.dateLabels, this.dateData];
         this.exportToExcel();
+        
+        this.dateData.shift();
+        this.dateLabels.shift();
         break;
       }
     default:

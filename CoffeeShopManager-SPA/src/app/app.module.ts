@@ -28,6 +28,9 @@ import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 import { UserService } from './_service/user.service';
+import { StaffService } from './_service/staff.service';
+import { StaffListComponent } from './staffs/staff-list/staff-list.component';
+import { StaffCardComponent } from './staffs/staff-card/staff-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductService } from './_service/Products/product.service';
 import { ProductDetailComponent } from './CreateBill/product-detail/product-detail.component';
@@ -46,7 +49,8 @@ export function tokenGetter() {
       ListsComponent,
       LoginComponent,
       BillsComponent,
-      StaffsComponent,
+      StaffListComponent,
+      StaffCardComponent,
       ReceiptsComponent,
       PaymentsComponent,
       MembersComponent,
@@ -79,6 +83,7 @@ export function tokenGetter() {
       AlertifyService,
       AuthGuard,
       UserService,
+      StaffService,
       ProductService
    ],
    bootstrap: [
