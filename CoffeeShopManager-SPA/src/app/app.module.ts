@@ -17,7 +17,8 @@ import { ListsComponent } from './lists/lists.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
-import { BillsComponent } from './bills/bills.component';
+import { BillsComponent } from './CreateBill/bills/bills.component';
+import { ProductComponent } from './CreateBill/product/product.component';
 import { StaffsComponent } from './staffs/staffs.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
@@ -28,6 +29,7 @@ import { Product_reportComponent } from './product_report/product_report.compone
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 import { UserService } from './_service/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductService } from './_service/Products/product.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -48,7 +50,8 @@ export function tokenGetter() {
       PaymentsComponent,
       MembersComponent,
       Product_reportComponent,
-      Revenue_reportComponent
+      Revenue_reportComponent,
+      ProductComponent
    ],
    imports: [
       BrowserModule,
@@ -72,7 +75,8 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      UserService
+      UserService,
+      ProductService
    ],
    bootstrap: [
       AppComponent
