@@ -1,14 +1,20 @@
-
-
-
-
 <div id="content">
   <h2 class="text-center text-primary">Thống kê doanh thu</h2>
+  <ul class="list-inline text-center" >
+    <li class="list-inline-item">
+        <button type="button" class="btn btn-info" (click)="sortByDate()">Doanh thu theo ngày</button>
+    </li>
+    <li class="list-inline-item">
+        <button type="button" class="btn btn-primary" (click)="sortByWeek()">Doanh thu theo tuần</button>
+    </li>
+    <li class="list-inline-item">
+        <button type="button" class="btn btn-success" (click)="sortByMonth()">Doanh thu theo tháng</button>
+    </li>
+   <li class="list-inline-item">
+        <button type="button" *ngIf="isExportable" id="buttonBaocao" class="btn btn-warning" (click)="report()">Xuất file báo cáo</button>
+    </li>
+  </ul>
 
-  <button type="button" class="btn btn-info" (click)="sortByDate()">Doanh thu theo ngày</button>
-  <button type="button" class="btn btn-primary" (click)="sortByWeek()">Doanh thu theo tuần</button>
-  <button type="button" class="btn btn-success" (click)="sortByMonth()">Doanh thu theo tháng</button>
-  <button type="button" id="buttonBaocao" class="btn btn-warning" (click)="report()">Xuất file báo cáo</button>
   <canvas #chart></canvas>
 
   

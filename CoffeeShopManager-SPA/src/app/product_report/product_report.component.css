@@ -3,4 +3,9 @@
     width: 1024px;
     background-color: #FFFFFF;
     padding: 20px;
+    text-align: center;
+}
+.btn {
+    padding: 10px;
+    margin: 10px;
 }

@@ -17,7 +17,9 @@ import { ListsComponent } from './lists/lists.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
-import { BillsComponent } from './bills/bills.component';
+import { BillsComponent } from './CreateBill/bills/bills.component';
+import { ProductComponent } from './CreateBill/product/product.component';
+import { StaffsComponent } from './staffs/staffs.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
@@ -29,6 +31,8 @@ import { UserService } from './_service/user.service';
 import { StaffService } from './_service/staff.service';
 import { StaffListComponent } from './staffs/staff-list/staff-list.component';
 import { StaffCardComponent } from './staffs/staff-card/staff-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductService } from './_service/Products/product.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,7 +54,8 @@ export function tokenGetter() {
       PaymentsComponent,
       MembersComponent,
       Product_reportComponent,
-      Revenue_reportComponent
+      Revenue_reportComponent,
+      ProductComponent
    ],
    imports: [
       BrowserModule,
@@ -66,7 +71,8 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      BrowserAnimationsModule
    ],
    providers: [
       AuthService,
@@ -74,7 +80,8 @@ export function tokenGetter() {
       AlertifyService,
       AuthGuard,
       UserService,
-      StaffService
+      StaffService,
+      ProductService
    ],
    bootstrap: [
       AppComponent
