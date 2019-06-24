@@ -4,10 +4,10 @@ import { BillsComponent } from './bills/bills.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
-import { StaffsComponent } from './staffs/staffs.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
+import { StaffListComponent } from './staffs/staff-list/staff-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,7 +17,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'bill', component: BillsComponent },
-            { path: 'staff', component: StaffsComponent },
+            { path: 'staff', component: StaffListComponent },
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
             { path: 'member', component: MembersComponent },

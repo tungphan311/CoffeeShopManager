@@ -18,7 +18,6 @@ import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
 import { BillsComponent } from './bills/bills.component';
-import { StaffsComponent } from './staffs/staffs.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
@@ -27,6 +26,9 @@ import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
 import { UserService } from './_service/user.service';
+import { StaffService } from './_service/staff.service';
+import { StaffListComponent } from './staffs/staff-list/staff-list.component';
+import { StaffCardComponent } from './staffs/staff-card/staff-card.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -42,7 +44,8 @@ export function tokenGetter() {
       ListsComponent,
       LoginComponent,
       BillsComponent,
-      StaffsComponent,
+      StaffListComponent,
+      StaffCardComponent,
       ReceiptsComponent,
       PaymentsComponent,
       MembersComponent,
@@ -70,7 +73,8 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      UserService
+      UserService,
+      StaffService
    ],
    bootstrap: [
       AppComponent
