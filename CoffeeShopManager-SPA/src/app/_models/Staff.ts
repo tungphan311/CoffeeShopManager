@@ -8,4 +8,5 @@ export interface Staff {
     phone : string;
     email : string;
     address : string;
+    dateofbirth : Date;
 }

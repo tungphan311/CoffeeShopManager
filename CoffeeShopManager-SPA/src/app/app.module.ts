@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -33,7 +33,12 @@ import { StaffListComponent } from './staffs/staff-list/staff-list.component';
 import { StaffCardComponent } from './staffs/staff-card/staff-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductService } from './_service/Products/product.service';
+import { StaffDetailComponent } from './staffs/staff-detail/staff-detail.component';
 import { ProductDetailComponent } from './CreateBill/product-detail/product-detail.component';
+import { StaffListResolver } from './_resolvers/staff-list.resolvers';
+import { StaffEditComponent } from './staffs/staff-edit/staff-edit.component';
+import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
+import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,16 +55,20 @@ export function tokenGetter() {
       LoginComponent,
       BillsComponent,
       StaffListComponent,
+      StaffDetailComponent,
       StaffCardComponent,
+      StaffEditComponent,
       ReceiptsComponent,
       PaymentsComponent,
       MembersComponent,
       Product_reportComponent,
       Revenue_reportComponent,
       ProductComponent,
-      ProductDetailComponent
+      ProductDetailComponent,
+      
    ],
    imports: [
+      TabsModule.forRoot(),
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
@@ -84,7 +93,10 @@ export function tokenGetter() {
       AuthGuard,
       UserService,
       StaffService,
-      ProductService
+      ProductService,
+      StaffDetailResolver,
+      StaffListResolver,
+      StaffEditResolver,
    ],
    bootstrap: [
       AppComponent

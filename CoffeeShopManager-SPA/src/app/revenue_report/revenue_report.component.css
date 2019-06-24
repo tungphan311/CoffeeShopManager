@@ -2,7 +2,9 @@
     margin: auto;
     width: 1024px;
     background-color: #FFFFFF;
-    padding: 20px
+    padding-top: 100px;
+    margin-top: 40px;
+
 }
 .btn {
     padding: 10px;

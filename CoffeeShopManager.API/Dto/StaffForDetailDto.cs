@@ -14,7 +14,7 @@ namespace CoffeeShopManager.API.Dto
 
         public string Gender { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public int Age {get; set;}
 
         public string Phone { get; set; }
 
@@ -23,5 +23,6 @@ namespace CoffeeShopManager.API.Dto
         public string Address { get; set; }
 
         public string Photo { get; set; }
+        public DateTime DateOfBirth{get;set;}
     }
 }
