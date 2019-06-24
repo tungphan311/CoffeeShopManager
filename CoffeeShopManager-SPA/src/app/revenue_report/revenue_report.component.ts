@@ -5,7 +5,7 @@ import * as XLSX from 'xlsx';
 type AOA = any[][];
 
 
-//Muon chay duoc report voi xuat ra excel thi phai chay 2 lenh sau
+// Muon chay duoc report voi xuat ra excel thi phai chay 2 lenh sau
 // npm install xlsx --save
 // npm install chart.js --save
 @Component({
@@ -35,11 +35,11 @@ export class Revenue_reportComponent implements OnInit {
 
   public constructor() {
     this.chartData = {};
-    //TODO:
-    //get all bills = > filter by 6 nearest months => implement get bill by month number
-    //filter by 6 nearest days
-    //filter by 6 nearest weeks
-    //this is temp data:
+    // TODO:
+    // get all bills = > filter by 6 nearest months => implement get bill by month number
+    // filter by 6 nearest days
+    // filter by 6 nearest weeks
+    // this is temp data:
     this.monthLabels = ['4', '5', '6', '7', '8', '9'];
     this.monthData = [12, 19, 3, 5, 2, 3];
     this.weekLabels = ['4', '5', '6', '7', '8', '9'];
