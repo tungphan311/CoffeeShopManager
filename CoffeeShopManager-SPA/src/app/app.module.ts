@@ -33,6 +33,7 @@ import { StaffListComponent } from './staffs/staff-list/staff-list.component';
 import { StaffCardComponent } from './staffs/staff-card/staff-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductService } from './_service/Products/product.service';
+import { StaffDetailComponent } from './staffs/staff-detail/staff-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -49,13 +50,14 @@ export function tokenGetter() {
       LoginComponent,
       BillsComponent,
       StaffListComponent,
+      StaffDetailComponent,
       StaffCardComponent,
       ReceiptsComponent,
       PaymentsComponent,
       MembersComponent,
       Product_reportComponent,
       Revenue_reportComponent,
-      ProductComponent
+      ProductComponent,
    ],
    imports: [
       BrowserModule,
