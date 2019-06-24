@@ -8,7 +8,7 @@
   <button type="button" class="btn btn-info" (click)="sortByDate()">Doanh thu theo ngày</button>
   <button type="button" class="btn btn-primary" (click)="sortByWeek()">Doanh thu theo tuần</button>
   <button type="button" class="btn btn-success" (click)="sortByMonth()">Doanh thu theo tháng</button>
-  <button type="button" id="buttonBaocao" class="btn btn-warning" (click)="report()">Xuất file báo cáo</button>
+  <button type="button" *ngIf="isExportable" id="buttonBaocao" class="btn btn-warning" (click)="report()">Xuất file báo cáo</button>
   <canvas #chart></canvas>
 
   

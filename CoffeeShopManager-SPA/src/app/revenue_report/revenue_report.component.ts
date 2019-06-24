@@ -31,9 +31,15 @@ export class Revenue_reportComponent implements OnInit {
   data: AOA = [ [1, 2], [3, 4] ];
   fileName = 'SheetJS.xlsx';
   count: number;
+  isExportable = false;
 
   public constructor() {
     this.chartData = {};
+    //TODO:
+    //get all bills = > filter by 6 nearest months => implement get bill by month number
+    //filter by 6 nearest days
+    //filter by 6 nearest weeks
+    //this is temp data:
     this.monthLabels = ['4', '5', '6', '7', '8', '9'];
     this.monthData = [12, 19, 3, 5, 2, 3];
     this.weekLabels = ['4', '5', '6', '7', '8', '9'];
@@ -141,18 +147,21 @@ report() {
   {
     case 1:
       {
+        this.fileName = 'BaoCaoDoanhThuTheoThang.xlsx';
         this.data = [this.monthLabels, this.monthData];
         this.exportToExcel();
         break;
       }
     case 2:
       {
+        this.fileName = 'BaoCaoDoanhThuTheoTuan.xlsx';
         this.data = [this.weekLabels, this.weekData];
         this.exportToExcel();
         break;
       }
     case 3:
       {
+        this.fileName = 'BaoCaoDoanhThuTheoNgay.xlsx';
         this.data = [this.dateLabels, this.dateData];
         this.exportToExcel();
         break;
@@ -168,6 +177,7 @@ report() {
 
 }
 drawChart() {
+  this.isExportable = true;
   this.chart = this.refChart.nativeElement;
   this.ctx = this.chart.getContext('2d');
   this.myChart = new Chart(this.ctx, {
@@ -191,7 +201,7 @@ exportToExcel() {
 
   /* generate workbook and add the worksheet */
   const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  XLSX.utils.book_append_sheet(wb, ws, 'DoanhThu');
 
   /* save to file */
   XLSX.writeFile(wb, this.fileName);
