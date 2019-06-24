@@ -1,0 +1,62 @@
+<div class="container mt-4">
+    <div class="row-title text-center mb-1" style="padding-top: 6%;font-weight: bold">
+        <h1>{{staff.name}}'s Profile</h1>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <img class="card-img-top img-thumbnail" src="{{staff.photo}}" alt="{{staff.name}}">
+          <div class="card-body">
+            <div>
+              <strong>Phone :</strong>
+              <p>{{staff.phone}}</p>
+            </div>
+            <div>
+              <strong>Age :</strong>
+              <p>{{staff.age}}</p>
+            </div>
+            <div>
+              <strong>Email :</strong>
+              <p>{{staff.email}}</p>
+            </div>
+            <div class="card-footer">
+              <div class="btn-group d-flex">
+                <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block w-200">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="tab-panel">
+          <tabset class="member-tabset">
+            <tab heading="Edit Profile" id="tab1">
+              <form #editForm = "ngForm" id="editForm" (ngSubmit)="updateStaff()">
+                <h4>Name</h4>
+                <textarea name="Name"  rows="1" class="form-control"
+                  [(ngModel)]="staff.name"></textarea>
+                <h4>Gender</h4>
+                <select 
+                  [(ngModel)]="staff.gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <h4>Date Of Birth</h4>
+                <input type="date" 
+                  [(ngModel)]="staff.dateofbirth">
+                <h4>Phone Number</h4>
+                <textarea name="Phone"  rows="1" class="form-control"
+                  [(ngModel)]="staff.phone"></textarea>
+                <h4>Email</h4>
+                <textarea name="Email"  rows="1" class="form-control"
+                  [(ngModel)]="staff.email"></textarea>
+                <h4>Address</h4>
+                <textarea name="Adddress"  rows="1" class="form-control"
+                  [(ngModel)]="staff.address"></textarea>
+              </form>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>

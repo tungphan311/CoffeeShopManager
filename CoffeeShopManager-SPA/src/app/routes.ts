@@ -10,17 +10,25 @@ import { Revenue_reportComponent } from './revenue_report/revenue_report.compone
 import { ProductDetailComponent } from './CreateBill/product-detail/product-detail.component';
 import { StaffListComponent } from './staffs/staff-list/staff-list.component';
 import { StaffDetailComponent } from './staffs/staff-detail/staff-detail.component';
+import { StaffListResolver } from './_resolvers/staff-list.resolvers';
+import { StaffEditComponent } from './staffs/staff-edit/staff-edit.component';
+import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
+import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     {
-        path: '',
+        path: '', 
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
             { path: 'bill', component: BillsComponent },
-            { path: 'staff', component: StaffListComponent },
-            { path: 'staff/:id', component: StaffDetailComponent },
+            { path: 'staff', component: StaffListComponent,
+                resolve :{staffs :StaffListResolver}},
+            { path: 'staff/:id', component: StaffDetailComponent, 
+                resolve :{staff:StaffDetailResolver}},
+            { path: 'staff/edit/:id', component: StaffEditComponent,
+                resolve :{staff:StaffEditResolver}},
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
             { path: 'member', component: MembersComponent },

@@ -3,6 +3,7 @@ import { Staff } from '../../_models/Staff';
 import { StaffService } from '../../_service/staff.service';
 import { AlertifyService } from '../../_service/alertify.service';
 import { error } from 'util';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-staff-list',
@@ -12,10 +13,12 @@ import { error } from 'util';
 export class StaffListComponent implements OnInit {
     staffs : Staff[];
 
-  constructor(private staffService: StaffService, private alertify : AlertifyService) { }
+  constructor(private staffService: StaffService, private alertify : AlertifyService, private route : ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadStaffs();
+    this.route.data.subscribe(data =>{
+      this.staffs = data['staffs'];
+    });
   }
 
   loadStaffs(){
