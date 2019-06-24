@@ -1,0 +1,23 @@
+.img-thumbnail {
+    margin: 8px;
+    width: 95%;
+    height: 95%;
+}
+
+.card-body {
+    padding: 0 5px;
+}
+
+.custom-top {
+    width: 50%;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+}
+
+img {
+    width: 128px; 
+    height: 128px;
+    margin-left: 30px;
+    margin-right: 10px;
+}

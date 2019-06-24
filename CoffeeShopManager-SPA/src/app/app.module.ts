@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -34,6 +34,7 @@ import { StaffCardComponent } from './staffs/staff-card/staff-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductService } from './_service/Products/product.service';
 import { StaffDetailComponent } from './staffs/staff-detail/staff-detail.component';
+import { ProductDetailComponent } from './CreateBill/product-detail/product-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -58,6 +59,7 @@ export function tokenGetter() {
       Product_reportComponent,
       Revenue_reportComponent,
       ProductComponent,
+      ProductDetailComponent
    ],
    imports: [
       BrowserModule,
@@ -74,7 +76,8 @@ export function tokenGetter() {
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       }),
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      ModalModule.forRoot()
    ],
    providers: [
       AuthService,
