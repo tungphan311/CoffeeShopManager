@@ -53,6 +53,8 @@ export class Product_reportComponent implements OnInit {
 }
 exportToExcel()
 {
+    this.labels.unshift("Sản phẩm");
+    this.dataChart.unshift("Doanh Thu")
     this.data = [this.labels, this.dataChart];
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
 
@@ -62,6 +64,9 @@ exportToExcel()
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+    this.labels.shift();
+    this.dataChart.shift();
+    this.data = [this.labels, this.dataChart];
 }
 
 
