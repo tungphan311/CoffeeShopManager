@@ -8,6 +8,7 @@ import { StaffsComponent } from './staffs/staffs.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
+import { ProductDetailComponent } from './CreateBill/product-detail/product-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },

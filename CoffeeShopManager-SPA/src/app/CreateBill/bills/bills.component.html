@@ -1,7 +1,12 @@
-<div class="container" style="margin-top: 20px">
+<div class="container" style="margin-top: 100px">
   <div class="row">
-    <div *ngFor="let product of products" class="col-lg-2 col-md-3 col-sm-6">
-      <app-product [product]="product"></app-product>
+    <div class="left row">
+      <div *ngFor="let product of products" class="col-lg-4">
+        <app-product [product]="product"></app-product>
+      </div>
+    </div>
+    <div class="right" style="border: solid thin;">
+      LOL
     </div>
   </div>
 </div>
