@@ -3,10 +3,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <div class="row">
-              <img src="{{product.photo}}" alt="{{product.name}}">
+              <img src="{{product?.photo}}" alt="{{product?.name}}">
               <div style="align-self: center; margin-left: 10px;">
                   <h5 >{{product.name}}</h5>
-                  <p>Loại: {{product.typeId}}</p> 
+                  <p>Loại: {{type.name}}</p> 
               </div>
           </div>
           <button type="button" class="close" (click)="close()">

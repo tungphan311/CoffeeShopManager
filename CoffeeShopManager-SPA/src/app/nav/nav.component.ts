@@ -12,10 +12,8 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  // @ViewChild('app') app: AppComponent;
+  accessCode: any;
   model: any = {};
-  public accessCode = '';
-  jwtHelper = new JwtHelperService();
 
   constructor(
     public authService: AuthService,

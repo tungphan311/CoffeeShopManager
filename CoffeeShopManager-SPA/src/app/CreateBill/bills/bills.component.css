@@ -7,4 +7,12 @@
     position: fixed;
     right: 20px;
     width: 32%;
+    overflow-y: auto;
+}
+
+button.btn.btn-secondary {
+    margin-top: 10px; 
+    margin-left: 10px;
+    margin-right: 10px;
+    width: -webkit-fill-available;
 }

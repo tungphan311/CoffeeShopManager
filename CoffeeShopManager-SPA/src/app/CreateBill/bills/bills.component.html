@@ -1,12 +1,31 @@
-<div class="container" style="margin-top: 100px">
+<div class="container" style="margin-top: 70px">
   <div class="row">
     <div class="left row">
       <div *ngFor="let product of products" class="col-lg-4">
-        <app-product [product]="product"></app-product>
+        <app-product [product]="product" (select)="show($event)"></app-product>
       </div>
     </div>
-    <div class="right" style="border: solid thin;">
-      LOL
+    <div class="right" style="overflow-y: auto; max-height: 85%">
+      <div class="card" style="border: solid thin;">
+        <div class="card-header">
+          <button class="btn btn-secondary">
+            Xem giỏ hàng
+          </button>
+        </div>
+        <div class="card-body">
+          <div *ngIf="order.length == 0">
+            <p class="text-center">Chưa chọn món nào</p> 
+          </div>
+          <div *ngIf="order.length > 0">
+    
+          </div>
+        </div>
+        <div class="card-footer">
+          <p>Số lượng: {{order.length}} món</p>
+          <p>Tổng cộng: <span style="text-align: right">0 đ</span></p>      
+        </div>
+      </div>
     </div>
   </div>
+  <app-product-detail #productDetail></app-product-detail>
 </div>

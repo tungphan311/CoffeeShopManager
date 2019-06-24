@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Products } from '../../_models/Products';
 import { ProductService } from '../../_service/Products/product.service';
 import { AlertifyService } from '../../_service/alertify.service';
@@ -11,9 +11,8 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 })
 
 export class ProductComponent implements OnInit {
-  @ViewChild('productDetail') productDetail: ProductDetailComponent;
-
   @Input() product: Products;
+  @Output() select: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
 
@@ -21,5 +20,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  add(id) {
+    this.select.emit(id);
   }
 }

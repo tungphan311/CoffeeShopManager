@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../../_service/Products/product.service';
 import { AlertifyService } from '../../_service/alertify.service';
 import { Products } from '../../_models/Products';
 import { ProductDetail } from 'src/app/_models/ProductDetail';
+import { ProductComponent } from '../product/product.component';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 @Component({
   selector: 'app-bills',
@@ -10,6 +12,9 @@ import { ProductDetail } from 'src/app/_models/ProductDetail';
   styleUrls: ['./bills.component.css']
 })
 export class BillsComponent implements OnInit {
+  @ViewChild('product') product: ProductComponent;
+  @ViewChild('productDetail') productDetail: ProductDetailComponent;
+
   products: Products[];
   selected: {
     detail: ProductDetail,
@@ -23,6 +28,7 @@ export class BillsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.order = [];
     this.loadProducts();
   }
 
@@ -32,5 +38,9 @@ export class BillsComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  show(id) {
+    this.productDetail.show(id);
   }
 }

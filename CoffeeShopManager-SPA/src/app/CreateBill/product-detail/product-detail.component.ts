@@ -4,6 +4,8 @@ import { Products } from 'src/app/_models/Products';
 import { ProductService } from 'src/app/_service/Products/product.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { ProductTypeService } from 'src/app/_service/ProductTypes/product-type.service';
+import { ProductType } from 'src/app/_models/ProductType';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,11 +18,12 @@ export class ProductDetailComponent implements OnInit {
 
   saving = false;
   product: Products;
+  type: ProductType;
 
   constructor(
     private productService: ProductService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute
+    private typeService: ProductTypeService
   ) { }
 
   ngOnInit() {
@@ -31,6 +34,9 @@ export class ProductDetailComponent implements OnInit {
     this.saving = false;
     this.productService.getProduct(productId).subscribe((product: Products) => {
       this.product = product;
+      this.typeService.getProductType(product.typeId).subscribe((type: ProductType) => {
+        this.type = type;
+      });
       this.modal.show();
     }, error => {
       this.alertify.error(error);
