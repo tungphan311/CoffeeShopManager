@@ -11,6 +11,7 @@ namespace CoffeeShopManager.API.Helpers
             CreateMap<User, UserForViewDto>();
             CreateMap<Staff, StaffForListDto>();
             CreateMap<Staff, StaffForDetailDto>();
+            CreateMap<Bill, BillForViewDto>();
         }
     }
 }

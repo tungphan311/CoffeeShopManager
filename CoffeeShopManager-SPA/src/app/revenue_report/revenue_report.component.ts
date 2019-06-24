@@ -55,7 +55,6 @@ export class Revenue_reportComponent implements OnInit {
 
 sortByMonth() {
   this.count = 1;
-  console.log('month');
   this.chartData = {
     labels: this.monthLabels,
     datasets: [{
@@ -85,7 +84,6 @@ sortByMonth() {
 }
 sortByWeek() {
   this.count = 2;
-  console.log('week');
   this.chartData = {
     labels: this.weekLabels,
     datasets: [{
@@ -114,7 +112,6 @@ sortByWeek() {
 }
 sortByDate() {
   this.count = 3;
-  console.log('date');
   this.chartData = {
     labels: this.dateLabels,
     datasets: [{
