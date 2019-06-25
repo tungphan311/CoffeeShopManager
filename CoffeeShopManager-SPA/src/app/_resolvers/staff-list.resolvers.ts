@@ -8,12 +8,15 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class StaffListResolver implements Resolve<Staff[]>{
+    pageNumber = 1;
+    pageSize = 5;
+
     constructor(
         private staffService: StaffService, 
         private router :Router, 
         private alertify: AlertifyService){}
     resolve(route: ActivatedRouteSnapshot) : Observable<Staff[]>{
-        return this.staffService.getStaffs().pipe(
+        return this.staffService.getStaffs(this.pageNumber, this.pageSize).pipe(
             catchError(error =>{
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/staff']);

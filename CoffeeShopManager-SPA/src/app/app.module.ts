@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule, ModalModule, TabsModule } from 'ngx-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -67,6 +68,7 @@ export function tokenGetter() {
    ],
    imports: [
       TabsModule.forRoot(),
+      PaginationModule.forRoot(),
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,

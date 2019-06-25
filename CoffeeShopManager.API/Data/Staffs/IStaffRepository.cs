@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 
 namespace CoffeeShopManager.API.Data.Staffs
@@ -12,7 +13,7 @@ namespace CoffeeShopManager.API.Data.Staffs
 
         Task<bool> SaveAll();
 
-        Task<IEnumerable<Staff>> GetStaffs();
+        Task<PagedList<Staff>> GetStaffs(StaffParams stafParams);
 
         Task<Staff> GetStaff(int id);
     }

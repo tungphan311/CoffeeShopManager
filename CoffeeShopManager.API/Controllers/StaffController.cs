@@ -5,6 +5,8 @@ using CoffeeShopManager.API.Dto;
 using CoffeeShopManager.API.Models;
 using CoffeeShopManager.API.Data.Staffs;
 using Microsoft.AspNetCore.Mvc;
+using CoffeeShopManager.API.Helpers;
+
 namespace CoffeeShopManager.API.Controllers
 {
     // [Authorize]
@@ -20,11 +22,14 @@ namespace CoffeeShopManager.API.Controllers
             _repo = repo;
         }
         [HttpGet]
-        public async Task<IActionResult> GetStaffs ()
+        public async Task<IActionResult> GetStaffs([FromQuery]StaffParams staffParams)
         {
-            var staffs = await _repo.GetStaffs();
+            var staffs = await _repo.GetStaffs(staffParams);
             
             var staffsToReturn = _mapper.Map<IEnumerable<StaffForListDto>>(staffs);
+
+            Response.AddPagination(staffs.CurrentPage, staffs.PageSize, staffs.TotalCount, staffs.TotalPages);
+
             return Ok(staffsToReturn);
         }
         [HttpGet("{id}")]
