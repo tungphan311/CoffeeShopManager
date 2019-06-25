@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BsDropdownModule, ModalModule, TabsModule } from 'ngx-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -19,7 +20,6 @@ import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
 import { BillsComponent } from './CreateBill/bills/bills.component';
 import { ProductComponent } from './CreateBill/product/product.component';
-import { StaffsComponent } from './staffs/staffs.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';
@@ -39,6 +39,7 @@ import { StaffListResolver } from './_resolvers/staff-list.resolvers';
 import { StaffEditComponent } from './staffs/staff-edit/staff-edit.component';
 import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
 import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
+import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -68,6 +69,7 @@ export function tokenGetter() {
    ],
    imports: [
       TabsModule.forRoot(),
+      PaginationModule.forRoot(),
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
@@ -86,6 +88,7 @@ export function tokenGetter() {
       ModalModule.forRoot()
    ],
    providers: [
+      PreventUnsavedChanges,
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,

@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeShopManager.API.Data.Users
+namespace CoffeeShopManager.API.Data.Staffs
 {
-    public class AppRepository: IAppRepository
+    public class StaffRepository: IStaffRepository
     {
         private readonly DataContext _context;
-        public AppRepository(DataContext context)
+        public StaffRepository(DataContext context)
         {
             _context = context;
         }
@@ -22,30 +23,23 @@ namespace CoffeeShopManager.API.Data.Users
             _context.Remove(entity);
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<Staff> GetStaff(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var staff = await _context.Staffs.FirstOrDefaultAsync(u => u.Id == id);
 
-            return user;
+            return staff;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<PagedList<Staff>> GetStaffs(StaffParams staffParams)
         {
-            var users = await _context.Users.ToListAsync();
+            var staffs = _context.Staffs;
 
-            return users;
+            return await PagedList<Staff>.CreateAsync(staffs, staffParams.PageNumber, staffParams.PageSize);
         }
 
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
-        }
-
-        public async Task<Photo> GetPhoto(int id)
-        {
-            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
-
-            return photo;
         }
     }
 }

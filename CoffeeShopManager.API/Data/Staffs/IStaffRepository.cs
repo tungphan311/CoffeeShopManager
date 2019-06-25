@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 
-namespace CoffeeShopManager.API.Data.Users
+namespace CoffeeShopManager.API.Data.Staffs
 {
-    public interface IAppRepository
+    public interface IStaffRepository
     {
         void Add<T>(T entity) where T: class;
 
@@ -12,8 +13,8 @@ namespace CoffeeShopManager.API.Data.Users
 
         Task<bool> SaveAll();
 
-        Task<IEnumerable<User>> GetUsers();
+        Task<PagedList<Staff>> GetStaffs(StaffParams stafParams);
 
-        Task<User> GetUser(int id);
+        Task<Staff> GetStaff(int id);
     }
 }

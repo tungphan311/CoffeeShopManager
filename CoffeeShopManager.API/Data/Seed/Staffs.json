@@ -3,7 +3,7 @@
         "Address": "Ktx khu A",
         "DateOfBirth": "2/11/1998",
         "Email": "lvhoang2198@gmail.com",
-        "Gender": "Male\n",
+        "Gender": "Male",
         "Id": 1,
         "Name": "Hoang",
         "Phone": "0377091735",
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "Address": "ktx khu B",
+        "Address": "ktx  B",
         "DateOfBirth": "1/8/2000",
         "Email": "lvhoang1102@gmail.com",
         "Gender": "Female",

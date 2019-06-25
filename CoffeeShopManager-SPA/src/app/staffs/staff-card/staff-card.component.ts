@@ -22,7 +22,6 @@ export class StaffCardComponent implements OnInit {
     for (const iterator of this.teamlist) {
       if (iterator.id == id) {
           return iterator.name;
-          
       }
   }
   }
