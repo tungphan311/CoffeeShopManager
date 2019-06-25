@@ -22,6 +22,7 @@ namespace CoffeeShopManager.API.Helpers
             CreateMap<Bill, BillForViewDto>();
             CreateMap<Product, ProductForViewDto>();
             CreateMap<ProductType, ProductTypeForViewDto>();
+            CreateMap<ProductDetail, ProductDetailForViewDto>();
         }
     }
 }

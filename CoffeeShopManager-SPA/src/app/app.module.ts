@@ -64,8 +64,7 @@ export function tokenGetter() {
       Product_reportComponent,
       Revenue_reportComponent,
       ProductComponent,
-      ProductDetailComponent,
-      
+      ProductDetailComponent
    ],
    imports: [
       TabsModule.forRoot(),

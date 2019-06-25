@@ -7,6 +7,7 @@
               <div style="align-self: center; margin-left: 10px;">
                   <h5 >{{product.name}}</h5>
                   <p>Loại: {{type.name}}</p> 
+                  <p>Size: {{sizeName(select.size)}}</p>
               </div>
           </div>
           <button type="button" class="close" (click)="close()">
@@ -14,7 +15,46 @@
           </button>
         </div>
         <div class="modal-body">
-          LOL
+          <div style="margin: 10px;">
+            <p>Size - </p>
+            <div *ngFor="let detail of details" class="form-check form-check-inline col-sm-3">
+              <input id="detail.size" type="checkbox" class="form-check-input" value="detail.size" 
+                [checked]="select == detail" (click)="checkboxEvent(detail)">
+              <label class="form-check-label" for="detail.size">{{sizeName(detail.size)}} ( {{formatPrice(detail.price)}}đ )</label>
+            </div>
+            <hr>
+          </div>
+          <div style="margin: 10px;">
+            <div class="inner-addon left-addon">
+              <i class="fa fa-pencil"></i>
+              <input type="text" class="form-control" placeholder="Nhập ghi chú cho món này" [(ngModel)]="note">
+            </div>
+            <hr>
+          </div>
+          <div style="margin: 10px;">
+            <ul class="list-inline" id="amount">
+              <li class="list-inline-item">
+                <button [disabled]="amount == 1" type="button" class="btn btn-lg btn-outline-danger btn-circle" (click)="decrease()">
+                  <i class="fa fa-minus"></i>
+                </button>
+              </li>
+              <li class="list-inline-item" style="margin-left: 10px; font-size: 18px;">
+                <p>{{amount}}</p>
+              </li>
+              <li class="list-inline-item" style="margin-left: 10px;"> 
+                <button type="button" class="btn btn-lg btn-outline-danger btn-circle" (click)="increase()">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </li>    
+              <li class="list-inline-item">
+                <p>Tổng tiền: {{formatPrice(totalPrice())}} đ</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="saving" type="button" class="btn btn-outline-info" (click)="close()">Huỷ bỏ</button>
+          <button class="btn btn-primary" (click)="save()">Thêm</button>
         </div>
       </div> 
     </div>

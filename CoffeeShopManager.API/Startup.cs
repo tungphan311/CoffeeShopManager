@@ -24,6 +24,7 @@ using Microsoft.IdentityModel.Tokens;
 using CoffeeShopManager.API.Data.Products;
 using CoffeeShopManager.API.Data.Bills;
 using CoffeeShopManager.API.Data.ProductTypes;
+using CoffeeShopManager.API.Data.ProductDetails;
 
 namespace CoffeeShopManager.API
 {
@@ -49,6 +50,7 @@ namespace CoffeeShopManager.API
             services.AddScoped<IProductRepository, ProductRepository>(); 
             services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+            services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {

@@ -13,19 +13,33 @@
           </button>
         </div>
         <div class="card-body">
-          <div *ngIf="order.length == 0">
+          <div *ngIf="orderList.length == 0">
             <p class="text-center">Chưa chọn món nào</p> 
           </div>
-          <div *ngIf="order.length > 0">
-    
+          <div *ngIf="orderList.length > 0">
+            <div *ngFor="let order of orderList">
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="number-circle">{{order.amount}}</div>
+                </div>
+                <div class="col-sm-7">
+                  <p><b>{{order.name}}</b></p>
+                  <p>Size: {{order.size}}</p>
+                </div>
+                <div class="col-sm-3">
+                  <p>{{formatPrice(order.price)}}đ</p>
+                </div>
+              </div>
+              <hr>
+            </div>
           </div>
         </div>
         <div class="card-footer">
-          <p>Số lượng: {{order.length}} món</p>
-          <p>Tổng cộng: <span style="text-align: right">0 đ</span></p>      
+          <p>Số lượng: {{totalAmount(orderList)}} món</p>
+          <p>Tổng cộng: <span style="text-align: right">{{formatPrice(totalPrice(orderList))}} đ</span></p>      
         </div>
       </div>
     </div>
   </div>
-  <app-product-detail #productDetail></app-product-detail>
+  <app-product-detail #productDetail (order)="getOrder($event)"></app-product-detail>
 </div>
