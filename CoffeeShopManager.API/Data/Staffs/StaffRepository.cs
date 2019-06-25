@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,11 +30,11 @@ namespace CoffeeShopManager.API.Data.Staffs
             return staff;
         }
 
-        public async Task<IEnumerable<Staff>> GetStaffs()
+        public async Task<PagedList<Staff>> GetStaffs(StaffParams staffParams)
         {
-            var staffs = await _context.Staffs.ToListAsync();
+            var staffs = _context.Staffs;
 
-            return staffs;
+            return await PagedList<Staff>.CreateAsync(staffs, staffParams.PageNumber, staffParams.PageSize);
         }
 
         public async Task<bool> SaveAll()
