@@ -25,7 +25,9 @@ namespace CoffeeShopManager.API.Controllers
             var staffs = await _repo.GetStaffs();
             
             var staffsToReturn = _mapper.Map<IEnumerable<StaffForListDto>>(staffs);
+            
             return Ok(staffsToReturn);
+            // return Ok(staffs);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetStaff(int id)
@@ -33,6 +35,8 @@ namespace CoffeeShopManager.API.Controllers
             var staff = await _repo.GetStaff(id);
             var staffToReturn = _mapper.Map<StaffForDetailDto>(staff);
             return Ok(staffToReturn);
+
+            // return Ok(staff);
         } 
     }
 }

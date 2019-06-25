@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace CoffeeShopManager.API.Models
 {
@@ -23,5 +24,7 @@ namespace CoffeeShopManager.API.Models
         public string Address { get; set; }
 
         public string Photo { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Collections.Generic;
+using CoffeeShopManager.API.Models;
 
 namespace CoffeeShopManager.API.Dto
 {
@@ -8,7 +10,6 @@ namespace CoffeeShopManager.API.Dto
         public int Id { get; set; }
 
         public string Name { get; set; }
-
 
         public int TeamId { get; set; }
 
@@ -22,7 +23,10 @@ namespace CoffeeShopManager.API.Dto
 
         public string Address { get; set; }
 
-        public string Photo { get; set; }
-        public DateTime DateOfBirth{get;set;}
+        public DateTime DateOfBirth { get; set; }
+
+        public string PhotoUrl { get; set; }
+
+        public ICollection<PhotoForDetailDto> Photos { get; set; }
     }
 }

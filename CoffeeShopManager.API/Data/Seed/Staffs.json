@@ -8,7 +8,14 @@
         "Name": "Hoang",
         "Phone": "0377091735",
         "Photo": "https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/64904289_2291666570919772_3796329117717102592_n.jpg?_nc_cat=104&_nc_eui2=AeF8tv7Bxj3-id50vhwa3UENAqawrnE78bSSDt-0RkJqeyOl1lHw18ZNN4kju8nEHlaNSeoiyYpJgGWHUO1Y80ov4i8dA2yaxgmGNN1MvF5G7Q&_nc_oc=AQk1vmkXUB-0GbsVxmn_7bASsz4X0S7N5De_XFiMWGbex1hGYX3oo2XcHCbliT_dbLQ&_nc_ht=scontent.fsgn2-1.fna&oh=d09dc8322fc76fbd9631e14e080fb089&oe=5DC40D23",
-        "TeamId": 1
+        "TeamId": 1,
+        "Photos": [
+            {
+                "Url": "https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/64904289_2291666570919772_3796329117717102592_n.jpg?_nc_cat=104&_nc_eui2=AeF8tv7Bxj3-id50vhwa3UENAqawrnE78bSSDt-0RkJqeyOl1lHw18ZNN4kju8nEHlaNSeoiyYpJgGWHUO1Y80ov4i8dA2yaxgmGNN1MvF5G7Q&_nc_oc=AQk1vmkXUB-0GbsVxmn_7bASsz4X0S7N5De_XFiMWGbex1hGYX3oo2XcHCbliT_dbLQ&_nc_ht=scontent.fsgn2-1.fna&oh=d09dc8322fc76fbd9631e14e080fb089&oe=5DC40D23",
+                "Description": "Nothing",
+                "IsMain": true
+            }
+        ]
     },
     {
         "Address": "ktx khu B",
@@ -19,6 +26,13 @@
         "Name": "Gia",
         "Phone": "01677091735",
         "Photo": "https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/64733889_2679289142297522_3731091004032286720_n.jpg?_nc_cat=103&_nc_eui2=AeGFW47W5f0IRkiRcb2bFfza-Bks8y_7bYefMhGw31bqf0GoWgKtIEiOOk2NbyhtmhMkNeOAZt4m35z8CExlqHSrquvocTj4J443GVbc2Cn9Tg&_nc_oc=AQmxX0TQ-Ab4FdEVDHCGijnBcPZJdgVOMGIqStyE2nETXIjJujohoi6aMxSMKPM0mi0&_nc_ht=scontent.fsgn2-2.fna&oh=06283de0cf20771226ac89ccb3c26a82&oe=5DBE3819",
-        "TeamId": 2
+        "TeamId": 2,
+        "Photos": [
+            {
+                "Url": "https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-9/64733889_2679289142297522_3731091004032286720_n.jpg?_nc_cat=103&_nc_eui2=AeGFW47W5f0IRkiRcb2bFfza-Bks8y_7bYefMhGw31bqf0GoWgKtIEiOOk2NbyhtmhMkNeOAZt4m35z8CExlqHSrquvocTj4J443GVbc2Cn9Tg&_nc_oc=AQmxX0TQ-Ab4FdEVDHCGijnBcPZJdgVOMGIqStyE2nETXIjJujohoi6aMxSMKPM0mi0&_nc_ht=scontent.fsgn2-2.fna&oh=06283de0cf20771226ac89ccb3c26a82&oe=5DBE3819",
+                "Description": "Nothing",
+                "IsMain": true
+            }
+        ]
     }
 ]
