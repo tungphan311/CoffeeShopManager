@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeShopManager.API.Data.Users
+namespace CoffeeShopManager.API.Data.Staffs
 {
-    public class AppRepository: IAppRepository
+    public class StaffRepository: IStaffRepository
     {
         private readonly DataContext _context;
-        public AppRepository(DataContext context)
+        public StaffRepository(DataContext context)
         {
             _context = context;
         }
@@ -22,18 +22,18 @@ namespace CoffeeShopManager.API.Data.Users
             _context.Remove(entity);
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<Staff> GetStaff(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var staff = await _context.Staffs.FirstOrDefaultAsync(u => u.Id == id);
 
-            return user;
+            return staff;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<Staff>> GetStaffs()
         {
-            var users = await _context.Users.ToListAsync();
+            var staffs = await _context.Staffs.ToListAsync();
 
-            return users;
+            return staffs;
         }
 
         public async Task<bool> SaveAll()

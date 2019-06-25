@@ -19,7 +19,6 @@ import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
 import { BillsComponent } from './CreateBill/bills/bills.component';
 import { ProductComponent } from './CreateBill/product/product.component';
-import { StaffsComponent } from './staffs/staffs.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { MembersComponent } from './members/members.component';

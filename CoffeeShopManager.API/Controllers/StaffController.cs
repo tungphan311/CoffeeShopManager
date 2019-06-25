@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using CoffeeShopManager.API.Data.Users;
 using CoffeeShopManager.API.Dto;
 using CoffeeShopManager.API.Models;
+using CoffeeShopManager.API.Data.Staffs;
 using Microsoft.AspNetCore.Mvc;
 namespace CoffeeShopManager.API.Controllers
 {
@@ -13,8 +13,8 @@ namespace CoffeeShopManager.API.Controllers
     public class StaffController: ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IAppRepository _repo;
-        public StaffController(IAppRepository repo, IMapper mapper)
+        private readonly IStaffRepository _repo;
+        public StaffController(IStaffRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
