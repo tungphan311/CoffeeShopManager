@@ -34,25 +34,31 @@
               <form #editForm = "ngForm" id="editForm" (ngSubmit)="updateStaff()">
                 <h4>Name</h4>
                 <textarea name="Name"  rows="1" class="form-control"
-                  [(ngModel)]="staff.name"></textarea>
+                  [(ngModel)]="staff.name" required></textarea>
                 <h4>Gender</h4>
-                <select 
-                  [(ngModel)]="staff.gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                <!-- <select (change)="changeGender($event.target.value)" required>
+                  <option *ngFor="let gender of genderlist" value="{{gender}}" 
+                    [selected]="getGender(staff.gender, gender)">
+                    {{gender}}
+                  </option>
+                </select> -->
+                <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let gender of genderlist" value="{{gender}}">
+                    {{gender}}
+                  </option>
                 </select>
                 <h4>Date Of Birth</h4>
                 <input type="date" 
-                  [(ngModel)]="staff.dateofbirth">
+                  [(ngModel)]="staff.dateofbirth" [ngModelOptions]="{standalone: true}" required>
                 <h4>Phone Number</h4>
                 <textarea name="Phone"  rows="1" class="form-control"
-                  [(ngModel)]="staff.phone"></textarea>
+                  [(ngModel)]="staff.phone" required></textarea>
                 <h4>Email</h4>
                 <textarea name="Email"  rows="1" class="form-control"
-                  [(ngModel)]="staff.email"></textarea>
+                  [(ngModel)]="staff.email" required></textarea>
                 <h4>Address</h4>
                 <textarea name="Adddress"  rows="1" class="form-control"
-                  [(ngModel)]="staff.address"></textarea>
+                  [(ngModel)]="staff.address" required></textarea>
               </form>
             </tab>
           </tabset>
