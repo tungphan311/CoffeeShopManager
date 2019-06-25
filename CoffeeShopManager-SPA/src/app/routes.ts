@@ -14,6 +14,7 @@ import { StaffListResolver } from './_resolvers/staff-list.resolvers';
 import { StaffEditComponent } from './staffs/staff-edit/staff-edit.component';
 import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
 import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
+import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -28,7 +29,7 @@ export const appRoutes: Routes = [
             { path: 'staff/:id', component: StaffDetailComponent, 
                 resolve :{staff:StaffDetailResolver}},
             { path: 'staff/edit/:id', component: StaffEditComponent,
-                resolve :{staff:StaffEditResolver}},
+                resolve :{staff:StaffEditResolver}, canDeactivate:[PreventUnsavedChanges]},
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
             { path: 'member', component: MembersComponent },

@@ -36,5 +36,8 @@ const httpOptions = {
     getStaff(id): Observable<Staff> {
       return this.http.get<Staff>(this.baseUrl + 'staff/' +id,httpOptions);
     }
+    updateStaff(staff: Staff){
+      return this.http.put(this.baseUrl+'staff/'+ staff.id, staff);
+    }
   }
   

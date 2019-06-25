@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
@@ -12,6 +12,12 @@ import { NgForm } from '@angular/forms';
 })
 export class StaffEditComponent implements OnInit {
   @ViewChild('editForm') editForm :NgForm;
+  @HostListener('window:beforeunload',['$event'])
+  unloadNotification($event: any){
+    if(this.editForm.dirty){
+      $event.returnValue = true;
+    }
+  }
   staff : Staff;
   staffGender = '';
   genderlist = ['Male','Female','Other'] ;
@@ -28,10 +34,24 @@ export class StaffEditComponent implements OnInit {
       
     });
   }
-  updateStaff(){
-    this.alertify.success('Profile updated successfully');
-    this.editForm.reset(this.staff);
+  reload(){
+    this.route.data.subscribe(data =>{
+      this.staff = data['staff'];
+      // var moment = require('moment/moment');
+      // var date = moment(this.staff.dateofbirth);
+      // var tz = date.u
+      
+    });
   }
+  updateStaff(){
+    this.staffService.updateStaff(this.staff).subscribe(next => {
+      this.alertify.success('Profile updated successfully');
+    this.editForm.reset(this.staff);
+    },error =>{
+      this.alertify.error(error);
+    })
+  }
+
 
   getGender(input, output): boolean {
     if (input === output) {

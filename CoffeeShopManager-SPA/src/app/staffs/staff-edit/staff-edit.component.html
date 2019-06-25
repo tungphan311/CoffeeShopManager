@@ -42,14 +42,14 @@
                     {{gender}}
                   </option>
                 </select> -->
-                <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}">
+                <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}" class="form-control">
                   <option *ngFor="let gender of genderlist" value="{{gender}}">
                     {{gender}}
                   </option>
                 </select>
-                <h4>Date Of Birth</h4>
-                <input type="date" 
-                  [(ngModel)]="staff.dateofbirth" [ngModelOptions]="{standalone: true}" required>
+                <!-- <h4>Date Of Birth</h4> -->
+                <!-- <input type="date" 
+                  [(ngModel)]="staff.dateofbirth" [ngModelOptions]="{standalone: true}" required> -->
                 <h4>Phone Number</h4>
                 <textarea name="Phone"  rows="1" class="form-control"
                   [(ngModel)]="staff.phone" required></textarea>
