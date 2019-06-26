@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
@@ -39,7 +41,24 @@ namespace CoffeeShopManager.API.Data.Bills
 
         public async Task<PagedList<Bill>> GetBills(BillParams billParams)
         {
-            var bills = _context.Bills;
+            var bills = _context.Bills.AsQueryable();
+
+            if (billParams.year!=0)
+            {
+                
+                bills=bills.Where(b => b.CreatedDate.Year==billParams.year);
+            }
+            if (billParams.month!=0)
+            {
+                bills=bills.Where(b => b.CreatedDate.Month==billParams.month);
+            }
+            if (billParams.day!=0)
+            {
+                bills=bills.Where(b => b.CreatedDate.Day==billParams.day);
+            }
+
+            
+
             return await PagedList<Bill>.CreateAsync(bills,billParams.PageNumber, billParams.PageSize);
 
         }

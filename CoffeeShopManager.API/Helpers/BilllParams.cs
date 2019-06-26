@@ -15,6 +15,8 @@ namespace CoffeeShopManager.API.Helpers
 
         public int BillID {get; set;}
 
-        public DateTime CreatedDate { get; set; }
+        public int year { get; set; }
+        public int month {get; set;}
+        public int day {get; set;}
     }
 }
