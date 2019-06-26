@@ -1,4 +1,4 @@
-export interface Bills {
+export interface Bill {
     id: number;
     staffId: number;
     memberId: number;

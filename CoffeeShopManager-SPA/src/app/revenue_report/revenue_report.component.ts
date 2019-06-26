@@ -1,6 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Chart from 'chart.js';
 import * as XLSX from 'xlsx';
+import { BillService } from '../_service/Bills/bill.service';
+import { AlertifyService } from '../_service/alertify.service';
+import { ActivatedRoute } from '@angular/router';
+import { Bill } from '../_models/Bill';
+import { Pagination, PaginatedResult } from '../_models/Pagination';
+import { TestBed } from '@angular/core/testing';
+import { formatDate } from '@angular/common';
 
 type AOA = any[][];
 
@@ -29,31 +36,122 @@ export class Revenue_reportComponent implements OnInit {
   dateLabels: any;
   dateData: any;
   data: AOA = [ [1, 2], [3, 4] ];
-  fileName = 'SheetJS.xlsx';
+  fileName = '';
   count: number;
   isExportable = false;
 
-  public constructor() {
+  bills: Bill[];
+  bill: Bill = JSON.parse(localStorage.getItem('bill'));
+  userParams: any = {};
+
+
+  today = new Date();
+  jstoday = '';
+
+  pagination: Pagination;
+
+
+  public constructor(
+    private billService: BillService,
+    private alertify: AlertifyService,
+  ) {
     this.chartData = {};
     // TODO:
     // get all bills = > filter by 6 nearest months => implement get bill by month number
     // filter by 6 nearest days
     // filter by 6 nearest weeks
     // this is temp data:
-    this.monthLabels = [ '4', '5', '6', '7', '8', '9'];
+    // this.monthLabels = [ '4', '5', '6', '7', '8', '9'];
+    // this.monthLabels = [month - 5, month - 4, month - 3, month - 2, month - 1, month];
+    const firstMonth = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+    const secondMonth = new Date(this.today.getFullYear(), this.today.getMonth() - 1, this.today.getDate());
+    const thirdMonth = new Date(this.today.getFullYear(), this.today.getMonth() - 2, this.today.getDate());
+    const forthMonth = new Date(this.today.getFullYear(), this.today.getMonth() - 3, this.today.getDate());
+    const fifthMonth = new Date(this.today.getFullYear(), this.today.getMonth() - 4, this.today.getDate());
+    const sixthMonth = new Date(this.today.getFullYear(), this.today.getMonth() - 5, this.today.getDate());
+
+// tslint:disable-next-line: max-line-length
+    this.monthLabels = [sixthMonth.getMonth() + 1, fifthMonth.getMonth() + 1, forthMonth.getMonth() + 1, thirdMonth.getMonth() + 1, secondMonth.getMonth() + 1, firstMonth.getMonth() + 1];
     this.monthData = [12, 19, 3, 5, 2, 3];
-    this.weekLabels = [ '4', '5', '6', '7', '8', '9'];
+    // const month =  this.today.getMonth();
+    // this.monthLabels = [month - 5, month - 4, month - 3, month - 2, month - 1, month];
+
+    // tslint:disable-next-line: max-line-length
+    const w1df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate()).toLocaleDateString('vi-VN').slice(0, 4); // today
+    // tslint:disable-next-line: max-line-length
+    const w1dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 7).toLocaleDateString('vi-VN').slice(0, 4); // -7
+    // tslint:disable-next-line: max-line-length
+    const w2df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 8).toLocaleDateString('vi-VN').slice(0, 4); // -1
+    // tslint:disable-next-line: max-line-length
+    const w2dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 15).toLocaleDateString('vi-VN').slice(0, 4); // -7
+    // tslint:disable-next-line: max-line-length
+    const w3df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 16).toLocaleDateString('vi-VN').slice(0, 4); // -1
+    // tslint:disable-next-line: max-line-length
+    const w3dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 23).toLocaleDateString('vi-VN').slice(0, 4); // -7
+    // tslint:disable-next-line: max-line-length
+    const w4df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 24).toLocaleDateString('vi-VN').slice(0, 4); // -1
+    // tslint:disable-next-line: max-line-length
+    const w4dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 31).toLocaleDateString('vi-VN').slice(0, 4); // -7
+    // tslint:disable-next-line: max-line-length
+    const w5df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 32).toLocaleDateString('vi-VN').slice(0, 4); // -1
+    // tslint:disable-next-line: max-line-length
+    const w5dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 39).toLocaleDateString('vi-VN').slice(0, 4); // -7
+    // tslint:disable-next-line: max-line-length
+    const w6df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 40).toLocaleDateString('vi-VN').slice(0, 4); // -1
+    // tslint:disable-next-line: max-line-length
+    const w6dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 47).toLocaleDateString('vi-VN').slice(0, 4); // -7
+
+
+    const w6 = w6dl + ' - ' + w6df;
+    const w5 = w5dl + ' - ' + w5df;
+    const w4 = w4dl + ' - ' + w4df;
+    const w3 = w3dl + ' - ' + w3df;
+    const w2 = w2dl + ' - ' + w2df;
+    const w1 = w1dl + ' - ' + w1df;
+
+    this.weekLabels = [ w6, w5, w4, w3, w2, w1];
     this.weekData = [12, 19, 3, 5, 2, 3];
-    this.dateLabels = [ '4', '5', '6', '7', '8', '9'];
+
+    // const date = this.today.getDate();
+    // this.dateLabels = [ '4', '5', '6', '7', '8', '9'];
+    const firstday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+    const secondday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 1);
+    const thirdday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 2);
+    const forthday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 3);
+    const fifthday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 4);
+    const sixthday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 5);
+// tslint:disable-next-line: max-line-length
+    this.dateLabels = [sixthday.getDate(), fifthday.getDate(), forthday.getDate(), thirdday.getDate(), secondday.getDate(), firstday.getDate()];
     this.dateData = [12, 19, 3, 5, 2, 3];
+
     this.count = 0;
+
+
+    this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
+    console.log(this.jstoday);
+    this.loadBills(0,0,0);
+    // console.log(this.bills)
 }
 
   public ngOnInit() {
-
+    this.loadBills(0,0,0);
+    // this.userParams.month = this.today.getMonth() + 1;
+    // this.userParams.day = this.today.getDate();
+    // this.userParams.year = this.today.getFullYear();
+    // this.userParams.year = 2016;
+    // this.loadBills();
 }
 
+
 sortByMonth() {
+  const month = this.today.getMonth() + 1;
+  this.loadBills(0, month, 0);
+  console.log(this.bills);
+  this.bills.forEach(element => {
+    console.log(element);
+    this.monthData[6] += element.value;
+  });
+
   this.count = 1;
   this.chartData = {
     labels: this.monthLabels,
@@ -83,6 +181,9 @@ sortByMonth() {
   this.drawChart();
 }
 sortByWeek() {
+  this.loadBills();
+  const day = this.today.getDate();
+  console.log(this.bills);
   this.count = 2;
   this.chartData = {
     labels: this.weekLabels,
@@ -111,6 +212,8 @@ sortByWeek() {
   this.drawChart();
 }
 sortByDate() {
+  this.loadBills();
+  console.log(this.bills);
   this.count = 3;
   this.chartData = {
     labels: this.dateLabels,
@@ -138,15 +241,25 @@ sortByDate() {
 };
   this.drawChart();
 }
+loadBills(day?, month?, year?) {
+  this.userParams.day = day;
+  this.userParams.month = month;
+  this.userParams.year = year;
+  this.billService.getBills(this.userParams)
+  .subscribe((res: PaginatedResult<Bill[]>) => {
+    this.bills = res.result;
+}, error => {
+    this.alertify.error(error);
+});
+}
 report() {
 
-  switch (this.count)
-  {
+  switch (this.count) {
     case 1:
       {
         this.fileName = 'BaoCaoDoanhThuTheoThang.xlsx';
-        this.monthData.unshift("Doanh Thu");
-        this.monthLabels.unshift("Tháng");
+        this.monthData.unshift('Doanh Thu');
+        this.monthLabels.unshift('Tháng');
         this.data = [this.monthLabels, this.monthData];
         this.exportToExcel();
 
@@ -157,8 +270,8 @@ report() {
     case 2:
       {
         this.fileName = 'BaoCaoDoanhThuTheoTuan.xlsx';
-        this.weekData.unshift("Doanh Thu");
-        this.weekLabels.unshift("Tuần");
+        this.weekData.unshift('Doanh Thu');
+        this.weekLabels.unshift('Tuần');
         this.data = [this.weekLabels, this.weekData];
         this.exportToExcel();
 
@@ -170,11 +283,11 @@ report() {
     case 3:
       {
         this.fileName = 'BaoCaoDoanhThuTheoNgay.xlsx';
-        this.dateData.unshift("Doanh Thu");
-        this.dateLabels.unshift("Ngày");
+        this.dateData.unshift('Doanh Thu');
+        this.dateLabels.unshift('Ngày');
         this.data = [this.dateLabels, this.dateData];
         this.exportToExcel();
-        
+
         this.dateData.shift();
         this.dateLabels.shift();
         break;
