@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,13 @@ namespace CoffeeShopManager.API.Data.Bills
         {
             var bills = await _context.Bills.ToListAsync();
             return bills;
+        }
+
+        public async Task<PagedList<Bill>> GetBills(BillParams billParams)
+        {
+            var bills = _context.Bills;
+            return await PagedList<Bill>.CreateAsync(bills,billParams.PageNumber, billParams.PageSize);
+
         }
 
         public async Task<bool> SaveAll()

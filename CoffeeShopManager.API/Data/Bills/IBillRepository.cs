@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 
 namespace CoffeeShopManager.API.Data.Bills
@@ -13,7 +14,7 @@ namespace CoffeeShopManager.API.Data.Bills
 
         Task<bool> SaveAll();
 
-        Task<IEnumerable<Bill>> GetBills();
+        Task<PagedList<Bill>> GetBills(BillParams billParams);
 
         Task<Bill> GetBill(int id);
     }
