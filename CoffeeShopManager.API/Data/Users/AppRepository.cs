@@ -47,5 +47,12 @@ namespace CoffeeShopManager.API.Data.Users
 
             return photo;
         }
+
+        public async Task<Staff> GetStaff(int id)
+        {
+            var staff = await _context.Staffs.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+
+            return staff;
+        }
     }
 }
