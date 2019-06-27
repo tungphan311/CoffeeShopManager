@@ -5,6 +5,7 @@ import { AlertifyService } from '../../_service/alertify.service';
 import { error } from 'util';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
+import { TypeaheadMatch } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-staff-list',
@@ -12,6 +13,8 @@ import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
+    selectedValue: string;
+    selectedOption = StaffListComponent;
     staffs : Staff[];
     pagination: Pagination;
 
@@ -22,6 +25,10 @@ export class StaffListComponent implements OnInit {
       this.staffs = data['staffs'].result;
       this.pagination = data ['staffs'].pagination;
     });
+  }
+
+  onSelect(event: TypeaheadMatch): void {
+    this.selectedOption = event.item;
   }
 
   pageChanged(event: any): void {
@@ -39,5 +46,4 @@ export class StaffListComponent implements OnInit {
 
       })
   }
-
 }
