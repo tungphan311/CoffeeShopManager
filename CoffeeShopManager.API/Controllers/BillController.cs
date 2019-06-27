@@ -42,5 +42,18 @@ namespace CoffeeShopManager.API.Controllers
 
             return Ok(billForView);
         }
+
+        [HttpGet("total")]
+        public int GetTotalRevenue([FromQuery]BillParams billParams)
+        {
+            var bills = _repo.GetTotalRevenue(billParams);
+
+            // var billsForView = _mapper.Map<IEnumerable<BillForViewDto>>(bills);
+
+            // Response.AddPagination(bills.CurrentPage, bills.PageSize, bills.TotalCount, bills.TotalPages);
+
+
+            return bills;
+        }
     }
 }

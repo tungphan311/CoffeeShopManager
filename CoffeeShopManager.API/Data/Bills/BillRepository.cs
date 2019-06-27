@@ -63,6 +63,32 @@ namespace CoffeeShopManager.API.Data.Bills
 
         }
 
+        public int GetTotalRevenue(BillParams billParams)
+        {
+            var bills = _context.Bills.AsQueryable();
+            var total = 0;
+
+            if (billParams.year!=0)
+            {
+                bills=bills.Where(b => b.CreatedDate.Year==billParams.year);
+            }
+            if (billParams.month!=0)
+            {
+                bills=bills.Where(b => b.CreatedDate.Month==billParams.month);
+            }
+            if (billParams.day!=0)
+            {
+                bills=bills.Where(b => b.CreatedDate.Day==billParams.day);
+            }
+
+            foreach(var bill in bills)
+            {
+                total += bill.Value;
+            }
+
+            return total;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
