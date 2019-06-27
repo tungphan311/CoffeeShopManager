@@ -1,12 +1,13 @@
 .left {
     float: left;
-    width: 70%;
+    width: 75%;
+    padding-right: 20px;
 }
 
 .right {
     position: fixed;
     right: 20px;
-    width: 32%;
+    width: 25%;
     overflow-y: auto;
 }
 
@@ -25,3 +26,19 @@ button.btn.btn-secondary {
     font-size: 16px;
     border: 1px solid #666;
 }
+
+.bill {
+    margin-top: 70px;
+    margin-left: 40px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.col-1-5{
+    width: 20%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
