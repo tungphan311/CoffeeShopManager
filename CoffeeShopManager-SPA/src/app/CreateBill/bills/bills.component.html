@@ -18,7 +18,7 @@
     <div class="right" style="overflow-y: auto; max-height: 85%">
       <div class="card" style="border: solid thin;">
         <div class="card-header">
-          <button class="btn btn-secondary" (click)="cart.show()">
+          <button class="btn btn-secondary" (click)="cartShow(1)">
             Xem giỏ hàng
           </button>
         </div>
@@ -53,5 +53,4 @@
     </div>
   </div>
   <app-product-detail #productDetail (order)="getOrder($event)"></app-product-detail>
-  <app-cart #cart></app-cart>
 </div>
