@@ -2,13 +2,50 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="row">
-            <p>Cart works!</p>
+        <div style="align-self: center; margin-left: 10px;">
+          <h5>Chỉnh sửa hoá đơn</h5>
         </div>
-        <button type="button" class="close">
+        <button type="button" class="close" (click)="close()">
             <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    </div> 
+      <div class="modal-body">
+        <div *ngFor="let order of orders">
+          <div id="{{orders.indexOf(order)}}" class="card" style="margin-bottom: 10px;">
+            <div class="card-body row">
+              <div class="left">
+                <img src="{{products[orders.indexOf(order)].photo}}">
+              </div>
+              <div class="middle">
+                <p><b>{{order.name}}</b></p>
+                <p>Size: {{order.size}}</p>
+                <input type="text" class="form-control" value="{{order.note}}" placeholder="Vui lòng nhập ghi chú"
+                  (change)="order.note = $event.target.value">
+                <ul class="list-inline" style="margin-top: 10px;">
+                  <li class="list-inline-item">
+                    <button [disabled]="order.amount == 1" type="button" class="btn btn-lg btn-outline-danger btn-circle" (click)="decrease(order)">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </li>
+                  <li class="list-inline-item" style="margin-left: 10px; font-size: 18px;">
+                    <p>{{order.amount}}</p>
+                  </li>
+                  <li class="list-inline-item" style="margin-left: 10px;"> 
+                    <button type="button" class="btn btn-lg btn-outline-danger btn-circle" (click)="increase(order)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </li>    
+                </ul>
+              </div>
+              <div class="right">
+                <button type="button" class="btn btn-danger" (click)="delete(order.productDetailId)">
+                    Xoá
+                </button>
+              </div>
+            </div>       
+          </div>
+        </div> 
+      </div>
+    </div>
   </div>
 </div>

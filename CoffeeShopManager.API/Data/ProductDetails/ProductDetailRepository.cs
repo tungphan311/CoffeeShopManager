@@ -21,6 +21,13 @@ namespace CoffeeShopManager.API.Data.ProductDetails
             return detailWithId;
         }
 
+        public async Task<ProductDetail> GetProductDetailById(int id)
+        {
+            var detail = await _context.ProductDetails.FirstOrDefaultAsync(x => x.Id == id);
+
+            return detail;
+        }
+
         public async Task<IEnumerable<ProductDetail>> GetProductDetails()
         {
             var details = await _context.ProductDetails.ToListAsync();

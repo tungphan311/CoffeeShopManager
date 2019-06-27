@@ -16,21 +16,23 @@ import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
 import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
 import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
+import { CartComponent } from './CreateBill/cart/cart.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     {
-        path: '', 
+        path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
             { path: 'bill', component: BillsComponent },
+            { path: 'bill/cart', component: CartComponent },
             { path: 'staff', component: StaffListComponent,
-                resolve :{staffs :StaffListResolver}},
-            { path: 'staff/:id', component: StaffDetailComponent, 
-                resolve :{staff:StaffDetailResolver}},
+                resolve : { staffs: StaffListResolver }},
+            { path: 'staff/:id', component: StaffDetailComponent,
+                resolve : { staff: StaffDetailResolver }},
             { path: 'staff/edit/:id', component: StaffEditComponent,
-                resolve :{staff:StaffEditResolver}, canDeactivate:[PreventUnsavedChanges]},
+                resolve : { staff: StaffEditResolver }, canDeactivate: [PreventUnsavedChanges]},
             { path: 'create', component: StaffCreateComponent},
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },

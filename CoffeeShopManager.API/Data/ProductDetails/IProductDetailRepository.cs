@@ -11,5 +11,7 @@ namespace CoffeeShopManager.API.Data.ProductDetails
         Task<IEnumerable<ProductDetail>> GetProductDetails();
 
         Task<IEnumerable<ProductDetail>> GetProductDetail(int id);
+
+        Task<ProductDetail> GetProductDetailById(int id);
     }
 }
