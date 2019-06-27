@@ -58,7 +58,7 @@ namespace CoffeeShopManager.API
             services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
             services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
-            // services.AddAutoMapper();
+            services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -99,7 +99,8 @@ namespace CoffeeShopManager.API
             }
 
             //app.UseHttpsRedirection();
-            // seeder.SeedUser();
+            
+            //seeder.SeedUser();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

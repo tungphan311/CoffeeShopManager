@@ -1,6 +1,6 @@
 namespace CoffeeShopManager.API.Helpers
 {
-    public class StaffParams
+    public class EmployeeParams
     {
         private const int MaxPageSize = 50;
         public int PageNumber {get;set;} = 1;
