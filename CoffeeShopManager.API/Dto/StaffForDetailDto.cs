@@ -25,7 +25,7 @@ namespace CoffeeShopManager.API.Dto
 
         public DateTime DateOfBirth { get; set; }
 
-        public string PhotoUrl { get; set; }
+        public string Photo { get; set; }
 
         public ICollection<PhotoForDetailDto> Photos { get; set; }
     }

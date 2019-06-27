@@ -20,6 +20,6 @@ namespace CoffeeShopManager.API.Dto
 
         //public string Address { get; set; }
 
-        public string PhotoUrl { get; set; }
+        public string Photo { get; set; }
     }
 }
