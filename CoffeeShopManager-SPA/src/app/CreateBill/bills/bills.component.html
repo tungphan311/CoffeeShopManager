@@ -1,19 +1,24 @@
 <div class="bill">
+  <div class="btn-group" role="group">
+    <button id="0" type="button" class="btn btn-info but" 
+      (click)="changeColor($event.target.id)" [style.background-color]="buttons[0] ? '#38afc7' : '#a0d8e4'">Cà phê</button>
+    <button id="1" type="button" class="btn btn-info but"
+      (click)="changeColor($event.target.id)" [style.background-color]="buttons[1] ? '#38afc7' : '#a0d8e4'">Trà & Macchiato</button>
+    <button id="2" type="button" class="btn btn-info but"
+      (click)="changeColor($event.target.id)" [style.background-color]="buttons[2] ? '#38afc7' : '#a0d8e4'">Thức uống đá xay</button>
+    <button id="3" type="button" class="btn btn-info but"
+      (click)="changeColor($event.target.id)" [style.background-color]="buttons[3] ? '#38afc7' : '#a0d8e4'">Thức uống trái cây</button>
+  </div>
   <div class="row">
-    <div class="left">
-      <div>
-        <h5>Ca phe</h5>
-        <hr>
-        <br/>
-      </div>
-      <div *ngFor="let product of products" class="col-1-5">
+    <div class="left row">
+      <div *ngFor="let product of products" class="col-lg-3">
         <app-product [product]="product" (select)="show($event)"></app-product>
       </div>
     </div>
     <div class="right" style="overflow-y: auto; max-height: 85%">
       <div class="card" style="border: solid thin;">
         <div class="card-header">
-          <button class="btn btn-secondary">
+          <button class="btn btn-secondary" (click)="cart.show()">
             Xem giỏ hàng
           </button>
         </div>
@@ -48,4 +53,5 @@
     </div>
   </div>
   <app-product-detail #productDetail (order)="getOrder($event)"></app-product-detail>
+  <app-cart #cart></app-cart>
 </div>

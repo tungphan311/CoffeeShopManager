@@ -40,6 +40,7 @@ import { StaffEditComponent } from './staffs/staff-edit/staff-edit.component';
 import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
 import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
 import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
+import { CartComponent } from './CreateBill/cart/cart.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -65,7 +66,8 @@ export function tokenGetter() {
       Product_reportComponent,
       Revenue_reportComponent,
       ProductComponent,
-      ProductDetailComponent
+      ProductDetailComponent,
+      CartComponent
    ],
    imports: [
       TabsModule.forRoot(),

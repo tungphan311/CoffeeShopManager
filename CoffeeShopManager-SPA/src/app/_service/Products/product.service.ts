@@ -21,4 +21,8 @@ export class ProductService {
   getProduct(id): Observable<Products> {
     return this.http.get<Products>(this.baseUrl + 'product/' + id);
   }
+
+  getProductByType(id): Observable<Products[]> {
+    return this.http.get<Products[]>(this.baseUrl + 'product/type/' + id);
+  }
 }

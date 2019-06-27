@@ -1,62 +1,162 @@
 [
     {
-        "ProductId": 1,
+        "ProductId": 8,
         "Size": "M",
         "Price": 25000
     },
     {
-        "ProductId": 1,
+        "ProductId": 8,
         "Size": "L",
         "Price": 29000
     },
     {
-        "ProductId": 2,
+        "ProductId": 9,
         "Size": "M",
         "Price": 25000
     },
     {
-        "ProductId": 2,
+        "ProductId": 9,
         "Size": "L",
         "Price": 29000
     },
     {
-        "ProductId": 3,
+        "ProductId": 13,
         "Size": "M",
         "Price": 25000
     },
     {
-        "ProductId": 3,
+        "ProductId": 13,
         "Size": "L",
         "Price": 29000
     },
     {
-        "ProductId": 4,
+        "ProductId": 11,
         "Size": "M",
         "Price": 35000
     },
     {
+        "ProductId": 11,
+        "Size": "L",
+        "Price": 39000
+    },
+    {
+        "ProductId": 12,
+        "Size": "M",
+        "Price": 39000
+    },
+    {
+        "ProductId": 12,
+        "Size": "L",
+        "Price": 45000
+    },
+    {
+        "ProductId": 18,
+        "Size": "M",
+        "Price": 39000
+    },
+    {
+        "ProductId": 18,
+        "Size": "L",
+        "Price": 45000
+    },
+    {
+        "ProductId": 1,
+        "Size": "M",
+        "Price": 40000
+    },
+    {
+        "ProductId": 2,
+        "Size": "M",
+        "Price": 40000
+    },
+    {
+        "ProductId": 3,
+        "Size": "M",
+        "Price": 25000
+    },
+    {
         "ProductId": 4,
-        "Size": "L",
-        "Price": 39000
+        "Size": "M",
+        "Price": 29000
     },
     {
         "ProductId": 5,
         "Size": "M",
-        "Price": 39000
+        "Price": 25000
     },
     {
-        "ProductId": 5,
-        "Size": "L",
-        "Price": 45000
+        "ProductId": 6,
+        "Size": "S",
+        "Price": 30000
     },
     {
         "ProductId": 6,
         "Size": "M",
-        "Price": 39000
+        "Price": 36000
     },
     {
         "ProductId": 6,
         "Size": "L",
+        "Price": 43000
+    },
+    {
+        "ProductId": 7,
+        "Size": "M",
+        "Price": 40000
+    },
+    {
+        "ProductId": 10,
+        "Size": "S",
+        "Price": 30000
+    },
+    {
+        "ProductId": 10,
+        "Size": "M",
+        "Price": 36000
+    },
+    {
+        "ProductId": 10,
+        "Size": "L",
+        "Price": 43000
+    },
+    {
+        "ProductId": 14,
+        "Size": "S",
+        "Price": 32000
+    },
+    {
+        "ProductId": 14,
+        "Size": "M",
+        "Price": 38000
+    },
+    {
+        "ProductId": 14,
+        "Size": "L",
         "Price": 45000
+    },
+    {
+        "ProductId": 15,
+        "Size": "M",
+        "Price": 45000
+    },
+    {
+        "ProductId": 16,
+        "Size": "S",
+        "Price": 32000
+    },
+    {
+        "ProductId": 16,
+        "Size": "M",
+        "Price": 38000
+    },
+    {
+        "ProductId": 16,
+        "Size": "L",
+        "Price": 45000
+    },
+    {
+        "ProductId": 17,
+        "Size": "M",
+        "Price": 40000
     }
 ]

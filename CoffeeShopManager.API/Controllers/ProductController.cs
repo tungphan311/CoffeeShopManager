@@ -38,5 +38,15 @@ namespace CoffeeShopManager.API.Controllers
 
             return Ok(productForView);
         }
+
+        [HttpGet("type/{id}")]
+        public async Task<IActionResult> GetProductByType(int id)
+        {
+            var products = await _repo.GetProductByType(id);
+
+            var productsForView = _mapper.Map<IEnumerable<ProductForViewDto>>(products);
+
+            return Ok(productsForView); 
+        }
     }
 }
