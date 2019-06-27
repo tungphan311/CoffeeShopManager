@@ -9,12 +9,22 @@
     </div>
 </div>
 
-<!-- <div class="d-flex justify-content-center">
+<pre class="card card-block card-header mb-3">Staff: {{selectedValue | json}}</pre>
+<pre class="card card-block card-header mb-3">Lý lịch: {{selectedOption | json}}</pre>
+ 
+<input [(ngModel)]="selectedValue"
+    [typeahead]="staffs"
+       typeaheadOptionField="name"
+       (typeaheadOnSelect)="onSelect($event)"
+       class="form-control">
+
+<div class="d-flex justify-content-center">
     <pagination [boundaryLinks]="true" 
                 [totalItems]="pagination.totalItems"
                 [itemsPerPage]="pagination.itemsPerPage"
-                [(ngModel)]="pagination.currentPage")]
+                [(ngModel)]="pagination.currentPage"
                 (pageChanged)="pageChanged($event)"
-        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-     </pagination>
-</div> -->
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+ 
+</pagination>
+</div>

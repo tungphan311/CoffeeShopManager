@@ -41,4 +41,13 @@ button.btn.btn-secondary {
     min-height: 1px;
     padding-right: 10px;
     padding-left: 10px;
-  }
+}
+
+.btn-group {
+    margin-bottom: 15px;
+    width: 80%;
+}
+
+.but {
+    width: 25%;
+}

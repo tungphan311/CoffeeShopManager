@@ -6,6 +6,7 @@ import { ProductDetail } from 'src/app/_models/ProductDetail';
 import { ProductComponent } from '../product/product.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { Order } from 'src/app/_models/Order';
+import { CartComponent } from '../cart/cart.component';
 
 @Component({
   selector: 'app-bills',
@@ -15,9 +16,11 @@ import { Order } from 'src/app/_models/Order';
 export class BillsComponent implements OnInit {
   @ViewChild('product') product: ProductComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
+  @ViewChild('cart') cart: CartComponent;
 
   products: Products[];
   orderList: Order[] = [];
+  buttons: boolean[] = [];
 
   constructor(
     private productService: ProductService,
@@ -26,14 +29,20 @@ export class BillsComponent implements OnInit {
 
   ngOnInit() {
     this.orderList = [];
-    this.loadProducts();
+    this.defaultButton();
+    this.buttons[0] = true;
+    this.loadProducts(this.buttons);
   }
 
-  loadProducts() {
-    this.productService.getProducts().subscribe((products: Products[]) => {
-      this.products = products;
-    }, error => {
-      this.alertify.error(error);
+  loadProducts(buttons: boolean[]) {
+    buttons.forEach(id => {
+      if (id === true) {
+        this.productService.getProductByType(buttons.indexOf(id) + 1).subscribe((products: Products[]) => {
+          this.products = products;
+        }, error => {
+          this.alertify.error(error);
+        });
+      }
     });
   }
 
@@ -65,5 +74,15 @@ export class BillsComponent implements OnInit {
     });
 
     return result;
+  }
+
+  changeColor(event) {
+    this.defaultButton();
+    this.buttons[event] = true;
+    this.loadProducts(this.buttons);
+  }
+
+  defaultButton() {
+    this.buttons.fill(false);
   }
 }
