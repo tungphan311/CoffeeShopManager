@@ -58,7 +58,7 @@ namespace CoffeeShopManager.API
             services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
             services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
-            services.AddAutoMapper();
+            // services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

@@ -13,10 +13,11 @@ namespace CoffeeShopManager.API.Data.Staffs
 
         Task<bool> SaveAll();
 
-        Task<PagedList<Staff>> GetStaffs(StaffParams stafParams);
+        // Task<PagedList<Staff>> GetStaffs(StaffParams stafParams);
 
-        Task<Staff> GetStaff(int id);
+        // Task<Staff> GetStaff(int id);
         
         Task<Staff> Create(Staff staff);
+        // Task<Staff> GetStaff(int id);
     }
 }

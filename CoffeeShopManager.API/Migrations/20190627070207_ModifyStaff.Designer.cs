@@ -3,14 +3,16 @@ using System;
 using CoffeeShopManager.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoffeeShopManager.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190627070207_ModifyStaff")]
+    partial class ModifyStaff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,8 +48,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.Property<string>("Email");
 
                     b.Property<string>("Gender");
-
-                    b.Property<bool>("IsDelete");
 
                     b.Property<string>("Name");
 
@@ -162,18 +162,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("CoffeeShopManager.API.Models.Test", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tests");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.User", b =>

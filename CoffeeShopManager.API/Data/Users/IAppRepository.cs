@@ -16,7 +16,7 @@ namespace CoffeeShopManager.API.Data.Users
 
         Task<User> GetUser(int id);
 
-        Task<Staff> GetStaff(int id);
+        // Task<Staff> GetStaff(int id);
 
         Task<Photo> GetPhoto(int id);
     }

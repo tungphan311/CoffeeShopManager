@@ -11,7 +11,6 @@ namespace CoffeeShopManager.API.Data
         }
         
         public DbSet<User> Users { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Product> Products {get; set;}
         public DbSet<ProductDetail> ProductDetails { get; set; }
@@ -19,6 +18,6 @@ namespace CoffeeShopManager.API.Data
         public DbSet<Member> Members { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Photo> Photos { get; set; }
-
+        public DbSet<Employee> Employees { get; set; }
     }
 }
