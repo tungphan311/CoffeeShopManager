@@ -31,7 +31,7 @@ export const appRoutes: Routes = [
                 resolve :{staff:StaffDetailResolver}},
             { path: 'staff/edit/:id', component: StaffEditComponent,
                 resolve :{staff:StaffEditResolver}, canDeactivate:[PreventUnsavedChanges]},
-            { path: 'staff/create/',component: StaffCreateComponent},
+            { path: 'create', component: StaffCreateComponent},
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
             { path: 'member', component: MembersComponent },

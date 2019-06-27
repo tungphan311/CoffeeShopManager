@@ -17,7 +17,6 @@ export class StaffCardComponent implements OnInit {
   getTeams(): void {
     this._teamService.getTeams().subscribe(result => {
       this.teamlist = result;
-      console.log(this.teamlist);
     } );
   }
   getStaffTeamName(id: number): any {
@@ -25,7 +24,10 @@ export class StaffCardComponent implements OnInit {
       if (iterator.id === id) {
           return iterator.name;
       }
+   }
   }
+  defaultPhoto():void {
+
   }
   ngOnInit() {
     this.getTeams();
