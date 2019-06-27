@@ -29,6 +29,15 @@ namespace CoffeeShopManager.API.Data.Products
             return product;
         }
 
+        public async Task<IEnumerable<Product>> GetProductByType(int typeId)
+        {
+            var products = await _context.Products.ToListAsync(); 
+
+            var productByType = products.FindAll(x => x.TypeId == typeId);
+
+            return productByType;
+        }
+
         public async Task<IEnumerable<Product>> GetProducts()
         {
             var products = await _context.Products.ToListAsync();
