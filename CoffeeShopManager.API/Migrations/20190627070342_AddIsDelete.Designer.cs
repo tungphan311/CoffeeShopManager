@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeShopManager.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190625100709_AddPhotoToProduct")]
-    partial class AddPhotoToProduct
+    [Migration("20190627070342_AddIsDelete")]
+    partial class AddIsDelete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,34 @@ namespace CoffeeShopManager.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bills");
+                });
+
+            modelBuilder.Entity("CoffeeShopManager.API.Models.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<bool>("IsDelete");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("Photo");
+
+                    b.Property<int>("TeamId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.Member", b =>
@@ -67,17 +95,17 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<int>("EmployeeId");
+
                     b.Property<bool>("IsMain");
 
                     b.Property<string>("PublicId");
-
-                    b.Property<int>("StaffId");
 
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StaffId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Photos");
                 });
@@ -126,34 +154,6 @@ namespace CoffeeShopManager.API.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("CoffeeShopManager.API.Models.Staff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Gender");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("Photo");
-
-                    b.Property<int>("TeamId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Staffs");
-                });
-
             modelBuilder.Entity("CoffeeShopManager.API.Models.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -188,17 +188,9 @@ namespace CoffeeShopManager.API.Migrations
 
             modelBuilder.Entity("CoffeeShopManager.API.Models.Photo", b =>
                 {
-                    b.HasOne("CoffeeShopManager.API.Models.Staff", "Staff")
+                    b.HasOne("CoffeeShopManager.API.Models.Employee", "Employee")
                         .WithMany("Photos")
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CoffeeShopManager.API.Models.Staff", b =>
-                {
-                    b.HasOne("CoffeeShopManager.API.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

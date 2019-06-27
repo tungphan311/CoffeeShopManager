@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   }
 
   show() {
+    console.log('OK');
     this.modal.show();
   }
 }

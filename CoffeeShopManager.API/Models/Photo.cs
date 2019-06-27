@@ -12,8 +12,8 @@ namespace CoffeeShopManager.API.Models
 
         public bool IsMain { get; set; }
 
-        public Staff Staff { get; set; }
+        public Employee Employee { get; set; }
 
-        public int StaffId { get; set; }
+        public int EmployeeId { get; set; }
     }
 }

@@ -23,19 +23,19 @@ namespace CoffeeShopManager.API.Data.Staffs
             _context.Remove(entity);
         }
 
-        public async Task<Staff> GetStaff(int id)
-        {
-            var staff = await _context.Staffs.FirstOrDefaultAsync(u => u.Id == id);
+        // public async Task<Staff> GetStaff(int id)
+        // {
+        //     var staff = await _context.Staffs.FirstOrDefaultAsync(u => u.Id == id);
 
-            return staff;
-        }
+        //     return staff;
+        // }
 
-        public async Task<PagedList<Staff>> GetStaffs(StaffParams staffParams)
-        {
-            var staffs = _context.Staffs;
+        // public async Task<PagedList<Staff>> GetStaffs(StaffParams staffParams)
+        // {
+        //     var staffs = _context.Staffs;
 
-            return await PagedList<Staff>.CreateAsync(staffs, staffParams.PageNumber, staffParams.PageSize);
-        }
+        //     return await PagedList<Staff>.CreateAsync(staffs, staffParams.PageNumber, staffParams.PageSize);
+        // }
 
         public async Task<bool> SaveAll()
         {
