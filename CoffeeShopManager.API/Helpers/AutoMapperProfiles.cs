@@ -10,14 +10,16 @@ namespace CoffeeShopManager.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<User, UserForViewDto>();
-            CreateMap<Staff, StaffForListDto>()
-                .ForMember(dest => dest.Age, opt =>{
-                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
-                });
-            CreateMap<Staff, StaffForDetailDto>()
-                .ForMember(dest => dest.Age, opt =>{
-                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
-                });
+
+            // CreateMap<Staff, StaffForListDto>()
+            //     .ForMember(dest => dest.Age, opt =>{
+            //         opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+            //     });
+            // CreateMap<Staff, StaffForDetailDto>()
+            //     .ForMember(dest => dest.Age, opt =>{
+            //         opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+            //     });
+
             CreateMap<Team, TeamForViewDto>();
             CreateMap<Bill, BillForViewDto>();
             CreateMap<Product, ProductForViewDto>();
@@ -28,7 +30,9 @@ namespace CoffeeShopManager.API.Helpers
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
             
-            CreateMap<StaffForEditDto, Staff>();
+            // CreateMap<StaffForEditDto, Staff>();
+            // CreateMap<StaffForCreateDto, Staff>();
+            // CreateMap<StaffForEditDto, Staff>();
         }
     }
 }

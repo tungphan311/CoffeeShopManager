@@ -31,7 +31,7 @@ namespace CoffeeShopManager.API.Data
             var teams = JsonConvert.DeserializeObject<List<Team>>(teamData);
 
             var staffData = System.IO.File.ReadAllText("Data/Seed/Staffs.json");
-            var staffs = JsonConvert.DeserializeObject<List<Staff>>(staffData);
+            // var staffs = JsonConvert.DeserializeObject<List<Staff>>(staffData);
 
             foreach (var user in users)
             {
@@ -44,10 +44,10 @@ namespace CoffeeShopManager.API.Data
                 _context.Users.Add(user);
             }
 
-            foreach (var staff in staffs)
-            {
-                _context.Staffs.Add(staff);
-            }
+            // foreach (var staff in staffs)
+            // {
+            //     _context.Staffs.Add(staff);
+            // }
             foreach (var team in teams)
             {
                 _context.Teams.Add(team);

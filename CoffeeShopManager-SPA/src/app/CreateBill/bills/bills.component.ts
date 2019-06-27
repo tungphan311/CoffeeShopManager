@@ -85,4 +85,8 @@ export class BillsComponent implements OnInit {
   defaultButton() {
     this.buttons.fill(false);
   }
+
+  cartShow(id) {
+    this.productDetail.show(id);
+  }
 }
