@@ -24,52 +24,47 @@ namespace CoffeeShopManager.API.Controllers
             _repo = repo;
         }
 
-        // [HttpGet]
-        // public async Task<IActionResult> GetStaffs([FromQuery]StaffParams staffParams)
-        // {
-        //     var staffs = await _repo.GetStaffs(staffParams);
+        [HttpGet]
+        public async Task<IActionResult> GetEmployees([FromQuery]EmployeeParams employeeParams)
+        {
+            var employees = await _repo.GetEmployees(employeeParams);
             
-        //     var staffsToReturn = _mapper.Map<IEnumerable<StaffForListDto>>(staffs);
+            var employeesToReturn = _mapper.Map<IEnumerable<StaffForListDto>>(employees);
 
-        //     Response.AddPagination(staffs.CurrentPage, staffs.PageSize, staffs.TotalCount, staffs.TotalPages);
+            Response.AddPagination(employees.CurrentPage, employees.PageSize, employees.TotalCount, employees.TotalPages);
 
-        //     return Ok(staffsToReturn);
-        //     // return Ok(staffs);
-        // }
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetStaff(int id)
-        // {
-        //     var staff = await _repo.GetStaff(id);
-        //     var staffToReturn = _mapper.Map<StaffForDetailDto>(staff);
-        //     return Ok(staffToReturn);
-        // }
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> UpdateStaff(int id, StaffForEditDto staffForEditDto){
-        //     // if(id!= int.Parse(Staff.FindFirst(ClaimTypes.NameIdentifier).Value))
-        //     //     return Unahthrized();
-        //     var staffFromRepo = await _repo.GetStaff(id);
-        //     _mapper.Map(staffForEditDto, staffFromRepo);
+            return Ok(employeesToReturn);
+            // return Ok(employees);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmployee(int id)
+        {
+            var employee = await _repo.GetEmployee(id);
+            var employeeToReturn = _mapper.Map<StaffForDetailDto>(employee);
+            return Ok(employeeToReturn);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateEmployee(int id, StaffForEditDto employeeForEditDto){
+            // if(id!= int.Parse(Employee.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unahthrized();
+            var employeeFromRepo = await _repo.GetEmployee(id);
+            _mapper.Map(employeeForEditDto, employeeFromRepo);
 
-        //     if(await _repo.SaveAll())
-        //         return NoContent();
-        //     throw new Exception($"Updating staff {id} failed on save");
-        // }
-        // [HttpPost("create")]
-        // public async Task<IActionResult> Create(StaffForCreateDto staffForCreateDto)
-        // {
-        //     var staffToCreate = new Staff
-        //     {
-        //         Name = staffForCreateDto.Name
-        //     };
+            if(await _repo.SaveAll())
+                return NoContent();
+            throw new Exception($"Updating employee {id} failed on save");
+        }
+        [HttpPost("create")]
+        public async Task<IActionResult> Create(StaffForCreateDto employeeForCreateDto)
+        {
+            var employeeToCreate = new Employee
+            {
+                Name = employeeForCreateDto.Name
+            };
 
-        //     var createdStaff = await _repo.Create(staffToCreate);
+            var createdEmployee = await _repo.Create(employeeToCreate);
 
-        //     return StatusCode(201);
-        // }
-       
-        //     if(await _repo.SaveAll())
-        //         return NoContent();
-        //     throw new Exception($"Updating staff {id} failed on save");
-        // }
+            return StatusCode(201);
+        }
     }
 }
