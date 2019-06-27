@@ -1,6 +1,9 @@
-<div class="container mt-5">
+<div class="container mt-5 ">
+    <h1 class="text-center text-primary" style="margin-top: 60px">Staff List</h1>
+    <button class="btn btn-primary" style="width: 200px;height: 50px;margin-left:41% "
+    [routerLink]="['/staff/create/']">Add Staff</button>
     <div class="row">
-        <div *ngFor="let staff of staffs" class="col-lg-2 col-md-3 col-sm-6" style="padding-top: 4%">
+        <div *ngFor="let staff of staffs" class="col-lg-2 col-md-3 col-sm-6" style="padding-top: 2%">
             <app-staff-card [staff]="staff"></app-staff-card>
         </div>
     </div>

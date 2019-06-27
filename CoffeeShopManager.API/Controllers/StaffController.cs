@@ -53,5 +53,18 @@ namespace CoffeeShopManager.API.Controllers
                 return NoContent();
             throw new Exception($"Updating staff {id} failed on save");
         }
+        [HttpPost("create")]
+        public async Task<IActionResult> Create(StaffForCreateDto staffForCreateDto)
+        {
+            var staffToCreate = new Staff
+            {
+                Name = staffForCreateDto.Name
+            };
+
+            var createdStaff = await _repo.Create(staffToCreate);
+
+            return StatusCode(201);
+        }
+       
     }
 }

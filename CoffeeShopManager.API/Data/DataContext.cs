@@ -19,5 +19,6 @@ namespace CoffeeShopManager.API.Data
         public DbSet<Member> Members { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Photo> Photos { get; set; }
+
     }
 }

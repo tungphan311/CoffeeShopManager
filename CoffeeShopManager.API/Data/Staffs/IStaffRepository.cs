@@ -16,5 +16,7 @@ namespace CoffeeShopManager.API.Data.Staffs
         Task<PagedList<Staff>> GetStaffs(StaffParams stafParams);
 
         Task<Staff> GetStaff(int id);
+        
+        Task<Staff> Create(Staff staff);
     }
 }

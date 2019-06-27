@@ -164,6 +164,18 @@ namespace CoffeeShopManager.API.Migrations
                     b.ToTable("Teams");
                 });
 
+            modelBuilder.Entity("CoffeeShopManager.API.Models.Test", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tests");
+                });
+
             modelBuilder.Entity("CoffeeShopManager.API.Models.User", b =>
                 {
                     b.Property<int>("Id")
