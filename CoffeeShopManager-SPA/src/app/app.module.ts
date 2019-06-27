@@ -40,6 +40,7 @@ import { StaffEditComponent } from './staffs/staff-edit/staff-edit.component';
 import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
 import { StaffDetailResolver } from './_resolvers/staff-edit.resolvers';
 import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -85,7 +86,8 @@ export function tokenGetter() {
          }
       }),
       BrowserAnimationsModule,
-      ModalModule.forRoot()
+      ModalModule.forRoot(),
+      TypeaheadModule.forRoot()
    ],
    providers: [
       PreventUnsavedChanges,
