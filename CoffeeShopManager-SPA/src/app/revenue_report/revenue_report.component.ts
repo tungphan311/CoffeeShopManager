@@ -40,7 +40,7 @@ export class Revenue_reportComponent implements OnInit {
   count: number;
   isExportable = false;
 
-  bills: Bill[];
+  bills: Bill[] = [];
   bill: Bill = JSON.parse(localStorage.getItem('bill'));
   userParams: any = {};
 
@@ -72,7 +72,9 @@ export class Revenue_reportComponent implements OnInit {
 
 // tslint:disable-next-line: max-line-length
     this.monthLabels = [sixthMonth.getMonth() + 1, fifthMonth.getMonth() + 1, forthMonth.getMonth() + 1, thirdMonth.getMonth() + 1, secondMonth.getMonth() + 1, firstMonth.getMonth() + 1];
-    this.monthData = [12, 19, 3, 5, 2, 3];
+    
+    // this.monthData = [12, 19, 3, 5, 2, 3];
+    this.monthData = [];
     // const month =  this.today.getMonth();
     // this.monthLabels = [month - 5, month - 4, month - 3, month - 2, month - 1, month];
 
@@ -122,35 +124,63 @@ export class Revenue_reportComponent implements OnInit {
     const sixthday = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 5);
 // tslint:disable-next-line: max-line-length
     this.dateLabels = [sixthday.getDate(), fifthday.getDate(), forthday.getDate(), thirdday.getDate(), secondday.getDate(), firstday.getDate()];
-    this.dateData = [12, 19, 3, 5, 2, 3];
+    this.dateData = [];
 
     this.count = 0;
 
 
     this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
-    console.log(this.jstoday);
-    this.loadBills(0,0,0);
+    // console.log(this.jstoday);
     // console.log(this.bills)
 }
 
   public ngOnInit() {
-    this.loadBills(0,0,0);
-    // this.userParams.month = this.today.getMonth() + 1;
-    // this.userParams.day = this.today.getDate();
-    // this.userParams.year = this.today.getFullYear();
+    // this.loadBills(0,0,0);
+    this.userParams.month = this.today.getMonth() + 1;
+    this.userParams.day = 0
+    this.userParams.year = this.today.getFullYear();
+
+    this.billService.getTotal(this.userParams).subscribe(result => {
+      console.log(result);
+    });
+
+    this.sortByMonth();
+    this.sortByDate();
+
+
     // this.userParams.year = 2016;
     // this.loadBills();
+
 }
-
-
 sortByMonth() {
   const month = this.today.getMonth() + 1;
-  this.loadBills(0, month, 0);
-  console.log(this.bills);
-  this.bills.forEach(element => {
-    console.log(element);
-    this.monthData[6] += element.value;
+  this.userParams.month = month;
+  this.userParams.day = 0;
+  this.monthData.length = 6;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.monthData[5] = result;
   });
+  this.userParams.month -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.monthData[4] = result;
+  });
+  this.userParams.month -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.monthData[3] = result;
+  });
+  this.userParams.month -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.monthData[2] = result;
+  });
+  this.userParams.month -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.monthData[1] = result;
+  });
+  this.userParams.month -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.monthData[0] = result;
+  });
+  console.log(this.monthData);
 
   this.count = 1;
   this.chartData = {
@@ -181,9 +211,8 @@ sortByMonth() {
   this.drawChart();
 }
 sortByWeek() {
-  this.loadBills();
   const day = this.today.getDate();
-  console.log(this.bills);
+  // console.log(this.bills);
   this.count = 2;
   this.chartData = {
     labels: this.weekLabels,
@@ -212,8 +241,35 @@ sortByWeek() {
   this.drawChart();
 }
 sortByDate() {
-  this.loadBills();
-  console.log(this.bills);
+  const day = this.today.getDate();
+  const month = this.today.getMonth() + 1;
+  this.userParams.month = month;
+  this.userParams.day = day;
+  this.dateData.length = 6;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.dateData[5] = result;
+  });
+  this.userParams.day -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.dateData[4] = result;
+  });
+  this.userParams.day -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.dateData[3] = result;
+  });
+  this.userParams.day -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.dateData[2] = result;
+  });
+  this.userParams.day -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.dateData[1] = result;
+  });
+  this.userParams.day -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.dateData[0] = result;
+  });
+  console.log(this.dateData);
   this.count = 3;
   this.chartData = {
     labels: this.dateLabels,
@@ -240,17 +296,6 @@ sortByDate() {
     }]
 };
   this.drawChart();
-}
-loadBills(day?, month?, year?) {
-  this.userParams.day = day;
-  this.userParams.month = month;
-  this.userParams.year = year;
-  this.billService.getBills(this.userParams)
-  .subscribe((res: PaginatedResult<Bill[]>) => {
-    this.bills = res.result;
-}, error => {
-    this.alertify.error(error);
-});
 }
 report() {
 

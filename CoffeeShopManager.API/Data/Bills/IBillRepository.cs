@@ -17,5 +17,7 @@ namespace CoffeeShopManager.API.Data.Bills
         Task<PagedList<Bill>> GetBills(BillParams billParams);
 
         Task<Bill> GetBill(int id);
+
+        int GetTotalRevenue(BillParams billParams);
     }
 }
