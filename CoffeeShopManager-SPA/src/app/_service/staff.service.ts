@@ -39,8 +39,13 @@ const httpOptions = {
       if (page != null && itemsPerPage != null) {
         params = params.append('pageNumber', page);
         params = params.append('pageSize', itemsPerPage);
-
       }
+
+      // if (staffParams != null){
+      //   params = params.append('minAge',staffParams.minAge);
+      //   params = params.append('maxAge',staffParams.maxAge);
+      //   params = params.append('gender',staffParams.gender);
+      // }
 
       return this.http.get<Staff[]>(this.baseUrl + 'staff/', { observe: 'response', params})
         .pipe(
