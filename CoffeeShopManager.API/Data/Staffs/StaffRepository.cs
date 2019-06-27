@@ -41,11 +41,11 @@ namespace CoffeeShopManager.API.Data.Staffs
         {
             return await _context.SaveChangesAsync() > 0;
         }
-        public async Task<Staff> Create (Staff staff){
-            await _context.Staffs.AddAsync(staff);
-            await _context.SaveChangesAsync();
+        // public async Task<Staff> Create (Staff staff){
+        //     await _context.Staffs.AddAsync(staff);
+        //     await _context.SaveChangesAsync();
 
-            return staff;
-        }
+        //     return staff;
+        // }
     }
 }

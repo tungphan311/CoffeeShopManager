@@ -54,18 +54,18 @@ namespace CoffeeShopManager.API.Controllers
         //         return NoContent();
         //     throw new Exception($"Updating staff {id} failed on save");
         // }
-        [HttpPost("create")]
-        public async Task<IActionResult> Create(StaffForCreateDto staffForCreateDto)
-        {
-            var staffToCreate = new Staff
-            {
-                Name = staffForCreateDto.Name
-            };
+        // [HttpPost("create")]
+        // public async Task<IActionResult> Create(StaffForCreateDto staffForCreateDto)
+        // {
+        //     var staffToCreate = new Staff
+        //     {
+        //         Name = staffForCreateDto.Name
+        //     };
 
-            var createdStaff = await _repo.Create(staffToCreate);
+        //     var createdStaff = await _repo.Create(staffToCreate);
 
-            return StatusCode(201);
-        }
+        //     return StatusCode(201);
+        // }
        
         //     if(await _repo.SaveAll())
         //         return NoContent();

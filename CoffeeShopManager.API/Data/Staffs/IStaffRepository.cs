@@ -17,7 +17,6 @@ namespace CoffeeShopManager.API.Data.Staffs
 
         // Task<Staff> GetStaff(int id);
         
-        Task<Staff> Create(Staff staff);
-        // Task<Staff> GetStaff(int id);
+        // Task<Staff> Create(Staff staff);
     }
 }
