@@ -8,19 +8,21 @@ import { TeamService } from 'src/app/_service/team.service';
   styleUrls: ['./staff-card.component.css']
 })
 export class StaffCardComponent implements OnInit {
-  @Input() staff : Staff;
-  teamlist=[];
+  @Input() staff: Staff;
+  teamlist = [];
 
-  constructor(private _teamService : TeamService) { }
-  getTeams():void{
+  // tslint:disable-next-line:typedef-whitespace
+  // tslint:disable-next-line:variable-name
+  constructor(private _teamService: TeamService) { }
+  getTeams(): void {
     this._teamService.getTeams().subscribe(result => {
-      this.teamlist=result;
+      this.teamlist = result;
       console.log(this.teamlist);
     } );
   }
-  getStaffTeamName(id : number) : any{
+  getStaffTeamName(id: number): any {
     for (const iterator of this.teamlist) {
-      if (iterator.id == id) {
+      if (iterator.id === id) {
           return iterator.name;
       }
   }

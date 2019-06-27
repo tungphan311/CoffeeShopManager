@@ -27,6 +27,7 @@ namespace CoffeeShopManager.API.Helpers
             CreateMap<Photo, PhotoForDetailDto>();
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
+            
             CreateMap<StaffForEditDto, Staff>();
         }
     }
