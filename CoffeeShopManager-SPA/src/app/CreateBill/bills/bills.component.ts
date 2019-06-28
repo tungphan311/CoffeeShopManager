@@ -117,7 +117,7 @@ export class BillsComponent implements OnInit {
     return true;
   }
 
-  isValid(num): boolean {
+  isIdValid(num): boolean {
     if (isNaN(+num)) {
       return false;
     }
@@ -129,18 +129,41 @@ export class BillsComponent implements OnInit {
     return true;
   }
 
-  isError(num): boolean {
-    return this.required(num) && this.isValid(num);
+  isPaidValid(num): boolean {
+    if (isNaN(+num)) {
+      return false;
+    }
+
+    if (num % 1000 !== 0 || Number(num) < this.totalPrice(this.orderList)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  isIdError(num): boolean {
+    return this.required(num) && this.isIdValid(num);
+  }
+
+  isPaidError(num): boolean {
+    return this.required(num) && this.isPaidValid(num);
   }
 
   printInvoice() {
     this.submitted = true;
 
-    if (!this.isError(this.id) || !this.isError(this.paid)) {
+    if (!this.isIdError(this.id) || !this.isPaidError(this.paid)) {
       return;
     }
 
-    this.router.navigate(['/bill/invoice']);
+    this.router.navigate(['/bill/invoice'],
+      {
+        state: {
+          id: this.id,
+          paid: this.paid,
+          list: this.orderList
+        }
+      });
     this.id = this.paid = '';
   }
 }

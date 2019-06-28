@@ -45,9 +45,12 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CartComponent } from './CreateBill/cart/cart.component';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MatIconModule, MatFormFieldModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatInputModule, MatOptionModule, MatSelectModule, } from '@angular/material';
+import { MatNativeDateModule, MatIconModule, MAT_DATE_LOCALE } from '@angular/material';
+import { GridModule } from '@progress/kendo-angular-grid';
+
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
@@ -102,11 +105,12 @@ export function tokenGetter() {
       TypeaheadModule.forRoot(),
       PDFExportModule,
       ReactiveFormsModule,
-      // NgbModule,
       MatDatepickerModule,
       MatNativeDateModule,
       MatIconModule,
-      MatFormFieldModule
+      MatFormFieldModule,
+      MatInputModule,
+      MatOptionModule, MatSelectModule, MatIconModule, GridModule,
    ],
    providers: [
       {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},
@@ -121,7 +125,6 @@ export function tokenGetter() {
       StaffDetailResolver,
       StaffListResolver,
       StaffEditResolver,
-      MatDatepickerModule,
    ],
    bootstrap: [
       AppComponent

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { stat } from 'fs';
+import { Order } from 'src/app/_models/Order';
 
 @Component({
   selector: 'app-invoice',
@@ -10,19 +12,21 @@ import { FormGroup } from '@angular/forms';
 export class InvoiceComponent implements OnInit {
   id: number;
   paid: number;
+  orders: Order[] = [];
 
   constructor(
     private router: Router
   ) {
     const navigaton = router.getCurrentNavigation();
-    const state = navigaton.extras.state as { example: string };
-    const stringtify = JSON.parse(state.example);
-    console.log(stringtify);
-    this.id = stringtify.id;
-    this.paid = stringtify.payment;
+    const state = navigaton.extras.state;
+
+    this.id = state.id;
+    this.paid = state.paid;
+    this.orders = state.list;
 
     console.log(this.id);
     console.log(this.paid);
+    console.log(this.orders);
   }
 
   ngOnInit() {
