@@ -72,6 +72,7 @@ namespace CoffeeShopManager.API.Controllers
             var createdEmployee = await _repo.Create(employeeToCreate);
 
             return StatusCode(201);
+        
         }
     }
 }
