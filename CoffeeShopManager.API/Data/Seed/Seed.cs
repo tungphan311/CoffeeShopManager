@@ -33,6 +33,9 @@ namespace CoffeeShopManager.API.Data
             var employeeData = System.IO.File.ReadAllText("Data/Seed/Staffs.json");
             var employees = JsonConvert.DeserializeObject<List<Employee>>(employeeData);
 
+            var billData = System.IO.File.ReadAllText("Data/Seed/Bills.json");
+            var bills= JsonConvert.DeserializeObject<List<Bill>>(billData);
+
             foreach (var user in users)
             {
                 byte[] passwordHash, passwordSalt;
@@ -66,6 +69,10 @@ namespace CoffeeShopManager.API.Data
             foreach (var detail in details)
             {
                 _context.ProductDetails.Add(detail);
+            }
+            foreach (var bill in bills)
+            {
+                _context.Bills.Add(bill);
             }
 
             _context.SaveChanges();
