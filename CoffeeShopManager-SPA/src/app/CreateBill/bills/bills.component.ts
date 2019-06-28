@@ -8,6 +8,7 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 import { Order } from 'src/app/_models/Order';
 import { CartComponent } from '../cart/cart.component';
 import { Router } from '@angular/router';
+import { OrderComponent } from '../order/order.component';
 
 @Component({
   selector: 'app-bills',
@@ -18,6 +19,7 @@ export class BillsComponent implements OnInit {
   @ViewChild('product') product: ProductComponent;
   @ViewChild('productDetail') productDetail: ProductDetailComponent;
   @ViewChild('cart') cart: CartComponent;
+  @ViewChild('order') orderModal: OrderComponent;
 
   products: Products[];
   orderList: Order[] = [];
@@ -53,7 +55,16 @@ export class BillsComponent implements OnInit {
   }
 
   getOrder(order: Order) {
-    this.orderList.push(order);
+    let temp = 0;
+    this.orderList.forEach(element => {
+      if (element.productDetailId === order.productDetailId && order.note === '') {
+        element.amount += order.amount;
+        temp += 1;
+      }
+    });
+    if (temp === 0) {
+      this.orderList.push(order);
+    }
   }
 
   formatPrice(num: number): string {
@@ -89,6 +100,10 @@ export class BillsComponent implements OnInit {
   }
 
   cartShow() {
-    this.router.navigate(['/bill/cart'], { state: { example: this.orderList } });
+    this.cart.show(this.orderList);
+  }
+
+  reloadList($event) {
+    // console.log($event);
   }
 }

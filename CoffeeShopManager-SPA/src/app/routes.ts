@@ -17,6 +17,7 @@ import { StaffEditResolver } from './_resolvers/staff-detail.resolvers';
 import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
 import { CartComponent } from './CreateBill/cart/cart.component';
+import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -26,7 +27,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'bill', component: BillsComponent },
-            { path: 'bill/cart', component: CartComponent },
+            { path: 'bill/invoice', component: InvoiceComponent },
             { path: 'staff', component: StaffListComponent,
                 resolve : { staffs: StaffListResolver }},
             { path: 'staff/:id', component: StaffDetailComponent,

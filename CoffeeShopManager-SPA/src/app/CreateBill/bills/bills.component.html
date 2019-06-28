@@ -18,9 +18,18 @@
     <div class="right" style="overflow-y: auto; max-height: 85%">
       <div class="card" style="border: solid thin;">
         <div class="card-header">
-          <button class="btn btn-secondary" (click)="cart.show()" [disabled]="orderList.length == 0">
-            Chỉnh sửa giỏ hàng
-          </button>
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <button class="btn btn-secondary" (click)="cartShow()" [disabled]="orderList.length == 0">
+                Sửa
+              </button>
+            </li>
+            <li class="list-inline-item">
+              <button class="btn btn-primary" (click)="orderModal.show()" [disabled]="orderList.length == 0">
+                Xuất hoá đơn
+              </button>
+            </li>
+          </ul>
         </div>
         <div class="card-body">
           <div *ngIf="orderList.length == 0">
@@ -53,5 +62,6 @@
     </div>
   </div>
   <app-product-detail #productDetail (order)="getOrder($event)"></app-product-detail>
-  <app-cart #cart [orders]="orderList"></app-cart>
+  <app-cart #cart (output)="reloadList($event)"></app-cart>
+  <app-order #order></app-order>
 </div>
