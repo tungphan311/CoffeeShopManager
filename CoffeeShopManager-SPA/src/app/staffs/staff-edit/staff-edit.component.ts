@@ -28,25 +28,25 @@ export class StaffEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data =>{
       this.staff = data['staff'];
-      // var moment = require('moment/moment');
-      // var date = moment(this.staff.dateofbirth);
-      // var tz = date.u
-      
+      this.defaultPhoto(this.staff);
     });
   }
+
+  defaultPhoto(staff) : Staff {
+    if(this.staff.photo===""||this.staff.photo ===null){
+      this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
+    }
+    return staff;
+  }
+
   reload(){
-    this.route.data.subscribe(data =>{
-      this.staff = data['staff'];
-      // var moment = require('moment/moment');
-      // var date = moment(this.staff.dateofbirth);
-      // var tz = date.u
-      
-    });
+    location.reload();
   }
   updateStaff(){
     this.staffService.updateStaff(this.staff).subscribe(next => {
-      this.alertify.success('Profile updated successfully');
+    this.alertify.success('Profile updated successfully');
     this.editForm.reset(this.staff);
+    this.reload();
     },error =>{
       this.alertify.error(error);
     })

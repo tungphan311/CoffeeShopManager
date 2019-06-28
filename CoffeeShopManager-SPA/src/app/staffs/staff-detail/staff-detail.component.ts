@@ -3,6 +3,7 @@ import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-staff-detail',
@@ -18,17 +19,25 @@ export class StaffDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data =>{
-      this.staff = data['staff'];
+      this.staff = data['staff']; 
+      this.defaultPhoto(this.staff);
+      var dob = this.staff.dateofbirth;
+      console.log(this.staff);
     });
   }
 
-  // loadStaff(){
-  //   this.staffService.getStaff(+this.route.snapshot.params['id']).subscribe((staff: Staff)=>{
-  //     this.staff = staff;
-  //     console.log(staff.age); 
-  //   },error => {
-  //     this.alertify.error(error);
-  //   });
-  // }
+  defaultPhoto(staff) : Staff {
+    this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
+    return staff;
+  }
+
+  loadStaff(){
+    this.staffService.getStaff(this.route.snapshot.params['id']).subscribe((staff: Staff)=>{
+      this.staff = staff;
+      console.log('s'); 
+    },error => {
+      this.alertify.error(error);
+    });
+  }
 
 }

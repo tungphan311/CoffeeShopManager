@@ -8,10 +8,12 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class StaffDetailResolver implements Resolve<Staff>{
+    staff : Staff;
     constructor(
         private staffService: StaffService, 
         private router :Router, 
         private alertify: AlertifyService){}
+        
     resolve(route: ActivatedRouteSnapshot) : Observable<Staff>{
         return this.staffService.getStaff(route.params['id']).pipe(
             catchError(error =>{

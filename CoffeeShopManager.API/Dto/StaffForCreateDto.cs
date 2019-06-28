@@ -12,9 +12,13 @@ namespace CoffeeShopManager.API.Dto
         public int TeamId { get; set; }
         [Required]
         public string Gender { get; set; }
+        [Required]
         public DateTime DateOfBirth { get; set; }
+        [Required]
         public string Phone { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Address{ get; set; }
         public string Photo { get; set; }
     }

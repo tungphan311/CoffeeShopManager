@@ -7,21 +7,10 @@
       <div class="card">
         <img class="card-img-top img-thumbnail" src="{{staff.photo}}" alt="{{staff.name}}">
         <div class="card-body">
-          <div>
-            <strong>Phone :</strong>
-            <p>{{staff.phone}}</p>
-          </div>
-          <div>
-            <strong>Age :</strong>
-            <p>{{staff.age}}</p>
-          </div>
-          <div>
-            <strong>Email :</strong>
-            <p>{{staff.email}}</p>
-          </div>
           <div class="card-footer">
             <div class="btn-group d-flex">
-              <button class="btn btn-primary w-100">Edit</button>
+              <button class="btn btn-primary w-100"
+              [routerLink]="['/staff/edit/', staff.id ]">Edit</button>
               <button class="btn btn-success w-100">Delete</button>
             </div>
           </div>
@@ -32,11 +21,32 @@
       <div class="tab-panel">
         <tabset class="member-tabset">
           <tab heading="About" id="tab1">   
-            <h4>Description</h4>
-            <h4>Time in</h4>
+            <div>
+              <strong>Date Of Birth :</strong>
+              <p>{{staff.dateofbirth}}</p>
+            </div>
+            <div>
+              <strong>Age :</strong>
+              <p>{{staff.age}}</p>
+            </div>
+            <div>
+              <strong>Gender :</strong>
+              <p>{{staff.gender}}</p>
+            </div>
           </tab>
-          <tab heading="Messages">
-            <h4>Messages</h4>
+          <tab heading="Contact">
+            <div>
+              <strong>Phone :</strong>
+              <p>{{staff.phone}}</p>
+            </div>
+            <div>
+              <strong>Email :</strong>
+              <p>{{staff.email}}</p>
+            </div>
+            <div>
+              <strong>Address :</strong>
+              <p>{{staff.address}}</p>
+            </div>
           </tab>
         </tabset>
       </div>
