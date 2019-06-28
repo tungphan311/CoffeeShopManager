@@ -22,7 +22,10 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@auth0/angular-jwt": "^2.1.0",
+    "@progress/kendo-angular-common": "^1.0.0",
     "@progress/kendo-angular-pdf-export": "^2.0.0",
+    "@progress/kendo-drawing": "^1.2.0",
+    "@progress/kendo-theme-default": "latest",
     "alertifyjs": "^1.11.3",
     "angular-material": "^1.1.19",
     "bootstrap": "^4.3.1",
@@ -39,10 +42,7 @@
     "tslib": "^1.9.0",
     "xlsx": "^0.14.3",
     "yarn": "^1.16.0",
-    "zone.js": "~0.8.26",
-    "@progress/kendo-angular-common": "^1.0.0",
-    "@progress/kendo-drawing": "^1.2.0",
-    "@progress/kendo-theme-default": "latest"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
