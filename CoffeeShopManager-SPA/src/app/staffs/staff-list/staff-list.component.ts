@@ -13,12 +13,11 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    selectedValue: String;
+    selectedValue: 0;
     noResult = false;
-    selectedOption = StaffListComponent;
+    public selectedOption: string;
     staffs: Staff[];
     staff: Staff = JSON.parse(localStorage.getItem('staff'));
-    genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}, {value: 'other', display: 'Others'}];
     staffParams: any = {};
     pagination: Pagination;
 
@@ -52,12 +51,13 @@ export class StaffListComponent implements OnInit {
     
   }
 
-  resetFilter() {
-    this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-    this.staffParams.minAge = 18;
-    this.staffParams.maxAge = 99;
-    this.loadStaffs();
-  }
+
+  // resetFilter() {
+  //   this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
+  //   this.staffParams.minAge = 18;
+  //   this.staffParams.maxAge = 99;
+  //   this.loadStaffs();
+  // }
 
   defaultPhoto(staffs) : Staff[] {
     for(const interator of staffs){
@@ -76,7 +76,6 @@ export class StaffListComponent implements OnInit {
           this.defaultPhoto(this.staffs);
       }, error => {
           this.alertify.error(error);
-
       })
   }
   
