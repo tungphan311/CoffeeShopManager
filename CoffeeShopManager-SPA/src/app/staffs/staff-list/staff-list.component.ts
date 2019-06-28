@@ -15,8 +15,9 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 export class StaffListComponent implements OnInit {
     selectedValue: 0;
     noResult = false;
-    public selectedOption: string;
+    selectedOption= 0;
     staffs: Staff[];
+    staffsForFilter: Staff[];
     staff: Staff = JSON.parse(localStorage.getItem('staff'));
     staffParams: any = {};
     pagination: Pagination;
@@ -25,11 +26,8 @@ export class StaffListComponent implements OnInit {
     private routelink: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data =>{
-      this.staffs = data['staffs'].result;
-      this.pagination = data ['staffs'].pagination;
-    });
-
+    
+    this.getStaffs();
     // this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
     // this.staffParams.minAge = 18;
     // this.staffParams.maxAge = 99;
@@ -38,6 +36,19 @@ export class StaffListComponent implements OnInit {
 
   onSelect(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
+    this.staffs = this.staffs.filter(x => x.id === this.selectedOption['id']);
+  }
+
+  getStaffs() {
+    this.route.data.subscribe(data =>{
+      this.staffs = data['staffs'].result;
+      this.pagination = data ['staffs'].pagination;
+    });
+  }
+
+  onChange() {
+    console.log('Change');
+    this.getStaffs();
   }
 
   typeaheadNoResults(event: boolean): void {
@@ -48,7 +59,6 @@ export class StaffListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadStaffs();
-    
   }
 
 
@@ -64,16 +74,16 @@ export class StaffListComponent implements OnInit {
       if(interator.photo === null || interator.photo === '')
         interator.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
     }
-    console.log(staffs);
+    console.log("Dit me");
     return staffs;
   }
+  
   loadStaffs(){
       this.staffService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe((res: PaginatedResult<Staff[]>) => {
-          //  this.defaultPhoto(res);
+          // this.defaultPhoto(res);
           this.staffs = res.result;
           this.pagination = res.pagination;
-          this.defaultPhoto(this.staffs);
       }, error => {
           this.alertify.error(error);
       })

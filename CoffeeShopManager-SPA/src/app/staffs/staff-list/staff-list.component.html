@@ -32,11 +32,10 @@
         </form>
         <br> -->
 <div class="container mt-5 ">
-    <h1 class="text-center text-primary" style="margin-top: 90px">Staff List</h1>
-    <button class="btn btn-primary" style="width: 200px;height: 50px;margin-left:41% "
-    [routerLink]="['/staff/create/']">Add Staff</button>
+        <h1 class="text-center text-primary" style="margin-top: 90px">Staff List</h1>
+        <button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-left:41% ">Add Staff</button>
 
-<pre class="card card-block card-header mt-3">Staff: {{selectedValue | json}}</pre>
+        <pre class="card card-block card-header mt-3">Staff: {{selectedValue | json}}</pre>
 
 <div class="alert alert-danger mt-2" *ngIf="noResult">Không có kết quả</div>
 
@@ -46,12 +45,10 @@
     (typeaheadOnSelect)="onSelect($event)"
     (typeaheadNoResults)="typeaheadNoResults($event)"
     class="form-control mt-2"
+    (keypress)="onChange()"
 >
 
-<pre class="container mt-2">Lý lịch: {{selectedOption | json}}</pre>
-
-    <h1 class="text-center text-primary" style="margin-top: 60px">Staff List</h1>
-    <button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-left:41% ">Add Staff</button>
+<!-- <pre class="container mt-2">Lý lịch: {{selectedOption | json}}</pre> -->
     <div class="row">
         <div *ngFor="let staff of staffs" class="col-lg-2 col-md-3 col-sm-6" style="padding-top: 2%">
             <app-staff-card [staff]="staff"></app-staff-card>
