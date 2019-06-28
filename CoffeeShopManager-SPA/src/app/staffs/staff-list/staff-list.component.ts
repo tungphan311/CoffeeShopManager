@@ -13,12 +13,11 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    selectedValue: String;
+    selectedValue: 0;
     noResult = false;
-    selectedOption = StaffListComponent;
+    public selectedOption: string;
     staffs: Staff[];
     staff: Staff = JSON.parse(localStorage.getItem('staff'));
-    genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}, {value: 'other', display: 'Others'}];
     staffParams: any = {};
     pagination: Pagination;
 
@@ -30,9 +29,9 @@ export class StaffListComponent implements OnInit {
       this.pagination = data ['staffs'].pagination;
     });
 
-    this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-    this.staffParams.minAge = 18;
-    this.staffParams.maxAge = 99;
+    // this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
+    // this.staffParams.minAge = 18;
+    // this.staffParams.maxAge = 99;
   }
 
   onSelect(event: TypeaheadMatch): void {
@@ -48,12 +47,13 @@ export class StaffListComponent implements OnInit {
     this.loadStaffs();
   }
 
-  resetFilter() {
-    this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-    this.staffParams.minAge = 18;
-    this.staffParams.maxAge = 99;
-    this.loadStaffs();
-  }
+
+  // resetFilter() {
+  //   this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
+  //   this.staffParams.minAge = 18;
+  //   this.staffParams.maxAge = 99;
+  //   this.loadStaffs();
+  // }
 
   loadStaffs(){
       this.staffService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
@@ -62,7 +62,6 @@ export class StaffListComponent implements OnInit {
           this.pagination = res.pagination;
       }, error => {
           this.alertify.error(error);
-
       })
   }
 }
