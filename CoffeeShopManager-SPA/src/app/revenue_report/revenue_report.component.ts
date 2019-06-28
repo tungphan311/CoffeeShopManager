@@ -143,7 +143,7 @@ addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.chartData = {
       labels: days,
       datasets: [{
-          label: 'Doanh thu (triệu đồng)',
+          label: 'Doanh thu (đồng)',
           data: temp_array,
           backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -212,7 +212,7 @@ sortByMonth() {
   this.chartData = {
     labels: this.monthLabels,
     datasets: [{
-        label: 'Doanh thu (triệu đồng)',
+        label: 'Doanh thu (đồng)',
         data: this.monthData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -272,7 +272,7 @@ sortByYear() {
   this.chartData = {
     labels: this.yearLabels,
     datasets: [{
-        label: 'Doanh thu (triệu đồng)',
+        label: 'Doanh thu (đồng)',
         data: this.yearData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -330,7 +330,7 @@ sortByDate() {
   this.chartData = {
     labels: this.dateLabels,
     datasets: [{
-        label: 'Doanh thu (triệu đồng)',
+        label: 'Doanh thu (đồng)',
         data: this.dateData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
