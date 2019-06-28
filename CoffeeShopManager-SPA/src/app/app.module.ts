@@ -49,6 +49,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule, MatOptionModule, MatSelectModule, } from '@angular/material';
 import { MatNativeDateModule, MatIconModule, MAT_DATE_LOCALE } from '@angular/material';
+import { GridModule } from '@progress/kendo-angular-grid';
+
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
@@ -108,7 +110,7 @@ export function tokenGetter() {
       MatIconModule,
       MatFormFieldModule,
       MatInputModule,
-      MatOptionModule, MatSelectModule, MatIconModule,
+      MatOptionModule, MatSelectModule, MatIconModule, GridModule,
    ],
    providers: [
       {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},
