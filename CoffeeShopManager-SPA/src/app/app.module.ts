@@ -44,7 +44,6 @@ import { StaffCreateComponent } from './staffs/staff-create/staff-create.compone
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CartComponent } from './CreateBill/cart/cart.component';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
-import { OrderComponent } from './CreateBill/order/order.component';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -78,7 +77,6 @@ export function tokenGetter() {
       ProductComponent,
       ProductDetailComponent,
       CartComponent,
-      OrderComponent,
       InvoiceComponent
    ],
    imports: [

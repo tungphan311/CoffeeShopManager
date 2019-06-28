@@ -25,11 +25,22 @@
               </button>
             </li>
             <li class="list-inline-item">
-              <button class="btn btn-primary" (click)="orderModal.show()" [disabled]="orderList.length == 0">
+              <button class="btn btn-primary" (click)="printInvoice()" [disabled]="orderList.length == 0">
                 Xuất hoá đơn
               </button>
             </li>
           </ul>
+          <input *ngIf="orderList.length > 0" class="form-control" type="text" placeholder="Mã số chờ" [(ngModel)]="id">
+          <div *ngIf="submitted && (!required(id) || !isValid(id))">
+            <div *ngIf="!required(id)" style="color: red"> * Vui lòng nhập mã số chờ</div>
+            <div *ngIf="!isValid(id) && required(id)" style="color: red"> * Vui lòng nhập đúng cú pháp</div>
+          </div>
+          <input *ngIf="orderList.length > 0" style="margin-top: 10px;" class="form-control" type="text" 
+            placeholder="Số tiền khách đưa" [(ngModel)]="paid">
+          <div *ngIf="submitted && (!required(paid) || !isValid(paid))">
+            <div *ngIf="!required(paid)" style="color: red"> * Vui lòng nhập số tiền khách đưa</div>
+            <div *ngIf="!isValid(paid) && required(paid)" style="color: red"> * Vui lòng nhập đúng cú pháp</div>
+          </div>
         </div>
         <div class="card-body">
           <div *ngIf="orderList.length == 0">
@@ -63,5 +74,4 @@
   </div>
   <app-product-detail #productDetail (order)="getOrder($event)"></app-product-detail>
   <app-cart #cart (output)="reloadList($event)"></app-cart>
-  <app-order #order></app-order>
 </div>
