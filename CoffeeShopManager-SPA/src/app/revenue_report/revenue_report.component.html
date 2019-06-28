@@ -1,3 +1,4 @@
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" > -->
 <div id="content">
   <h2 class="text-center text-primary">Thống kê doanh thu</h2>
   <ul class="list-inline text-center" >
@@ -15,6 +16,20 @@
     </li>
   </ul>
 
+  <!-- <p>Simple datepicker</p>
+ 
+<ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+ 
+<hr/>
+ 
+<button class="btn btn-sm btn-outline-primary mr-2" (click)="selectToday()">Select Today</button>
+<button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo()">To current month</button>
+<button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo({year: 2013, month: 2})">To Feb 2013</button>
+ 
+<hr/>
+ 
+<pre>Month: {{ date.month }}.{{ date.year }}</pre>
+<pre>Model: {{ model | json }}</pre> -->
   <canvas #chart></canvas>
 
   

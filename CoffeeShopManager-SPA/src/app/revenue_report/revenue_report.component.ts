@@ -3,12 +3,10 @@ import Chart from 'chart.js';
 import * as XLSX from 'xlsx';
 import { BillService } from '../_service/Bills/bill.service';
 import { AlertifyService } from '../_service/alertify.service';
-import { ActivatedRoute } from '@angular/router';
 import { Bill } from '../_models/Bill';
 import { Pagination, PaginatedResult } from '../_models/Pagination';
-import { TestBed } from '@angular/core/testing';
 import { formatDate } from '@angular/common';
-
+// import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 type AOA = any[][];
 
 
@@ -39,6 +37,8 @@ export class Revenue_reportComponent implements OnInit {
   fileName = '';
   count: number;
   isExportable = false;
+  
+  // model: NgbDateStruct;
 
   bills: Bill[] = [];
   bill: Bill = JSON.parse(localStorage.getItem('bill'));
@@ -54,6 +54,7 @@ export class Revenue_reportComponent implements OnInit {
   public constructor(
     private billService: BillService,
     private alertify: AlertifyService,
+    // private calendar: NgbCalendar
   ) {
     this.chartData = {};
     // TODO:
@@ -137,7 +138,7 @@ export class Revenue_reportComponent implements OnInit {
   public ngOnInit() {
     // this.loadBills(0,0,0);
     this.userParams.month = this.today.getMonth() + 1;
-    this.userParams.day = 0
+    this.userParams.day = 0;
     this.userParams.year = this.today.getFullYear();
 
     this.billService.getTotal(this.userParams).subscribe(result => {
@@ -180,6 +181,7 @@ sortByMonth() {
   this.billService.getTotal(this.userParams).subscribe(result => {
     this.monthData[0] = result;
   });
+
   console.log(this.monthData);
 
   this.count = 1;

@@ -43,6 +43,7 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CartComponent } from './CreateBill/cart/cart.component';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -91,7 +92,8 @@ export function tokenGetter() {
       }),
       BrowserAnimationsModule,
       ModalModule.forRoot(),
-      TypeaheadModule.forRoot()
+      TypeaheadModule.forRoot(),
+      // NgbModule,
    ],
    providers: [
       PreventUnsavedChanges,
