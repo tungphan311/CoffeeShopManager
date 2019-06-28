@@ -6,6 +6,7 @@ import { AlertifyService } from '../_service/alertify.service';
 import { Bill } from '../_models/Bill';
 import { Pagination, PaginatedResult } from '../_models/Pagination';
 import { formatDate } from '@angular/common';
+import { MatDatepickerInputEvent } from '@angular/material';
 // import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 type AOA = any[][];
 
@@ -48,6 +49,8 @@ export class Revenue_reportComponent implements OnInit {
   jstoday = '';
 
   pagination: Pagination;
+
+  events: string[] = [];
 
 
   public constructor(
@@ -117,6 +120,62 @@ export class Revenue_reportComponent implements OnInit {
     // this.loadBills();
 
 }
+
+addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+  this.isExportable = false;
+  this.events.push(`${type}: ${event.value}`);
+
+  let year = event.value.getFullYear();
+  let month = event.value.getMonth() + 1;
+  let day = event.value.getDate();
+  let days: Array<number>;
+  days = [1]; 
+  days[0] = day;
+  let userParams: any = {};
+  userParams.month = month;
+  userParams.day = day;
+  userParams.year = year;
+  console.log(userParams);
+  this.billService.getTotal(userParams).subscribe(result => {
+    let temp_array: number[];
+    temp_array=[0];
+    temp_array[0]=result;
+    this.chartData = {
+      labels: days,
+      datasets: [{
+          label: 'Doanh thu (triệu đồng)',
+          data: temp_array,
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+          ],
+          borderColor: [
+              'rgba(255,99,132,1)',
+          ],
+          borderWidth: 1
+      }]
+  };
+    this.chart = this.refChart.nativeElement;
+    this.ctx = this.chart.getContext('2d');
+    this.myChart = new Chart(this.ctx, {
+      type: 'bar',
+      data: this.chartData,
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          },
+          events: ['click']
+      }
+  });
+    this.isExportable = false;
+  });
+
+
+
+}
 sortByMonth() {
   const month = this.today.getMonth() + 1;
   let userParams: any = {};
@@ -183,11 +242,10 @@ sortByYear() {
   userParams.year = year;
   userParams.day = 0;
   userParams.month = 0;
-  console.log(userParams)
   this.yearData.length = 6;
   this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[5] = result;
-    console.log(result);
+
   });
   userParams.year -= 1;
   this.billService.getTotal(userParams).subscribe(result => {
@@ -210,7 +268,6 @@ sortByYear() {
     this.yearData[0] = result;
   });
 
-  console.log(this.yearData);
   this.count = 2;
   this.chartData = {
     labels: this.yearLabels,
