@@ -1,72 +1,100 @@
 [
     {
-        "CreatedDate": "2019-01-22",
+        "CreatedDate": "2019-01-22 00:00:00",
         "Id": 1,
         "MemberId": 2,
         "StaffId": 1,
         "Value": 4000
     },
     {
-        "CreatedDate": "2019-02-23\n",
+        "CreatedDate": "2019-02-23 00:00:00",
         "Id": 2,
         "MemberId": 3,
         "StaffId": 1,
         "Value": 300
     },
     {
-        "CreatedDate": "2019-03-24",
+        "CreatedDate": "2019-03-24 00:00:00",
         "Id": 3,
         "MemberId": 0,
         "StaffId": 0,
         "Value": 5000
     },
     {
-        "CreatedDate": "2019-04-25",
+        "CreatedDate": "2019-04-25 00:00:00",
         "Id": 4,
         "MemberId": 1,
         "StaffId": 3,
         "Value": 4400
     },
     {
-        "CreatedDate": "2019-05-26",
+        "CreatedDate": "2019-05-26 00:00:00",
         "Id": 5,
         "MemberId": 3,
         "StaffId": 0,
         "Value": 4000
     },
     {
-        "CreatedDate": "2019-06-27",
+        "CreatedDate": "2019-06-27 00:00:00",
         "Id": 6,
         "MemberId": 0,
         "StaffId": 0,
         "Value": 1200
     },
     {
-        "CreatedDate": "2019-06-26",
+        "CreatedDate": "2019-06-26 00:00:00",
         "Id": 7,
         "MemberId": 0,
         "StaffId": 0,
         "Value": 600
     },
     {
-        "CreatedDate": "2019-06-25",
+        "CreatedDate": "2019-06-25 00:00:00",
         "Id": 8,
         "MemberId": 0,
         "StaffId": 0,
         "Value": 400
     },
     {
-        "CreatedDate": "2019-06-23",
+        "CreatedDate": "2019-06-23 00:00:00",
         "Id": 9,
         "MemberId": 0,
         "StaffId": 0,
         "Value": 750
     },
     {
-        "CreatedDate": "2019-06-22",
+        "CreatedDate": "2019-06-22 00:00:00",
         "Id": 10,
         "MemberId": 0,
         "StaffId": 0,
         "Value": 350
+    },
+    {
+        "CreatedDate": "2017-06-22 00:00:00",
+        "Id": 11,
+        "MemberId": 0,
+        "StaffId": 0,
+        "Value": 200
+    },
+    {
+        "CreatedDate": "2017-08-22 00:00:00",
+        "Id": 12,
+        "MemberId": 0,
+        "StaffId": 0,
+        "Value": 1200
+    },
+    {
+        "CreatedDate": "2016-06-22 00:00:00",
+        "Id": 13,
+        "MemberId": 0,
+        "StaffId": 0,
+        "Value": 1000
+    },
+    {
+        "CreatedDate": "2014-06-22 00:00:00",
+        "Id": 14,
+        "MemberId": 0,
+        "StaffId": 0,
+        "Value": 200
     }
 ]

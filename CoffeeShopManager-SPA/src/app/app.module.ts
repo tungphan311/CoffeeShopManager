@@ -47,6 +47,8 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { OrderComponent } from './CreateBill/order/order.component';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatIconModule, MatFormFieldModule, MAT_DATE_LOCALE } from '@angular/material';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
@@ -86,6 +88,7 @@ export function tokenGetter() {
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
@@ -100,10 +103,15 @@ export function tokenGetter() {
       ModalModule.forRoot(),
       TypeaheadModule.forRoot(),
       PDFExportModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
       // NgbModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+      MatIconModule,
+      MatFormFieldModule
    ],
    providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},
       PreventUnsavedChanges,
       AuthService,
       ErrorInterceptorProvider,
@@ -115,6 +123,7 @@ export function tokenGetter() {
       StaffDetailResolver,
       StaffListResolver,
       StaffEditResolver,
+      MatDatepickerModule,
    ],
    bootstrap: [
       AppComponent

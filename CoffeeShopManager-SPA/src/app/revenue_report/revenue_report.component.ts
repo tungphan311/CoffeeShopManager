@@ -29,15 +29,15 @@ export class Revenue_reportComponent implements OnInit {
   myChart: any;
   monthLabels: any;
   monthData: any;
-  weekLabels: any;
-  weekData: any;
+  yearLabels: any;
+  yearData: any;
   dateLabels: any;
   dateData: any;
   data: AOA = [ [1, 2], [3, 4] ];
   fileName = '';
   count: number;
   isExportable = false;
-  
+
   // model: NgbDateStruct;
 
   bills: Bill[] = [];
@@ -60,7 +60,7 @@ export class Revenue_reportComponent implements OnInit {
     // TODO:
     // get all bills = > filter by 6 nearest months => implement get bill by month number
     // filter by 6 nearest days
-    // filter by 6 nearest weeks
+    // filter by 6 nearest years
     // this is temp data:
     // this.monthLabels = [ '4', '5', '6', '7', '8', '9'];
     // this.monthLabels = [month - 5, month - 4, month - 3, month - 2, month - 1, month];
@@ -73,47 +73,15 @@ export class Revenue_reportComponent implements OnInit {
 
 // tslint:disable-next-line: max-line-length
     this.monthLabels = [sixthMonth.getMonth() + 1, fifthMonth.getMonth() + 1, forthMonth.getMonth() + 1, thirdMonth.getMonth() + 1, secondMonth.getMonth() + 1, firstMonth.getMonth() + 1];
-    
+
     // this.monthData = [12, 19, 3, 5, 2, 3];
     this.monthData = [];
     // const month =  this.today.getMonth();
     // this.monthLabels = [month - 5, month - 4, month - 3, month - 2, month - 1, month];
+    const year = this.today.getFullYear();
 
-    // tslint:disable-next-line: max-line-length
-    const w1df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate()).toLocaleDateString('vi-VN').slice(0, 4); // today
-    // tslint:disable-next-line: max-line-length
-    const w1dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 7).toLocaleDateString('vi-VN').slice(0, 4); // -7
-    // tslint:disable-next-line: max-line-length
-    const w2df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 8).toLocaleDateString('vi-VN').slice(0, 4); // -1
-    // tslint:disable-next-line: max-line-length
-    const w2dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 15).toLocaleDateString('vi-VN').slice(0, 4); // -7
-    // tslint:disable-next-line: max-line-length
-    const w3df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 16).toLocaleDateString('vi-VN').slice(0, 4); // -1
-    // tslint:disable-next-line: max-line-length
-    const w3dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 23).toLocaleDateString('vi-VN').slice(0, 4); // -7
-    // tslint:disable-next-line: max-line-length
-    const w4df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 24).toLocaleDateString('vi-VN').slice(0, 4); // -1
-    // tslint:disable-next-line: max-line-length
-    const w4dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 31).toLocaleDateString('vi-VN').slice(0, 4); // -7
-    // tslint:disable-next-line: max-line-length
-    const w5df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 32).toLocaleDateString('vi-VN').slice(0, 4); // -1
-    // tslint:disable-next-line: max-line-length
-    const w5dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 39).toLocaleDateString('vi-VN').slice(0, 4); // -7
-    // tslint:disable-next-line: max-line-length
-    const w6df = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 40).toLocaleDateString('vi-VN').slice(0, 4); // -1
-    // tslint:disable-next-line: max-line-length
-    const w6dl = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 47).toLocaleDateString('vi-VN').slice(0, 4); // -7
-
-
-    const w6 = w6dl + ' - ' + w6df;
-    const w5 = w5dl + ' - ' + w5df;
-    const w4 = w4dl + ' - ' + w4df;
-    const w3 = w3dl + ' - ' + w3df;
-    const w2 = w2dl + ' - ' + w2df;
-    const w1 = w1dl + ' - ' + w1df;
-
-    this.weekLabels = [ w6, w5, w4, w3, w2, w1];
-    this.weekData = [12, 19, 3, 5, 2, 3];
+    this.yearLabels = [ year - 5, year - 4, year - 3, year - 2, year - 1, year];
+    this.yearData = [];
 
     // const date = this.today.getDate();
     // this.dateLabels = [ '4', '5', '6', '7', '8', '9'];
@@ -131,8 +99,6 @@ export class Revenue_reportComponent implements OnInit {
 
 
     this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
-    // console.log(this.jstoday);
-    // console.log(this.bills)
 }
 
   public ngOnInit() {
@@ -141,12 +107,11 @@ export class Revenue_reportComponent implements OnInit {
     this.userParams.day = 0;
     this.userParams.year = this.today.getFullYear();
 
-    this.billService.getTotal(this.userParams).subscribe(result => {
-      console.log(result);
-    });
 
     this.sortByMonth();
     this.sortByDate();
+    this.sortByYear();
+    this.isExportable = false;
 
 
     // this.userParams.year = 2016;
@@ -182,7 +147,6 @@ sortByMonth() {
     this.monthData[0] = result;
   });
 
-  console.log(this.monthData);
 
   this.count = 1;
   this.chartData = {
@@ -212,15 +176,45 @@ sortByMonth() {
 };
   this.drawChart();
 }
-sortByWeek() {
-  const day = this.today.getDate();
-  // console.log(this.bills);
+sortByYear() {
+  const year = this.today.getFullYear();
+  this.userParams.year = year;
+  this.userParams.day = 0;
+  this.userParams.month = 0;
+  console.log(this.userParams)
+  this.yearData.length = 6;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.yearData[5] = result;
+    console.log(result);
+  });
+  this.userParams.year -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.yearData[4] = result;
+  });
+  this.userParams.year -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.yearData[3] = result;
+  });
+  this.userParams.year -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.yearData[2] = result;
+  });
+  this.userParams.year -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.yearData[1] = result;
+  });
+  this.userParams.year -= 1;
+  this.billService.getTotal(this.userParams).subscribe(result => {
+    this.yearData[0] = result;
+  });
+
+  console.log(this.yearData);
   this.count = 2;
   this.chartData = {
-    labels: this.weekLabels,
+    labels: this.yearLabels,
     datasets: [{
         label: 'Doanh thu (triệu đồng)',
-        data: this.weekData,
+        data: this.yearData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -271,7 +265,6 @@ sortByDate() {
   this.billService.getTotal(this.userParams).subscribe(result => {
     this.dateData[0] = result;
   });
-  console.log(this.dateData);
   this.count = 3;
   this.chartData = {
     labels: this.dateLabels,
@@ -316,14 +309,13 @@ report() {
       }
     case 2:
       {
-        this.fileName = 'BaoCaoDoanhThuTheoTuan.xlsx';
-        this.weekData.unshift('Doanh Thu');
-        this.weekLabels.unshift('Tuần');
-        this.data = [this.weekLabels, this.weekData];
+        this.fileName = 'BaoCaoDoanhThuTheoNam.xlsx';
+        this.yearData.unshift('Doanh Thu');
+        this.yearLabels.unshift('Năm');
+        this.data = [this.yearLabels, this.yearData];
         this.exportToExcel();
-
-        this.weekData.shift();
-        this.weekLabels.shift();
+        this.yearData.shift();
+        this.yearLabels.shift();
 
         break;
       }
