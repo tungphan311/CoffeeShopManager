@@ -1,3 +1,5 @@
+using System;
+
 namespace CoffeeShopManager.API.Dto
 {
     public class PhotoForReturnDto
@@ -7,6 +9,8 @@ namespace CoffeeShopManager.API.Dto
         public string Url { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime DateAdded { get; set; }
 
         public bool IsMain { get; set; }
 

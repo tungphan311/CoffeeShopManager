@@ -1,3 +1,5 @@
+using System;
+
 namespace CoffeeShopManager.API.Models
 {
     public class Photo
@@ -7,6 +9,8 @@ namespace CoffeeShopManager.API.Models
         public string Url { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime DateAdded { get; set; }
 
         public string PublicId { get; set; }
 
