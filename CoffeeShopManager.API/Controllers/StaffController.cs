@@ -64,13 +64,15 @@ namespace CoffeeShopManager.API.Controllers
                 Gender = employeeForCreateDto.Gender,
                 DateOfBirth = employeeForCreateDto.DateOfBirth,
                 Phone = employeeForCreateDto.Phone,
-                Email = employeeForCreateDto.Address,
-                Photo = employeeForCreateDto.Photo
+                Email = employeeForCreateDto.Email,
+                Photo = employeeForCreateDto.Photo,
+                Address = employeeForCreateDto.Address
             };
 
             var createdEmployee = await _repo.Create(employeeToCreate);
 
             return StatusCode(201);
+        
         }
     }
 }

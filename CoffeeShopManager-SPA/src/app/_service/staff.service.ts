@@ -70,8 +70,8 @@ const httpOptions = {
     createStaffClick():Observable<Staff>{
       return this.http.get<Staff>(this.baseUrl+ 'staff/' );
     }
-    create(model: any) {
-      return this.http.post(this.baseUrl + 'create/', model);
+    create(staff: Staff) {
+      return this.http.post(this.baseUrl + 'staff/create/', staff);
     }
   
   }

@@ -13,12 +13,12 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    selectedValue: String;
+    selectedValue: 0;
     noResult = false;
-    selectedOption = StaffListComponent;
+    selectedOption= 0;
     staffs: Staff[];
+    staffsForFilter: Staff[];
     staff: Staff = JSON.parse(localStorage.getItem('staff'));
-    genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}, {value: 'other', display: 'Others'}];
     staffParams: any = {};
     pagination: Pagination;
 
@@ -26,11 +26,8 @@ export class StaffListComponent implements OnInit {
     private routelink: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data =>{
-      this.staffs = data['staffs'].result;
-      this.pagination = data ['staffs'].pagination;
-    });
-
+    
+    this.getStaffs();
     // this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
     // this.staffParams.minAge = 18;
     // this.staffParams.maxAge = 99;
@@ -39,6 +36,19 @@ export class StaffListComponent implements OnInit {
 
   onSelect(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
+    this.staffs = this.staffs.filter(x => x.id === this.selectedOption['id']);
+  }
+
+  getStaffs() {
+    this.route.data.subscribe(data =>{
+      this.staffs = data['staffs'].result;
+      this.pagination = data ['staffs'].pagination;
+    });
+  }
+
+  onChange() {
+    console.log('Change');
+    this.getStaffs();
   }
 
   typeaheadNoResults(event: boolean): void {
@@ -51,12 +61,13 @@ export class StaffListComponent implements OnInit {
     this.loadStaffs();
   }
 
-  resetFilter() {
-    this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-    this.staffParams.minAge = 18;
-    this.staffParams.maxAge = 99;
-    this.loadStaffs();
-  }
+
+  // resetFilter() {
+  //   this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
+  //   this.staffParams.minAge = 18;
+  //   this.staffParams.maxAge = 99;
+  //   this.loadStaffs();
+  // }
 
   defaultPhoto(staffs) : Staff[] {
     for(const interator of staffs){
@@ -66,6 +77,7 @@ export class StaffListComponent implements OnInit {
     console.log("Dit me");
     return staffs;
   }
+  
   loadStaffs(){
       this.staffService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe((res: PaginatedResult<Staff[]>) => {
@@ -74,7 +86,6 @@ export class StaffListComponent implements OnInit {
           this.pagination = res.pagination;
       }, error => {
           this.alertify.error(error);
-
       })
   }
   
