@@ -11,11 +11,19 @@
     overflow-y: auto;
 }
 
-button.btn.btn-secondary {
-    margin-top: 10px; 
-    margin-left: 10px;
-    margin-right: 10px;
+li button {
+    margin-top: 5px; 
+    margin-left: 5px;
+    margin-right: 5px;
     width: -webkit-fill-available;
+} 
+
+.list-inline {
+    width: 100%;
+}
+
+.list-inline-item {
+    width: 47%;
 }
 
 .number-circle {

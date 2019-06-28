@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/_models/Order';
@@ -13,11 +13,13 @@ import { ProductService } from 'src/app/_service/Products/product.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  @Input() orders: Order[];
   @ViewChild('cart') modal: ModalDirective;
+  @Output() output: EventEmitter<Order[]> = new EventEmitter<Order[]>();
 
   saving = false;
 
+  listTemp: Order[] = [];
+  orders: Order[] = [];
   details: ProductDetail[] = [];
   products: Products[] = [];
 
@@ -30,13 +32,13 @@ export class CartComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.getProduct();
+
   }
 
   getProduct() {
     this.orders.forEach(order => {
       this.detailService.getProductDetailById(order.productDetailId).subscribe((detail: ProductDetail) => {
-        console.log(detail);
+        // console.log(detail);
         this.details.push(detail);
         this.productService.getProduct(detail.productId).subscribe((product: Products) => {
           this.products.push(product);
@@ -46,14 +48,19 @@ export class CartComponent implements OnInit {
     });
   }
 
-  show() {
+  show(orderList) {
     this.saving = false;
+    this.orders = orderList;
+    orderList.forEach(ele => {
+      this.listTemp.push(ele);
+    });
     this.getProduct();
     this.modal.show();
   }
 
   close() {
     this.saving = false;
+    this.output.emit(null);
     this.modal.hide();
   }
 
@@ -66,6 +73,6 @@ export class CartComponent implements OnInit {
   }
 
   delete(id) {
-    this.orders = this.orders.filter(x => x.productDetailId !== id);
+    this.orders = this.orders.filter(x => x !== id);
   }
 }

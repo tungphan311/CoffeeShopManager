@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule, ModalModule, TabsModule } from 'ngx-bootstrap';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterModule } from '@angular/router';
@@ -43,6 +43,10 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CartComponent } from './CreateBill/cart/cart.component';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { OrderComponent } from './CreateBill/order/order.component';
+import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
+
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
@@ -71,7 +75,9 @@ export function tokenGetter() {
       Revenue_reportComponent,
       ProductComponent,
       ProductDetailComponent,
-      CartComponent
+      CartComponent,
+      OrderComponent,
+      InvoiceComponent
    ],
    imports: [
       TabsModule.forRoot(),
@@ -93,6 +99,8 @@ export function tokenGetter() {
       BrowserAnimationsModule,
       ModalModule.forRoot(),
       TypeaheadModule.forRoot(),
+      PDFExportModule,
+      ReactiveFormsModule
       // NgbModule,
    ],
    providers: [
