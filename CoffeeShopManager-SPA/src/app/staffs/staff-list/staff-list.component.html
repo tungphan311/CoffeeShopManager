@@ -1,9 +1,3 @@
-<!-- <div class="text-center mt-3">
-    <h2>Your matches - {{pagination.totalItems}} found</h2>
-</div> -->
-
-
-
 <!-- <div class="container mt-3"> -->
     <!-- <form class="form-inline" #form="ngForm" (ngSubmit)="loadStaffs()" novalidate>
         <div class="form-group">
@@ -37,26 +31,37 @@
         
     <div class="alert alert-danger mt-2" *ngIf="noResult">Không có kết quả</div>
 
-    Name: <input [(ngModel)]="selectedValue"
+    <input [(ngModel)]="selectedName"
     [typeahead]="staffs"
     typeaheadOptionField="name"
     (typeaheadOnSelect)="onSelectName($event)"
     (typeaheadNoResults)="typeaheadNoResults($event)"
     class="form-control mt-2"
-    (keypress)="onChange()"
->    
-    <div class="alert alert-danger mt-2" *ngIf="noResult">Không có kết quả</div>
+    placeholder="Name"
+    (keypress)="onChange()">
     
-    Phone: <input [(ngModel)]="selectedValue"
-        [typeahead]="staffs"
-        typeaheadOptionField="phone"
-        (typeaheadOnSelect)="onSelectPhone($event)"
-        (typeaheadNoResults)="typeaheadNoResults($event)"
-        class="form-control mt-2"
-        (keypress)="onChange()"
->
+    <input [(ngModel)]="selectedPhone"
+    [typeahead]="staffs"
+    typeaheadOptionField="phone"
+    (typeaheadOnSelect)="onSelectPhone($event)"
+    (typeaheadNoResults)="typeaheadNoResults($event)"
+    class="form-control mt-2"
+    placeholder="Phone"
+    (keypress)="onChange()">
+
+    <input [(ngModel)]="selecetedAddress"
+    [typeahead]="staffs"
+    typeaheadOptionField="address"
+    (typeaheadOnSelect)="onSelectAddress($event)"
+    (typeaheadNoResults)="typeaheadNoResults($event)"
+    class="form-control mt-2"
+    placeholder="Address"
+    (keypress)="onChange()">
+
 
 <!-- <pre class="container mt-2">Lý lịch: {{selectedOption | json}}</pre> -->
+
+<button class="btn btn-outline-danger mt-2" (click)="resetFilter()" style="width: 100px;height: 50px">Reset</button>
 
 <h1 class="text-center text-primary">Staff List</h1>
     <div class="row">

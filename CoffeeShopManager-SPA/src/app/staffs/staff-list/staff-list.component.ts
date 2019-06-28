@@ -13,7 +13,9 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    selectedValue: string;
+    selectedName: string;
+    selectedPhone: string;
+    selecetedAddress: string;
     noResult = false;
     selectedOption= 0;
     staffs: Staff[];
@@ -28,20 +30,23 @@ export class StaffListComponent implements OnInit {
   ngOnInit() {
     
     this.getStaffs();
-    // this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-    // this.staffParams.minAge = 18;
-    // this.staffParams.maxAge = 99;
     this.defaultPhoto(this.staffs);
   }
 
   onSelectName(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']);
+    this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']) 
+
   }
 
   onSelectPhone(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(x => x.phone === this.selectedOption['phone']);
+    this.staffs = this.staffs.filter(y => y.phone === this.selectedOption['phone']);
+  }
+
+  onSelectAddress(event: TypeaheadMatch): void {
+    this.selectedOption = event.item;
+    this.staffs = this.staffs.filter(z => z.address === this.selectedOption['address']);
   }
 
   getStaffs() {
@@ -67,12 +72,10 @@ export class StaffListComponent implements OnInit {
   }
 
 
-  // resetFilter() {
-  //   this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-  //   this.staffParams.minAge = 18;
-  //   this.staffParams.maxAge = 99;
-  //   this.loadStaffs();
-  // }
+  resetFilter() {
+    this.selectedOption=0;
+    this.loadStaffs();
+  }
 
   defaultPhoto(staffs) : Staff[] {
     for(const interator of staffs){
