@@ -9,4 +9,5 @@ export interface Staff {
     email: string;
     address: string;
     dateofbirth: Date;
+    isdelete: boolean;
 }

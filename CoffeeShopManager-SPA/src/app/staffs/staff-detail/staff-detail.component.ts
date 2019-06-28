@@ -3,6 +3,7 @@ import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-staff-detail',
@@ -20,6 +21,8 @@ export class StaffDetailComponent implements OnInit {
     this.route.data.subscribe(data =>{
       this.staff = data['staff']; 
       this.defaultPhoto(this.staff);
+      var dob = this.staff.dateofbirth;
+      console.log(this.staff);
     });
   }
 

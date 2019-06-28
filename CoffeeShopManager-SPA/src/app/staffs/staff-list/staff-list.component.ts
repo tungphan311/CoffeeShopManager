@@ -74,16 +74,16 @@ export class StaffListComponent implements OnInit {
       if(interator.photo === null || interator.photo === '')
         interator.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
     }
-    console.log("Dit me");
     return staffs;
   }
   
   loadStaffs(){
       this.staffService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe((res: PaginatedResult<Staff[]>) => {
-          // this.defaultPhoto(res);
+          
           this.staffs = res.result;
           this.pagination = res.pagination;
+          this.defaultPhoto(this.staffs);
       }, error => {
           this.alertify.error(error);
       })
