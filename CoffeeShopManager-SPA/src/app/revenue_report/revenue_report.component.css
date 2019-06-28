@@ -2,11 +2,13 @@
     margin: auto;
     width: 1024px;
     background-color: #FFFFFF;
-    padding-top: 100px;
-    margin-top: 40px;
+    margin-top: 70px;
 
 }
 .btn {
     padding: 10px;
     margin: 10px;
 }
+/* .material-icons {
+    color: crimson;
+} */

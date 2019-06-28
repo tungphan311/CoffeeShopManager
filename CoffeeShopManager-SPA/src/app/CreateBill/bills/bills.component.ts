@@ -7,6 +7,7 @@ import { ProductComponent } from '../product/product.component';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { Order } from 'src/app/_models/Order';
 import { CartComponent } from '../cart/cart.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bills',
@@ -24,7 +25,8 @@ export class BillsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -86,7 +88,7 @@ export class BillsComponent implements OnInit {
     this.buttons.fill(false);
   }
 
-  cartShow(id) {
-    this.productDetail.show(id);
+  cartShow() {
+    this.router.navigate(['/bill/cart'], { state: { example: this.orderList } });
   }
 }

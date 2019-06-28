@@ -67,8 +67,12 @@ const httpOptions = {
     updateStaff(staff: Staff){
       return this.http.put(this.baseUrl+'staff/'+ staff.id, staff);
     }
-    createStaffClick(id):Observable<Staff>{
-      return this.http.get<Staff>(this.baseUrl+ 'staff/' + id);
+    createStaffClick():Observable<Staff>{
+      return this.http.get<Staff>(this.baseUrl+ 'staff/' );
     }
+    create(model: any) {
+      return this.http.post(this.baseUrl + 'create/', model);
+    }
+  
   }
 

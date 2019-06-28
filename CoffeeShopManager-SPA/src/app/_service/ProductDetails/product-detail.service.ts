@@ -19,4 +19,8 @@ export class ProductDetailService {
   getProductDetail(id): Observable<ProductDetail[]> {
     return this.http.get<ProductDetail[]>(this.baseUrl + 'productdetail/' + id);
   }
+
+  getProductDetailById(id): Observable<ProductDetail> {
+    return this.http.get<ProductDetail>(this.baseUrl + 'productdetail/id/' + id);
+  }
 }

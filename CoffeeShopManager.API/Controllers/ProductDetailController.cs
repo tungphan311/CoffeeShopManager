@@ -38,5 +38,15 @@ namespace CoffeeShopManager.API.Controllers
 
             return Ok(detailForView);
         }
+
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetProductDetailById(int id)
+        {
+            var detail = await _repo.GetProductDetailById(id);
+
+            var detailForView = _mapper.Map<ProductDetailForViewDto>(detail);
+
+            return Ok(detailForView);
+        }
     }
 }

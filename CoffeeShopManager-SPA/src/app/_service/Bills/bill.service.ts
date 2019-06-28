@@ -6,6 +6,7 @@ import { Bill } from 'src/app/_models/Bill';
 import { PaginatedResult } from 'src/app/_models/Pagination';
 import { Staff } from 'src/app/_models/Staff';
 import { map } from 'rxjs/operators';
+import { Response } from 'selenium-webdriver/http';
 
 
 const httpOptions = {
@@ -33,16 +34,13 @@ export class BillService {
 
     if (userParams != null) {
 
-      if (userParams.year !== 0)
-      {
+      if (userParams.year !== 0) {
         params = params.append('year', userParams.year);
       }
-      if (userParams.month !== 0)
-      {
+      if (userParams.month !== 0) {
         params = params.append('month', userParams.month);
       }
-      if (userParams.day !== 0)
-      {
+      if (userParams.day !== 0) {
         params = params.append('day', userParams.day)
       }
     }
@@ -61,5 +59,35 @@ export class BillService {
 
   getBill(id): Observable<Bill> {
     return this.http.get<Bill>(this.baseUrl + 'bill/' + id);
+  }
+
+  getTotal(userParams?): Observable<number> {
+    let params ='';
+
+    if (userParams != null) {
+
+      if (userParams.year !== 0) {
+        params += 'year=' + userParams.year;
+
+        if (userParams.month !== 0) {
+          params += '&month=' + userParams.month;
+        }
+
+        if (userParams.day !== 0) {
+          params += '&day=' + userParams.day;
+        }
+      } else if (userParams.month !== 0) {
+        params += '&month=' + userParams.month;
+
+        if (userParams.day !== 0) {
+          params += '&day=' + userParams.day;
+        }
+      } else if (userParams.day !==  0 ) {
+        params += 'day=' + userParams.day;
+      }
+
+    }
+
+    return this.http.get<number>(this.baseUrl + 'bill/total?' + params);
   }
 }

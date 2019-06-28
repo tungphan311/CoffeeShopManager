@@ -3,7 +3,7 @@ import { Staff } from '../../_models/Staff';
 import { StaffService } from '../../_service/staff.service';
 import { AlertifyService } from '../../_service/alertify.service';
 import { error } from 'util';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 
@@ -21,7 +21,8 @@ export class StaffListComponent implements OnInit {
     staffParams: any = {};
     pagination: Pagination;
 
-  constructor(private staffService: StaffService, private alertify : AlertifyService, private route : ActivatedRoute) { }
+  constructor(private staffService: StaffService, private alertify: AlertifyService, private route: ActivatedRoute,
+    private routelink: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data =>{
@@ -32,6 +33,7 @@ export class StaffListComponent implements OnInit {
     // this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
     // this.staffParams.minAge = 18;
     // this.staffParams.maxAge = 99;
+    this.defaultPhoto(this.staffs);
   }
 
   onSelect(event: TypeaheadMatch): void {
@@ -41,6 +43,7 @@ export class StaffListComponent implements OnInit {
   typeaheadNoResults(event: boolean): void {
     this.noResult = event;
   }
+
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
@@ -55,13 +58,27 @@ export class StaffListComponent implements OnInit {
   //   this.loadStaffs();
   // }
 
+  defaultPhoto(staffs) : Staff[] {
+    for(const interator of staffs){
+      if(interator.photo === null || interator.photo === '')
+        interator.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
+    }
+    console.log("Dit me");
+    return staffs;
+  }
   loadStaffs(){
       this.staffService.getStaffs(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe((res: PaginatedResult<Staff[]>) => {
+          // this.defaultPhoto(res);
           this.staffs = res.result;
           this.pagination = res.pagination;
       }, error => {
           this.alertify.error(error);
       })
+  }
+  
+  toCreatePage(){
+    // debugger
+    this.routelink.navigate(['/create']);
   }
 }

@@ -43,6 +43,10 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { CartComponent } from './CreateBill/cart/cart.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatIconModule, MatFormFieldModule, MAT_DATE_LOCALE } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -79,6 +83,7 @@ export function tokenGetter() {
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
@@ -91,9 +96,14 @@ export function tokenGetter() {
       }),
       BrowserAnimationsModule,
       ModalModule.forRoot(),
-      TypeaheadModule.forRoot()
+      TypeaheadModule.forRoot(),
+      MatDatepickerModule,
+      MatNativeDateModule,
+      MatIconModule,
+      MatFormFieldModule
    ],
    providers: [
+      {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},
       PreventUnsavedChanges,
       AuthService,
       ErrorInterceptorProvider,
@@ -105,6 +115,7 @@ export function tokenGetter() {
       StaffDetailResolver,
       StaffListResolver,
       StaffEditResolver,
+      MatDatepickerModule,
    ],
    bootstrap: [
       AppComponent

@@ -59,7 +59,13 @@ namespace CoffeeShopManager.API.Controllers
         {
             var employeeToCreate = new Employee
             {
-                Name = employeeForCreateDto.Name
+                Name = employeeForCreateDto.Name,
+                TeamId = employeeForCreateDto.TeamId,
+                Gender = employeeForCreateDto.Gender,
+                DateOfBirth = employeeForCreateDto.DateOfBirth,
+                Phone = employeeForCreateDto.Phone,
+                Email = employeeForCreateDto.Address,
+                Photo = employeeForCreateDto.Photo
             };
 
             var createdEmployee = await _repo.Create(employeeToCreate);
