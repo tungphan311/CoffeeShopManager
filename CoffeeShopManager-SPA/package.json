@@ -27,7 +27,6 @@
     "@progress/kendo-drawing": "^1.2.0",
     "@progress/kendo-theme-default": "latest",
     "alertifyjs": "^1.11.3",
-    "angular-material": "^1.1.19",
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.3.1",
     "chart.js": "^2.8.0",
