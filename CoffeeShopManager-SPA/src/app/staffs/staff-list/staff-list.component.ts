@@ -13,7 +13,9 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    selectedValue: string;
+    selectedName: string;
+    selectedPhone: string;
+    selecetedAddress: string;
     noResult = false;
     selectedOption= 0;
     staffs: Staff[];
@@ -28,26 +30,31 @@ export class StaffListComponent implements OnInit {
   ngOnInit() {
     
     this.getStaffs();
-    // this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-    // this.staffParams.minAge = 18;
-    // this.staffParams.maxAge = 99;
     this.defaultPhoto(this.staffs);
+    console.log(this.staffs);
   }
 
   onSelectName(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']);
+    this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']) 
+
   }
 
   onSelectPhone(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(x => x.phone === this.selectedOption['phone']);
+    this.staffs = this.staffs.filter(y => y.phone === this.selectedOption['phone']);
+  }
+
+  onSelectAddress(event: TypeaheadMatch): void {
+    this.selectedOption = event.item;
+    this.staffs = this.staffs.filter(z => z.address === this.selectedOption['address']);
   }
 
   getStaffs() {
     this.route.data.subscribe(data =>{
       this.staffs = data['staffs'].result;
       this.pagination = data ['staffs'].pagination;
+      this.staffs = this.staffs.filter(x => x.isDelete === false);
     });
   }
 
@@ -67,12 +74,10 @@ export class StaffListComponent implements OnInit {
   }
 
 
-  // resetFilter() {
-  //   this.staffParams.gender = this.staff.gender === 'female' ? 'male' : 'female';
-  //   this.staffParams.minAge = 18;
-  //   this.staffParams.maxAge = 99;
-  //   this.loadStaffs();
-  // }
+  resetFilter() {
+    this.selectedOption=0;
+    this.loadStaffs();
+  }
 
   defaultPhoto(staffs) : Staff[] {
     for(const interator of staffs){
@@ -89,6 +94,7 @@ export class StaffListComponent implements OnInit {
           this.staffs = res.result;
           this.pagination = res.pagination;
           this.defaultPhoto(this.staffs);
+          this.staffs = this.staffs.filter(x => x.isDelete === false);
       }, error => {
           this.alertify.error(error);
       })
