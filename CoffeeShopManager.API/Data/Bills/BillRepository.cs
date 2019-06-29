@@ -21,6 +21,22 @@ namespace CoffeeShopManager.API.Data.Bills
             _context.Add(entity);
         }
 
+        public async Task<Bill> Create(Bill bill)
+        {
+            await _context.Bills.AddAsync(bill);
+            await _context.SaveChangesAsync();
+
+            return bill;
+        }
+
+        public async Task<BillDetail> CreateBillDetail(BillDetail billDetail)
+        {
+            await _context.BillDetails.AddAsync(billDetail);
+            await _context.SaveChangesAsync();
+
+            return billDetail;
+        }
+
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);

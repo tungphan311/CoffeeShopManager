@@ -41,7 +41,7 @@ export class BillService {
         params = params.append('month', userParams.month);
       }
       if (userParams.day !== 0) {
-        params = params.append('day', userParams.day)
+        params = params.append('day', userParams.day);
       }
     }
 
@@ -62,7 +62,7 @@ export class BillService {
   }
 
   getTotal(userParams?): Observable<number> {
-    let params ='';
+    let params = '';
 
     if (userParams != null) {
 
@@ -89,5 +89,9 @@ export class BillService {
     }
 
     return this.http.get<number>(this.baseUrl + 'bill/total?' + params);
+  }
+
+  create(bill: Bill) {
+    return this.http.post(this.baseUrl + 'bill/create', bill);
   }
 }

@@ -23,10 +23,6 @@ export class InvoiceComponent implements OnInit {
     this.id = state.id;
     this.paid = state.paid;
     this.orders = state.list;
-
-    console.log(this.id);
-    console.log(this.paid);
-    console.log(this.orders);
   }
 
   ngOnInit() {
