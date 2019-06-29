@@ -13,11 +13,11 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    selectedName: string;
-    selectedPhone: string;
-    selecetedAddress: string;
+    model= {selectedName: null,
+    selectedPhone: null,
+    selecetedAddress: null};
     noResult = false;
-    selectedOption= 0;
+    selectedOption: Staff[];
     staffs: Staff[];
     // staffsForFilter: Staff[];
     staff: Staff = JSON.parse(localStorage.getItem('staff'));
@@ -36,8 +36,8 @@ export class StaffListComponent implements OnInit {
 
   onSelectName(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']) 
-
+    this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']);
+    this.getStaffs();
   }
 
   onSelectPhone(event: TypeaheadMatch): void {
@@ -75,9 +75,10 @@ export class StaffListComponent implements OnInit {
 
 
   resetFilter() {
-    this.selectedOption=0;
+    this.selectedOption[0];
     this.loadStaffs();
   }
+
 
   defaultPhoto(staffs) : Staff[] {
     for(const interator of staffs){
