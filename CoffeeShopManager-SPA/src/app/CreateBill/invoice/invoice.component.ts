@@ -9,6 +9,7 @@ import { Order } from 'src/app/_models/Order';
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
+
 export class InvoiceComponent implements OnInit {
   id: number;
   paid: number;
@@ -23,10 +24,6 @@ export class InvoiceComponent implements OnInit {
     this.id = state.id;
     this.paid = state.paid;
     this.orders = state.list;
-
-    console.log(this.id);
-    console.log(this.paid);
-    console.log(this.orders);
   }
 
   ngOnInit() {

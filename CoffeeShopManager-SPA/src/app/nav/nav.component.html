@@ -49,15 +49,20 @@
     </li>
   </ul>
 
-  <div *ngIf="loggedIn()" class="dropdown" dropdown>
+  <div *ngIf="loggedIn()" class="dropdown" style="margin-right: 50px;" dropdown>
     <a class="dropdown-toggle text-light" dropdownToggle>
       Welcome {{ authService.decodedToken?.unique_name}}
     </a>
   
     <div class="dropdown-menu mt-3" *dropdownMenu>
-      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+      <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+      <a class="dropdown-item" [routerLink]="['/register']" *ngIf="getAccessCode() != 'cashier' && getAccessCode() != 'manager'">
+        <i class="fa fa-user"></i> 
+        Thêm mới tài khoản 
+      </a>
+      <div class="dropdown-divider" *ngIf="getAccessCode() != 'cashier' && getAccessCode() != 'manager'"></div>
+      <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
     </div>
   </div>
 </nav>

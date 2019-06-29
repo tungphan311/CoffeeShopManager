@@ -47,7 +47,7 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule, MatOptionModule, MatSelectModule, } from '@angular/material';
+import { MatInputModule, MatOptionModule, MatSelectModule, MatButtonModule } from '@angular/material';
 import { MatNativeDateModule, MatIconModule, MAT_DATE_LOCALE } from '@angular/material';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
@@ -114,6 +114,7 @@ export function tokenGetter() {
       MatIconModule,
       MatFormFieldModule,
       MatInputModule,
+      MatButtonModule,
       MatOptionModule, MatSelectModule, MatIconModule, GridModule,
    ],
    providers: [
