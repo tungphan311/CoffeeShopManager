@@ -25,7 +25,7 @@ namespace CoffeeShopManager.API.Data.Staffs
 
         public async Task<Employee> GetEmployee(int id)
         {
-            var employee = await _context.Employees.FirstOrDefaultAsync(u => u.Id == id);
+            var employee = await _context.Employees.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
 
             return employee;
         }
@@ -46,6 +46,13 @@ namespace CoffeeShopManager.API.Data.Staffs
             await _context.SaveChangesAsync();
 
             return employee;
+        }
+
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(x => x.Id == id);
+
+            return photo;   
         }
     }
 }

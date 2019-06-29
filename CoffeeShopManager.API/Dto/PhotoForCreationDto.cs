@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Http;
 
 namespace CoffeeShopManager.API.Dto
@@ -10,6 +11,13 @@ namespace CoffeeShopManager.API.Dto
 
         public string Description { get; set; }
 
+        public DateTime DateAdded { get; set; }
+
         public string PublicId { get; set; }
+
+        public PhotoForCreationDto()
+        {
+            DateAdded = DateTime.Now;
+        }
     }
 }

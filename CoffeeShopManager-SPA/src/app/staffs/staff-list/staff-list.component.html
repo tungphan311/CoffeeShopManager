@@ -1,10 +1,4 @@
-<!-- <div class="text-center mt-3">
-    <h2>Your matches - {{pagination.totalItems}} found</h2>
-</div> -->
-
-
-
-<div class="container mt-3">
+<!-- <div class="container mt-3"> -->
     <!-- <form class="form-inline" #form="ngForm" (ngSubmit)="loadStaffs()" novalidate>
         <div class="form-group">
             <label for="minAge">Age From</label>
@@ -31,24 +25,45 @@
         <button type="button" class="btn btn-info" (click)="resetFilter()" style="margin-left:10px">Reset Filter</button>
         </form>
         <br> -->
-<div class="container mt-5 ">
-        <h1 class="text-center text-primary" style="margin-top: 90px">Staff List</h1>
-        <button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-left:41% ">Add Staff</button>
+<button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-top: 1in; margin-left: 45%">Add Staff</button>
 
-        <pre class="card card-block card-header mt-3">Staff: {{selectedValue | json}}</pre>
+<div class="container mt-3 ">
+        
+    <div class="alert alert-danger mt-2" *ngIf="noResult">Không có kết quả</div>
 
-<div class="alert alert-danger mt-2" *ngIf="noResult">Không có kết quả</div>
-
- <input [(ngModel)]="selectedValue"
+    <input [(ngModel)]="selectedName"
     [typeahead]="staffs"
     typeaheadOptionField="name"
-    (typeaheadOnSelect)="onSelect($event)"
+    (typeaheadOnSelect)="onSelectName($event)"
     (typeaheadNoResults)="typeaheadNoResults($event)"
     class="form-control mt-2"
-    (keypress)="onChange()"
->
+    placeholder="Name"
+    (keypress)="onChange()">
+    
+    <input [(ngModel)]="selectedPhone"
+    [typeahead]="staffs"
+    typeaheadOptionField="phone"
+    (typeaheadOnSelect)="onSelectPhone($event)"
+    (typeaheadNoResults)="typeaheadNoResults($event)"
+    class="form-control mt-2"
+    placeholder="Phone"
+    (keypress)="onChange()">
+
+    <input [(ngModel)]="selecetedAddress"
+    [typeahead]="staffs"
+    typeaheadOptionField="address"
+    (typeaheadOnSelect)="onSelectAddress($event)"
+    (typeaheadNoResults)="typeaheadNoResults($event)"
+    class="form-control mt-2"
+    placeholder="Address"
+    (keypress)="onChange()">
+
 
 <!-- <pre class="container mt-2">Lý lịch: {{selectedOption | json}}</pre> -->
+
+<button class="btn btn-outline-danger mt-2" (click)="resetFilter()" style="width: 100px;height: 50px">Reset</button>
+
+<h1 class="text-center text-primary">Staff List</h1>
     <div class="row">
         <div *ngFor="let staff of staffs" class="col-lg-2 col-md-3 col-sm-6" style="padding-top: 2%">
             <app-staff-card [staff]="staff"></app-staff-card>

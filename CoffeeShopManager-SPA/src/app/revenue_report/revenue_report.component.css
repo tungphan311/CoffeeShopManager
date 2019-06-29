@@ -3,6 +3,8 @@
     width: 1024px;
     background-color: #FFFFFF;
     margin-top: 70px;
+    display: flex;
+    flex-direction: column;
 
 }
 .btn {

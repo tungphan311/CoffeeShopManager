@@ -6,6 +6,7 @@ import { AlertifyService } from '../_service/alertify.service';
 import { Bill } from '../_models/Bill';
 import { Pagination, PaginatedResult } from '../_models/Pagination';
 import { formatDate } from '@angular/common';
+import { MatDatepickerInputEvent } from '@angular/material';
 // import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 type AOA = any[][];
 
@@ -42,13 +43,14 @@ export class Revenue_reportComponent implements OnInit {
 
   bills: Bill[] = [];
   bill: Bill = JSON.parse(localStorage.getItem('bill'));
-  userParams: any = {};
 
 
   today = new Date();
   jstoday = '';
 
   pagination: Pagination;
+
+  events: string[] = [];
 
 
   public constructor(
@@ -103,9 +105,9 @@ export class Revenue_reportComponent implements OnInit {
 
   public ngOnInit() {
     // this.loadBills(0,0,0);
-    this.userParams.month = this.today.getMonth() + 1;
-    this.userParams.day = 0;
-    this.userParams.year = this.today.getFullYear();
+    // userParams.month = this.today.getMonth() + 1;
+    // userParams.day = 0;
+    // userParams.year = this.today.getFullYear();
 
 
     this.sortByMonth();
@@ -114,36 +116,94 @@ export class Revenue_reportComponent implements OnInit {
     this.isExportable = false;
 
 
-    // this.userParams.year = 2016;
+    // userParams.year = 2016;
     // this.loadBills();
+
+}
+
+addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+  this.isExportable = false;
+  this.events.push(`${type}: ${event.value}`);
+
+  let year = event.value.getFullYear();
+  let month = event.value.getMonth() + 1;
+  let day = event.value.getDate();
+  let days: Array<number>;
+  days = [1]; 
+  days[0] = day;
+  let userParams: any = {};
+  userParams.month = month;
+  userParams.day = day;
+  userParams.year = year;
+  console.log(userParams);
+  this.billService.getTotal(userParams).subscribe(result => {
+    let temp_array: number[];
+    temp_array=[0];
+    temp_array[0]=result;
+    this.chartData = {
+      labels: days,
+      datasets: [{
+          label: 'Doanh thu (đồng)',
+          data: temp_array,
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+          ],
+          borderColor: [
+              'rgba(255,99,132,1)',
+          ],
+          borderWidth: 1
+      }]
+  };
+    this.chart = this.refChart.nativeElement;
+    this.ctx = this.chart.getContext('2d');
+    this.myChart = new Chart(this.ctx, {
+      type: 'bar',
+      data: this.chartData,
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          },
+          events: ['click']
+      }
+  });
+    this.isExportable = false;
+  });
+
+
 
 }
 sortByMonth() {
   const month = this.today.getMonth() + 1;
-  this.userParams.month = month;
-  this.userParams.day = 0;
+  let userParams: any = {};
+  userParams.month = month;
+  userParams.day = 0;
+  userParams.year = this.today.getFullYear();
   this.monthData.length = 6;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  this.billService.getTotal(userParams).subscribe(result => {
     this.monthData[5] = result;
   });
-  this.userParams.month -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.month -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.monthData[4] = result;
   });
-  this.userParams.month -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.month -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.monthData[3] = result;
   });
-  this.userParams.month -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.month -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.monthData[2] = result;
   });
-  this.userParams.month -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.month -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.monthData[1] = result;
   });
-  this.userParams.month -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.month -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.monthData[0] = result;
   });
 
@@ -152,7 +212,7 @@ sortByMonth() {
   this.chartData = {
     labels: this.monthLabels,
     datasets: [{
-        label: 'Doanh thu (triệu đồng)',
+        label: 'Doanh thu (đồng)',
         data: this.monthData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -178,42 +238,41 @@ sortByMonth() {
 }
 sortByYear() {
   const year = this.today.getFullYear();
-  this.userParams.year = year;
-  this.userParams.day = 0;
-  this.userParams.month = 0;
-  console.log(this.userParams)
+  let userParams: any = {};
+  userParams.year = year;
+  userParams.day = 0;
+  userParams.month = 0;
   this.yearData.length = 6;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[5] = result;
-    console.log(result);
+
   });
-  this.userParams.year -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.year -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[4] = result;
   });
-  this.userParams.year -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.year -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[3] = result;
   });
-  this.userParams.year -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.year -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[2] = result;
   });
-  this.userParams.year -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.year -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[1] = result;
   });
-  this.userParams.year -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.year -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.yearData[0] = result;
   });
 
-  console.log(this.yearData);
   this.count = 2;
   this.chartData = {
     labels: this.yearLabels,
     datasets: [{
-        label: 'Doanh thu (triệu đồng)',
+        label: 'Doanh thu (đồng)',
         data: this.yearData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -237,39 +296,41 @@ sortByYear() {
   this.drawChart();
 }
 sortByDate() {
+  let userParams: any = {};
   const day = this.today.getDate();
   const month = this.today.getMonth() + 1;
-  this.userParams.month = month;
-  this.userParams.day = day;
+  userParams.month = month;
+  userParams.day = day;
+  userParams.year = this.today.getFullYear();
   this.dateData.length = 6;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[5] = result;
   });
-  this.userParams.day -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.day -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[4] = result;
   });
-  this.userParams.day -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.day -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[3] = result;
   });
-  this.userParams.day -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.day -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[2] = result;
   });
-  this.userParams.day -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.day -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[1] = result;
   });
-  this.userParams.day -= 1;
-  this.billService.getTotal(this.userParams).subscribe(result => {
+  userParams.day -= 1;
+  this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[0] = result;
   });
   this.count = 3;
   this.chartData = {
     labels: this.dateLabels,
     datasets: [{
-        label: 'Doanh thu (triệu đồng)',
+        label: 'Doanh thu (đồng)',
         data: this.dateData,
         backgroundColor: [
             'rgba(255, 99, 132, 0.2)',

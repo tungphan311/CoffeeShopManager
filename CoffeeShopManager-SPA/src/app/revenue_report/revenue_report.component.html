@@ -10,26 +10,26 @@
     <li class="list-inline-item">
       <button type="button" class="btn btn-primary" (click)="sortByYear()">Doanh thu theo năm</button>
     </li>
-   <li class="list-inline-item">
+    <li class="list-inline-item">
         <button type="button" *ngIf="isExportable" id="buttonBaocao" class="btn btn-warning" (click)="report()">Xuất file báo cáo <i class="fa fa-download"></i></button>
     </li>
     <li class="list-inline-item">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="picker">
-        <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker touchUi="true" #picker></mat-datepicker>
-      <mat-datepicker #picker></mat-datepicker>
-      <!-- <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field> -->
-      
-          
+
+      <br>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Chọn ngày bất kì"
+            (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
     </li>
   </ul>
   <canvas #chart></canvas>
+
+
 
   
 </div>
