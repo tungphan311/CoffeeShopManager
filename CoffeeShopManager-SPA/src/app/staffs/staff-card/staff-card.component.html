@@ -5,7 +5,8 @@
       <li class="list-inline-item"><button class="btn btn-primary" [routerLink]="['/staff/', staff.id]"><i class="fa fa-eye"></i></button></li>
       <li class="list-inline-item"><button class="btn btn-primary"
         [routerLink]="['/staff/edit/', staff.id ]"><i class="fa fa-edit"></i></button></li>
-      <li class="list-inline-item"><button class="btn btn-primary"><i class="fa fa-times-rectangle"></i></button></li>
+      <li class="list-inline-item"><button class="btn btn-primary"
+        (click)=deleteClick()><i class="fa fa-times-rectangle"></i></button></li>
     </ul>
   </div>
   <div class="card-body p-1">

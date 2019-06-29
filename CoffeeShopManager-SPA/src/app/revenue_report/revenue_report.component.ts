@@ -138,8 +138,8 @@ addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
   console.log(userParams);
   this.billService.getTotal(userParams).subscribe(result => {
     let temp_array: number[];
-    temp_array=[0];
-    temp_array[0]=result;
+    temp_array = [0];
+    temp_array[0] = result;
     this.chartData = {
       labels: days,
       datasets: [{

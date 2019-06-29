@@ -17,6 +17,7 @@ namespace CoffeeShopManager.API.Data
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Bill> Bills { get; set; }
+        public DbSet<BillDetail> BillDetails { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Employee> Employees { get; set; }
     }
