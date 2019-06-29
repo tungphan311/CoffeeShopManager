@@ -40,6 +40,16 @@ namespace CoffeeShopManager.API.Controllers
             return Ok(billsForView);
         }
 
+        [HttpGet("bills/{id}")]
+        public async Task<IActionResult> GetBillDetails(int id)
+        {
+            var billDetails = await _repo.GetBillDetails(id);
+
+            var billsDetailForView = _mapper.Map<IEnumerable<BillDetailForViewDto>>(billDetails);
+
+            return Ok(billsDetailForView);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBill(int id)
         {

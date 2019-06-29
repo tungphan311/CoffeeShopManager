@@ -1,6 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import Chart from 'chart.js';
 import * as XLSX from 'xlsx';
+import { BillService } from '../_service/Bills/bill.service';
+import { Bill } from '../_models/Bill';
+import { BillDetail } from '../_models/BillDetail';
+import { formatDate } from '@angular/common';
+import { PaginatedResult } from '../_models/Pagination';
 
 type AOA = any[][];
 @Component({
@@ -19,7 +24,11 @@ export class Product_reportComponent implements OnInit {
   fileName = 'BaoCaoSanPhamBanChay.xlsx';
   labels: any;
   dataChart: any;
-  public constructor() {
+  bill: Bill[] = [];
+  billDetail: BillDetail[] = [];
+  public constructor(
+    private billService: BillService,
+  ) {
     this.chartData = {};
     this.labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
     this.dataChart = [12, 19, 3, 5, 2, 3];
@@ -50,6 +59,30 @@ export class Product_reportComponent implements OnInit {
           borderWidth: 1
       }]
   };
+  this.getData();
+}
+
+getData() {
+    let today = new Date();
+    let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
+
+    let userParams: any = {};
+    // userParams.month = today.getMonth() + 1;
+    userParams.month = 0;
+    // userParams.day = today.getDate();
+    userParams.day = 0;
+    userParams.year = today.getFullYear();
+
+    let bills: Bill[] = [];
+
+    this.billService.getBills(userParams).subscribe((res: PaginatedResult<Bill[]>) => {
+        this.bill = res.result;
+        this.bill.forEach(element => {
+            this.billService.getBillDetail(element.id).subscribe(result => {
+                console.log(result);
+            })
+        });
+    })
 }
 exportToExcel()
 {

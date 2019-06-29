@@ -34,7 +34,9 @@ namespace CoffeeShopManager.API.Controllers
 
             var userToCreate = new User
             {
-                Username = userForRegisterDto.Username
+                Username = userForRegisterDto.Username,
+                AccessCode = userForRegisterDto.AccessCode,
+                StaffId = userForRegisterDto.StaffId
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
