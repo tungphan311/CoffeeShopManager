@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewChild } from '@angular/core';
 import { AuthService } from '../_service/auth.service';
 import { AlertifyService } from '../_service/alertify.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
-
-  model: any = {};
 
   constructor(
     private authService: AuthService,
     private alertify: AlertifyService,
     private router: Router
   ) { }
+
+  @Output() cancelRegister = new EventEmitter();
+
+  model: any = {};
 
   ngOnInit() {
   }
@@ -31,6 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['../home']);
+    // location.reload();
   }
 }
