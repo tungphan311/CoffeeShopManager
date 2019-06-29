@@ -16,6 +16,8 @@ namespace CoffeeShopManager.API.Data.Staffs
         Task<PagedList<Employee>> GetEmployees(EmployeeParams employeeParams);
 
         Task<Employee> GetEmployee(int id);
+
+        Task<IEnumerable<Employee>> GetAllEmployees();
         
         Task<Employee> Create(Employee employee);
 

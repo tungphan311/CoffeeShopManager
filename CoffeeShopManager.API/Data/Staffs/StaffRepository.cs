@@ -61,5 +61,14 @@ namespace CoffeeShopManager.API.Data.Staffs
             return await _context.Photos.Where(u => u.EmployeeId == employeeId)
                 .FirstOrDefaultAsync(p => p.IsMain);
         }
+
+        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        {
+            var employees = await _context.Employees.ToListAsync();
+
+            var available = employees.Where(x => !x.IsDelete);
+
+            return available;
+        }
     }
 }

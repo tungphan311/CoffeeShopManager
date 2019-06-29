@@ -22,15 +22,16 @@ const httpOptions = {
   export class StaffService {
     baseUrl = environment.apiUrl;
     staff: any;
-    // list 
-    
-    
-  
+    // list
+
+
+
     constructor(
       private http: HttpClient,
-      private _teamService : TeamService,
+      // tslint:disable-next-line:variable-name
+      private _teamService: TeamService,
       ) { }
-  
+
     getStaffs(page?, itemsPerPage?): Observable<PaginatedResult<Staff[]>> {
       const paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
 
@@ -40,7 +41,7 @@ const httpOptions = {
         params = params.append('pageNumber', page);
         params = params.append('pageSize', itemsPerPage);
       }
-      
+
 
       // if (staffParams != null){
       //   params = params.append('minAge',staffParams.minAge);
@@ -53,30 +54,33 @@ const httpOptions = {
           map(response => {
             paginatedResult.result = response.body;
             if (response.headers.get('Pagination') != null) {
-              paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))
+              paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
             }
             return paginatedResult;
           })
         );
     }
 
-    
-  
+
+
     getStaff(id): Observable<Staff> {
       return this.http.get<Staff>(this.baseUrl + 'staff/' + id);
     }
-    updateStaff(staff: Staff){
-      return this.http.put(this.baseUrl+'staff/'+ staff.id, staff);
+    updateStaff(staff: Staff) {
+      return this.http.put(this.baseUrl + 'staff/' + staff.id, staff);
     }
-    createStaffClick():Observable<Staff>{
-      return this.http.get<Staff>(this.baseUrl+ 'staff/' );
+    createStaffClick(): Observable<Staff> {
+      return this.http.get<Staff>(this.baseUrl + 'staff/' );
     }
     create(staff: Staff) {
       return this.http.post(this.baseUrl + 'staff/create/', staff);
     }
-    setMainPhoto(staffId: number, id : number){
-      return this.http.post(this.baseUrl + 'staff/'+ staffId +'/photo/' + id +'/setMain',{});
+    setMainPhoto(staffId: number, id: number) {
+      return this.http.post(this.baseUrl + 'staff/' + staffId + '/photo/' + id + '/setMain', {});
     }
-  
+
+    getAllEmployees(): Observable<Staff[]> {
+      return this.http.get<Staff[]>(this.baseUrl + 'staff/all');
+    }
   }
 

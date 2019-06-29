@@ -20,9 +20,9 @@
     <p>Nhóm thực hiện: <br>Nguyễn Đăng Quang <br> Phan Thanh Tùng <br> Nguyễn Ngọc Nghĩa <br> Lê Việt Hoàng</p>
   </div>
 
-  <div *ngIf="!loggedIn()" class="container">
+  <div *ngIf="!loggedIn()">
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col-4 login">
         <app-login (cancelRegister)="cancelRegisterMode($event)"></app-login>
       </div>
     </div>
