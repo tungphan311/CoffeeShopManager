@@ -7,18 +7,6 @@
         <div class="card">
           <img class="card-img-top img-thumbnail" src="{{staff.photo}}" alt="{{staff.name}}">
           <div class="card-body">
-            <div>
-              <strong>Phone :</strong>
-              <p>{{staff.phone}}</p>
-            </div>
-            <div>
-              <strong>Age :</strong>
-              <p>{{staff.age}}</p>
-            </div>
-            <div>
-              <strong>Email :</strong>
-              <p>{{staff.email}}</p>
-            </div>
             <div class="card-footer">
               <div class="btn-group d-flex">
                 <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block w-200">Save Changes</button>
@@ -60,6 +48,11 @@
                 <textarea name="Adddress"  rows="1" class="form-control"
                   [(ngModel)]="staff.address" required></textarea>
               </form>
+            </tab>
+            <tab heading="Edit Photos">
+              <app-photo-editor 
+                [staff]="staff"
+                [photos]="staff.photos"></app-photo-editor>
             </tab>
           </tabset>
         </div>
