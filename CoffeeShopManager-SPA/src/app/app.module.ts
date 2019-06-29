@@ -50,6 +50,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule, MatOptionModule, MatSelectModule, MatButtonModule } from '@angular/material';
 import { MatNativeDateModule, MatIconModule, MAT_DATE_LOCALE } from '@angular/material';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
+import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -72,6 +74,7 @@ export function tokenGetter() {
       StaffCardComponent,
       StaffEditComponent,
       StaffCreateComponent,
+      PhotoEditorComponent,
       ReceiptsComponent,
       PaymentsComponent,
       MembersComponent,
@@ -89,6 +92,7 @@ export function tokenGetter() {
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      FileUploadModule,
       ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),

@@ -18,13 +18,22 @@ export class StaffDetailComponent implements OnInit {
     private route : ActivatedRoute) { }
 
   ngOnInit() {
+    var dateString = '';
     this.route.data.subscribe(data =>{
       this.staff = data['staff']; 
       this.defaultPhoto(this.staff);
       var dob = this.staff.dateOfBirth;
-      console.log(this.staff);
     });
   }
+
+  loadDate(staff): string{
+    var dateString = '';
+    dateString = this.staff.dateOfBirth.toString();
+    dateString = dateString.slice(0,10);
+    return dateString;
+  }
+
+
 
   defaultPhoto(staff) : Staff {
     this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"

@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Collections.Generic;
+using CoffeeShopManager.API.Models;
 namespace CoffeeShopManager.API.Dto
 {
     public class StaffForListDto
@@ -28,5 +30,6 @@ namespace CoffeeShopManager.API.Dto
         //public string Address { get; set; }
 
         public string Photo {get;set;}
+        public ICollection<PhotoForDetailDto> Photos { get; set; }
     }
 }
