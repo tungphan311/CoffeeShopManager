@@ -1,3 +1,5 @@
+import { Photo } from './Photo';
+
 export interface Staff {
     id: number;
     name: string;
@@ -10,4 +12,5 @@ export interface Staff {
     address: string;
     dateOfBirth: Date;
     isDelete: boolean;
+    photos?: Photo[];
 }

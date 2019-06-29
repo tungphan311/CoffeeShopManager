@@ -18,6 +18,7 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
 import { CartComponent } from './CreateBill/cart/cart.component';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
+import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ export const appRoutes: Routes = [
                 resolve : { staff: StaffDetailResolver }},
             { path: 'staff/edit/:id', component: StaffEditComponent,
                 resolve : { staff: StaffEditResolver }, canDeactivate: [PreventUnsavedChanges]},
+            { path: 'staff/edit/photo:id', component: PhotoEditorComponent},
             { path: 'create', component: StaffCreateComponent},
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },

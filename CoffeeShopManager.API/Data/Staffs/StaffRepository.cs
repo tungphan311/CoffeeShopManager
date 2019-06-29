@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace CoffeeShopManager.API.Data.Staffs
 {
@@ -32,7 +33,9 @@ namespace CoffeeShopManager.API.Data.Staffs
 
         public async Task<PagedList<Employee>> GetEmployees(EmployeeParams employeeParams)
         {
-            var employees = _context.Employees;
+            var employees = _context.Employees.Include(p => p.Photos).AsQueryable();
+
+            employees = employees.Where(e => e.IsDelete == false);
 
             return await PagedList<Employee>.CreateAsync(employees, employeeParams.PageNumber, employeeParams.PageSize);
         }

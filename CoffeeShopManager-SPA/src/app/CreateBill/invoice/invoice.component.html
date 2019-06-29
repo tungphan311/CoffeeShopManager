@@ -17,7 +17,7 @@
     <kendo-grid-column field="total" format="{0:c}" title="Total" width="120"
                         [style]="rightAlign" [footerStyle]="rightAlign">
       <ng-template kendoGridFooterTemplate let-column="column">
-        <!-- {{ totals[column.field].sum | kendoNumber:'c' }} -->
+        {{ totals[column.field].sum | kendoNumber:'c' }}
       </ng-template>
     </kendo-grid-column>
   </kendo-grid>
