@@ -57,5 +57,9 @@ namespace CoffeeShopManager.API.Data.Staffs
 
             return photo;   
         }
+        public async Task<Photo> GetMainPhotoForEmployee(int employeeId){
+            return await _context.Photos.Where(u => u.EmployeeId == employeeId)
+                .FirstOrDefaultAsync(p => p.IsMain);
+        }
     }
 }
