@@ -33,7 +33,7 @@ const httpOptions = {
       ) { }
 
     getStaffs(page?, itemsPerPage?): Observable<PaginatedResult<Staff[]>> {
-      let paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
+      const paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
 
       let params = new HttpParams();
 
