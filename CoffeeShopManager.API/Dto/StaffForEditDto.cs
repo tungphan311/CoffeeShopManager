@@ -18,6 +18,8 @@ namespace CoffeeShopManager.API.Dto
         public string Address { get; set; }
 
         public string Photo { get; set; }
-        public DateTime DateOfBirth{get;set;}
+
+        public DateTime DateOfBirth{ get; set; }
+        public bool IsDelete { get; set; }
     }
 }

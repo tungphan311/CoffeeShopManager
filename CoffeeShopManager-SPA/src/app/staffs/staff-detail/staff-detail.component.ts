@@ -21,7 +21,7 @@ export class StaffDetailComponent implements OnInit {
     this.route.data.subscribe(data =>{
       this.staff = data['staff']; 
       this.defaultPhoto(this.staff);
-      var dob = this.staff.dateofbirth;
+      var dob = this.staff.dateOfBirth;
       console.log(this.staff);
     });
   }
