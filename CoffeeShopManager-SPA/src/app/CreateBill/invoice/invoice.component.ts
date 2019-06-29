@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { stat } from 'fs';
 import { Order } from 'src/app/_models/Order';
 
 @Component({
@@ -23,10 +22,6 @@ export class InvoiceComponent implements OnInit {
     this.id = state.id;
     this.paid = state.paid;
     this.orders = state.list;
-
-    console.log(this.id);
-    console.log(this.paid);
-    console.log(this.orders);
   }
 
   ngOnInit() {

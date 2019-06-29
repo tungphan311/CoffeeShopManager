@@ -8,6 +8,9 @@ import { ProductDetailComponent } from '../product-detail/product-detail.compone
 import { Order } from 'src/app/_models/Order';
 import { CartComponent } from '../cart/cart.component';
 import { Router } from '@angular/router';
+import { Bill } from 'src/app/_models/Bill';
+import { BillDetail } from 'src/app/_models/BillDetail';
+import { BillService } from 'src/app/_service/Bills/bill.service';
 
 @Component({
   selector: 'app-bills',
@@ -23,6 +26,8 @@ export class BillsComponent implements OnInit {
   orderList: Order[] = [];
   buttons: boolean[] = [];
 
+  bill: any = {};
+
   submitted = false;
   id = '';
   paid = '';
@@ -30,13 +35,15 @@ export class BillsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private alertify: AlertifyService,
-    private router: Router
+    private router: Router,
+    private billService: BillService
   ) { }
 
   ngOnInit() {
     this.orderList = [];
     this.defaultButton();
     this.buttons[0] = true;
+    this.bill.billDetails = [];
     this.loadProducts(this.buttons);
   }
 
@@ -155,6 +162,25 @@ export class BillsComponent implements OnInit {
     if (!this.isIdError(this.id) || !this.isPaidError(this.paid)) {
       return;
     }
+
+    this.bill.memberId = 1;
+    this.bill.staffId = 1;
+    this.bill.value = this.totalPrice(this.orderList);
+
+    this.orderList.forEach(order => {
+      const detail: BillDetail = {
+        productDetailId: order.productDetailId,
+        amount: order.amount
+      };
+
+      this.bill.billDetails.push(detail);
+    });
+
+    this.billService.create(this.bill).subscribe(result => {
+      this.alertify.success('Success');
+    }, error => {
+      this.alertify.error(error);
+    });
 
     this.router.navigate(['/bill/invoice'],
       {
