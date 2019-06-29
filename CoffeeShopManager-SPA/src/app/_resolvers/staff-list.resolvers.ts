@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class StaffListResolver implements Resolve<Staff[]>{
     pageNumber = 1;
-    pageSize = 6;
+    pageSize = 10;
     staffs : Staff[];
 
     constructor(

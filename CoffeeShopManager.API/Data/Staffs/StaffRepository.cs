@@ -4,6 +4,7 @@ using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using CoffeeShopManager.API.Dto;
 
 namespace CoffeeShopManager.API.Data.Staffs
 {
@@ -36,6 +37,35 @@ namespace CoffeeShopManager.API.Data.Staffs
             var employees = _context.Employees.Include(p => p.Photos).AsQueryable();
 
             employees = employees.Where(e => e.IsDelete == false);
+
+            if (employeeParams.Name != null) 
+            {
+                employees = employees.Where(e => e.Name.ToLower().Contains(employeeParams.Name));
+            }
+
+            if (employeeParams.Phone != null) {
+                if (employeeParams.Phone.All(char.IsDigit)) 
+                {
+                    employees = employees.Where(e => e.Phone.Contains(employeeParams.Phone));
+                }   
+            }
+
+            if (employeeParams.Address != null) 
+            {
+                employees = employees.Where(e => e.Address.ToLower().Contains(employeeParams.Address));
+            }
+
+            if (employeeParams.Gender != null) 
+            {
+                employees = employees.Where(e => e.Gender.ToLower().Contains(employeeParams.Gender));
+            }
+
+            // if (employeeParams.Age != null) {
+            //     if (employeeParams.Age.All(char.IsDigit)) 
+            //     {
+            //         employees = employees.Where(e => e.Age.Contains(employeeParams.Age));
+            //     }   
+            // }
 
             return await PagedList<Employee>.CreateAsync(employees, employeeParams.PageNumber, employeeParams.PageSize);
         }

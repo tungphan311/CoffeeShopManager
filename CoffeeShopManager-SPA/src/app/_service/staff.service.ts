@@ -33,7 +33,7 @@ const httpOptions = {
       ) { }
 
     getStaffs(page?, itemsPerPage?): Observable<PaginatedResult<Staff[]>> {
-      const paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
+      let paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
 
       let params = new HttpParams();
 
@@ -42,13 +42,6 @@ const httpOptions = {
         params = params.append('pageSize', itemsPerPage);
       }
 
-
-      // if (staffParams != null){
-      //   params = params.append('minAge',staffParams.minAge);
-      //   params = params.append('maxAge',staffParams.maxAge);
-      //   params = params.append('gender',staffParams.gender);
-      // }
-
       return this.http.get<Staff[]>(this.baseUrl + 'staff/', { observe: 'response', params})
         .pipe(
           map(response => {
@@ -56,13 +49,47 @@ const httpOptions = {
             if (response.headers.get('Pagination') != null) {
               paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
             }
+
             return paginatedResult;
           })
         );
     }
 
+    getListStaff(staffParams?): Observable<PaginatedResult<Staff[]>> {
+      const paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
+
+      let params = new HttpParams();
 
 
+      if (staffParams.name !== '') {
+        params = params.append('name', staffParams.name);
+      }
+      if (staffParams.phone !== '') {
+        params = params.append('phone', staffParams.phone);
+      }
+      if (staffParams.address !== '') {
+        params = params.append('address', staffParams.address);
+      }
+      if (staffParams.gender !== '') {
+        params = params.append('gender', staffParams.gender);
+      }
+      // if (staffParams.age !== '') {
+      //   params = params.append('age', staffParams.age);
+      // }
+
+      return this.http.get<Staff[]>(this.baseUrl + 'staff', { observe: 'response', params })
+        .pipe(
+          map(response => {
+            paginatedResult.result = response.body;
+            if (response.headers.get('Pagination') != null) {
+              paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+            }
+            console.log(paginatedResult);
+
+            return paginatedResult;
+          })
+        );
+    }
     getStaff(id): Observable<Staff> {
       return this.http.get<Staff>(this.baseUrl + 'staff/' + id);
     }
