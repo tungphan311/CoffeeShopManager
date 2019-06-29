@@ -4762,10 +4762,20 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
+ng2-file-upload@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ng2-file-upload/-/ng2-file-upload-1.3.0.tgz#d90f8f568f62383462175f8bdfa0096b131f277a"
+  integrity sha512-Pudxik6LWYsT8hNiEW7RfjgGWAnvfQywxwJYMdt1snTUe+KnlRc/QqPv3QEQW6plXTanuLkYz/TbqilSfSHOsw==
+
 ngx-bootstrap@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-4.3.0.tgz#4c2213c082787701711c991ae728adaed035e637"
   integrity sha512-ZPS6V2yLEeqB/7KIlVohS8qUdtFa1bgUB/sSPWRcXqOWU3EKhORetZoXG6m2F5ILYDe5hwQvBEjdHPlEz2piOg==
+
+ngx-gallery@^5.3.2:
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/ngx-gallery/-/ngx-gallery-5.10.0.tgz#21f623cb788578dbb5a3625c869712de2b95258c"
+  integrity sha512-+2DnsBfkIzNQoReOHf6+OMf06+qyQQMyVVN4iQAtL0+KykjVqDZiBwLQtmwajDWMGph6O1HNKLrqTcmgqw+d2A==
 
 nice-try@^1.0.4:
   version "1.0.5"

@@ -23,7 +23,7 @@
           <tab heading="About" id="tab1">   
             <div>
               <strong>Date Of Birth :</strong>
-              <p>{{staff.dateOfBirth}}</p>
+              <p>{{loadDate(staff)}}</p>
             </div>
             <div>
               <strong>Age :</strong>
@@ -47,6 +47,9 @@
               <strong>Address :</strong>
               <p>{{staff.address}}</p>
             </div>
+          </tab>
+          <tab heading="Photos">
+              <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </tab>
         </tabset>
       </div>

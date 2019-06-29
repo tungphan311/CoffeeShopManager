@@ -4,6 +4,7 @@ import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-staff-detail',
@@ -12,22 +13,59 @@ import { formatDate } from '@angular/common';
 })
 export class StaffDetailComponent implements OnInit {
   staff : Staff;
+  galleryOptions: NgxGalleryOptions[]; 
+  galleryImages : NgxGalleryImage[];
   constructor(
     private staffService: StaffService, 
     private alertify: AlertifyService, 
     private route : ActivatedRoute) { }
 
   ngOnInit() {
+    var dateString = '';
     this.route.data.subscribe(data =>{
       this.staff = data['staff']; 
       this.defaultPhoto(this.staff);
-      var dob = this.staff.dateOfBirth;
-      console.log(this.staff);
     });
+    console.log(this.staff);
+    this.galleryOptions = [
+      {
+        width:'500px',
+        height:'500px',
+        imagePercent: 100,
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        preview: false
+      }
+    ];
+    this.galleryImages = this.getImages();
+    console.log(this.galleryImages);
   }
 
+  getImages(){
+    const imageUrls =[];
+    for(let i=0;i<this.staff.photos.length;i++){
+      imageUrls.push({
+        small: this.staff.photos[i].url,
+        medium: this.staff.photos[i].url,
+        big: this.staff.photos[i].url,
+        description: this.staff.photos[i].description
+      })
+    }
+    return imageUrls;
+  }
+
+  loadDate(staff): string{
+    var dateString = '';
+    dateString = this.staff.dateOfBirth.toString();
+    dateString = dateString.slice(0,10);
+    return dateString;
+  }
+
+
+
   defaultPhoto(staff) : Staff {
-    this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
+    if(this.staff.photo==null||this.staff.photo=="")
+      this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png";
     return staff;
   }
 
