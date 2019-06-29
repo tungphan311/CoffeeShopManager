@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    console.log(this.authService.decodedToken);
   }
 
   getAccessCode(): string {

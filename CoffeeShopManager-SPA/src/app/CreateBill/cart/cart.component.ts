@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/_service/Products/product.service';
 })
 export class CartComponent implements OnInit {
   @ViewChild('cart') modal: ModalDirective;
-  @Output() output: EventEmitter<Order[]> = new EventEmitter<Order[]>();
+  // @Output() output: EventEmitter<Order[]> = new EventEmitter<Order[]>();
 
   saving = false;
 
@@ -60,7 +60,7 @@ export class CartComponent implements OnInit {
 
   close() {
     this.saving = false;
-    this.output.emit(null);
+    // this.output.emit(null);
     this.modal.hide();
   }
 

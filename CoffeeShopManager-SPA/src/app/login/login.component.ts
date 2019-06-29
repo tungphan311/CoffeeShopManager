@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       this.alertify.error(error);
     }, () => {
       this.router.navigate(['/home']);
-      location.reload();
+      // location.reload();
     });
   }
 

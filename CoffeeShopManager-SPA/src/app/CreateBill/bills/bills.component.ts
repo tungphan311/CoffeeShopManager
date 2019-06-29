@@ -12,6 +12,7 @@ import { Bill } from 'src/app/_models/Bill';
 import { BillDetail } from 'src/app/_models/BillDetail';
 import { BillService } from 'src/app/_service/Bills/bill.service';
 import { formatDate } from '@angular/common';
+import { AuthService } from 'src/app/_service/auth.service';
 
 @Component({
   selector: 'app-bills',
@@ -37,7 +38,8 @@ export class BillsComponent implements OnInit {
     private productService: ProductService,
     private alertify: AlertifyService,
     private router: Router,
-    private billService: BillService
+    private billService: BillService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -66,9 +68,11 @@ export class BillsComponent implements OnInit {
 
   getOrder(order: Order) {
     let temp = 0;
+    this.orderList = this.orderList.filter(x => x.amount > 0);
     this.orderList.forEach(element => {
       if (element.productDetailId === order.productDetailId && order.note === '') {
         element.amount += order.amount;
+        element.price += order.price;
         temp += 1;
       }
     });
@@ -164,11 +168,11 @@ export class BillsComponent implements OnInit {
       return;
     }
 
-    let today = new Date();
+    const today = new Date();
     let jstoday = '';
     jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0700');
     this.bill.memberId = 1;
-    this.bill.staffId = 1;
+    this.bill.staffId = this.authService.decodedToken.given_name;
     this.bill.value = this.totalPrice(this.orderList);
     this.bill.createddate = today;
 

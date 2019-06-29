@@ -1,0 +1,27 @@
+kendo-pdf-export {
+    font-family: "DejaVu Sans", "Arial", sans-serif;
+    font-size: 12px;
+}
+
+.header {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+    color: #3aabf0;
+  }
+
+  .address {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 0 20px 0;
+  }
+
+  .from p, .for p {
+    color: #787878;
+  }
+
+  .container {
+      width: 50%;
+      margin-top: 10px;
+  }
