@@ -10,6 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class StaffListResolver implements Resolve<Staff[]>{
     pageNumber = 1;
     pageSize = 6;
+    staffs : Staff[];
 
     constructor(
         private staffService: StaffService, 
