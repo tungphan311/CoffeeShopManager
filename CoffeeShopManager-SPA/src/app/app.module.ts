@@ -52,6 +52,7 @@ import { MatNativeDateModule, MatIconModule, MAT_DATE_LOCALE } from '@angular/ma
 import { GridModule } from '@progress/kendo-angular-grid';
 import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -96,6 +97,7 @@ export function tokenGetter() {
       ReactiveFormsModule,
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
+      NgxGalleryModule,
       JwtModule.forRoot({
          config: {
             // tslint:disable-next-line:object-literal-shorthand

@@ -3,6 +3,8 @@ import { Photo } from 'src/app/_models/Photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { Staff } from 'src/app/_models/Staff';
+import { StaffService } from 'src/app/_service/staff.service';
+import { AlertifyService } from 'src/app/_service/alertify.service';
 
 @Component({
   selector: 'app-photo-editor',
@@ -16,7 +18,10 @@ export class PhotoEditorComponent implements OnInit {
   hasBaseDropZoneOver = false;
   baseUrl = environment;
 
-  constructor() { }
+  constructor(
+    private staffService :StaffService,
+    private alertify : AlertifyService
+  ) { }
 
   ngOnInit() {
     // console.log(this.staff);
@@ -52,5 +57,11 @@ export class PhotoEditorComponent implements OnInit {
       }
     };
   }
-
+  setMainPhoto(photo: Photo){
+    this.staffService.setMainPhoto(this.staff.id, photo.id).subscribe(()=>{
+      console.log('Successfully set to Main');
+    },error =>{
+      this.alertify.error(error);
+    });
+  }
 }

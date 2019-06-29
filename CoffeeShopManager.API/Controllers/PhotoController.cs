@@ -92,5 +92,23 @@ namespace CoffeeShopManager.API.Controllers
 
             return BadRequest("Could not add the photo");
         }
+
+        [HttpPost("{id}/setMain")]
+        public async Task<IActionResult> SetMainPhoto(int staffId, int id){
+            var staff = await _repo.GetEmployee(staffId);
+            // if(!staff.Photos.Any(p => p.Id = id ))
+            //     return
+            var photoFromRepo = await _repo.GetPhoto(id);
+            if (photoFromRepo.IsMain)
+                return BadRequest("This is already the main photo");
+            var currenMainPhoto = await _repo.GetMainPhotoForEmployee(staffId);
+            currenMainPhoto.IsMain = false;
+
+            photoFromRepo.IsMain = true;
+            staff.Photo = photoFromRepo.Url;
+            if (await _repo.SaveAll())
+                return NoContent();
+            return BadRequest("Could not set photo to Main");
+        }
     }
 }
