@@ -18,6 +18,7 @@ import { PreventUnsavedChanges } from './_guard/prevent-unsaved-changes.guard';
 import { StaffCreateComponent } from './staffs/staff-create/staff-create.component';
 import { CartComponent } from './CreateBill/cart/cart.component';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
+import { RegisterComponent } from './register/register.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
+            { path: 'register', component: RegisterComponent },
             { path: 'bill', component: BillsComponent },
             { path: 'bill/invoice', component: InvoiceComponent },
             { path: 'staff', component: StaffListComponent,
