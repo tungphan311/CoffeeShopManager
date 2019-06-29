@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeShopManager.API.Dto;
 using CoffeeShopManager.API.Helpers;
 using CoffeeShopManager.API.Models;
 

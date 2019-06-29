@@ -13,10 +13,11 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    model= {selectedName: null,
-    selectedPhone: null,
-    selecetedAddress: null};
-    noResult = false;
+    model= {selectedName: '',
+    selectedPhone: '',
+    selecetedAddress: '',
+    selectedGender: '',
+    selectedAge: ''};
     selectedOption: Staff[];
     staffs: Staff[];
     // staffsForFilter: Staff[];
@@ -37,18 +38,27 @@ export class StaffListComponent implements OnInit {
   onSelectName(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
     this.staffs = this.staffs.filter(x => x.name === this.selectedOption['name']);
-    this.getStaffs();
   }
 
   onSelectPhone(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(y => y.phone === this.selectedOption['phone']);
+    this.staffs = this.staffs.filter(x => x.phone === this.selectedOption['phone']);
   }
 
   onSelectAddress(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(z => z.address === this.selectedOption['address']);
+    this.staffs = this.staffs.filter(x => x.address === this.selectedOption['address']);
   }
+
+  onSelectGender(event: TypeaheadMatch): void {
+    this.selectedOption = event.item;
+    this.staffs = this.staffs.filter(x => x.gender === this.selectedOption['gender']);
+  }
+
+  // onSelectAge(event: TypeaheadMatch): void {
+  //   this.selectedOption = event.item;
+  //   this.staffs = this.staffs.filter(x => x.age === this.selectedOption['age']);
+  // }
 
   getStaffs() {
     this.route.data.subscribe(data =>{
@@ -58,15 +68,30 @@ export class StaffListComponent implements OnInit {
     });
   }
 
+  isValid(num): boolean {
+    if (isNaN(+num)) {
+      return false;
+    }
+    return true;
+  }
+
+  applyFilter() {
+    let staffParams: any = {};
+    staffParams.name = this.model.selectedName;
+    staffParams.phone = this.model.selectedPhone;
+    staffParams.address = this.model.selecetedAddress;
+    staffParams.gender = this.model.selectedGender;
+    // staffParams.age = this.model.selectedAge;
+    this.staffService.getListStaff(staffParams).subscribe(result => {
+      this.staffs = result.result;
+      this.staffs = this.defaultPhoto(result.result);
+    });
+  }
+
   onChange() {
     console.log('Change');
     this.getStaffs();
   }
-
-  typeaheadNoResults(event: boolean): void {
-    this.noResult = event;
-  }
-
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
@@ -75,8 +100,8 @@ export class StaffListComponent implements OnInit {
 
 
   resetFilter() {
-    this.selectedOption[0];
-    this.loadStaffs();
+    this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = '';
+    this.applyFilter();
   }
 
 

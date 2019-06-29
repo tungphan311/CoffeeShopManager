@@ -1,16 +1,13 @@
 <button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-top: 1in; margin-left: 45%">Add Staff</button>
 
 <div class="container mt-3 ">
-        
-    <div class="alert alert-danger" style="width: 300px; margin-right: 0%" *ngIf="noResult">Không có kết quả</div>
 
     <ul class="list-inline">       
         <li class="list-inline-item">
             <input [(ngModel)]="model.selectedName"
             [typeahead]="staffs"
             typeaheadOptionField="name"
-            (typeaheadOnSelect)="onSelectName($event)"
-            (typeaheadNoResults)="typeaheadNoResults($event)"
+            (typeaheadOnSelect)="onSelectName($event)"         
             class="form-control"
             placeholder="Name"
             (keypress)="onChange()">
@@ -20,7 +17,6 @@
             [typeahead]="staffs"
             typeaheadOptionField="phone"
             (typeaheadOnSelect)="onSelectPhone($event)"
-            (typeaheadNoResults)="typeaheadNoResults($event)"
             class="form-control"
             placeholder="Phone"
             (keypress)="onChange()">
@@ -30,22 +26,34 @@
             [typeahead]="staffs"
             typeaheadOptionField="address"
             (typeaheadOnSelect)="onSelectAddress($event)"
-            (typeaheadNoResults)="typeaheadNoResults($event)"
             class="form-control"
             placeholder="Address"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
-            <button class="btn btn-outline-success" (click)="onSelectName()">Search</button>
+            <button class="btn btn-outline-success" (click)="applyFilter()">Search</button>
         </li>
         <li class="list-inline-item">
             <button class="btn btn-outline-danger" (click)="resetFilter()">Reset</button>
         </li>
     </ul>
 
-<h1 class="text-center text-primary">Staff List</h1>
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <input [(ngModel)]="model.selectedGender"
+            [typeahead]="staffs"
+            typeaheadOptionField="gender"
+            (typeaheadOnSelect)="onSelectGender($event)"         
+            class="form-control"
+            placeholder="Gender"
+            (keypress)="onChange()">
+        </li> 
+    </ul>
+
+    <h3 class="text-center text-primary">Staff List</h3>
+    
     <div class="row">
-        <div *ngFor="let staff of staffs" class="col-lg-2 col-md-3 col-sm-6" style="padding-top: 2%">
+        <div *ngFor="let staff of staffs" class="col-1-5">
             <app-staff-card [staff]="staff"></app-staff-card>
         </div>
     </div>
