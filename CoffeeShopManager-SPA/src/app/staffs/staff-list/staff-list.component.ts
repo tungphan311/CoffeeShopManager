@@ -32,6 +32,7 @@ export class StaffListComponent implements OnInit {
     // this.staffParams.minAge = 18;
     // this.staffParams.maxAge = 99;
     this.defaultPhoto(this.staffs);
+    console.log(this.staffs);
   }
 
   onSelect(event: TypeaheadMatch): void {
@@ -43,6 +44,7 @@ export class StaffListComponent implements OnInit {
     this.route.data.subscribe(data =>{
       this.staffs = data['staffs'].result;
       this.pagination = data ['staffs'].pagination;
+      this.staffs = this.staffs.filter(x => x.isDelete === false);
     });
   }
 
@@ -84,6 +86,7 @@ export class StaffListComponent implements OnInit {
           this.staffs = res.result;
           this.pagination = res.pagination;
           this.defaultPhoto(this.staffs);
+          this.staffs = this.staffs.filter(x => x.isDelete === false);
       }, error => {
           this.alertify.error(error);
       })

@@ -8,6 +8,6 @@ export interface Staff {
     phone: string;
     email: string;
     address: string;
-    dateofbirth: Date;
-    isdelete: boolean;
+    dateOfBirth: Date;
+    isDelete: boolean;
 }
