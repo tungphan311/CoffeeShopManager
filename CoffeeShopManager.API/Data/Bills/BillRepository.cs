@@ -72,11 +72,17 @@ namespace CoffeeShopManager.API.Data.Bills
             {
                 bills=bills.Where(b => b.CreatedDate.Day==billParams.day);
             }
-
-            
-
             return await PagedList<Bill>.CreateAsync(bills,billParams.PageNumber, billParams.PageSize);
 
+        }
+
+        public async Task<PagedList<BillDetail>> GetBillDetails(int billID)
+        {
+            var billDetails = _context.BillDetails.AsQueryable();
+
+            billDetails=billDetails.Where(b => b.BillId == billID);
+            
+            return await PagedList<BillDetail>.CreateAsync(billDetails, 1,100);
         }
 
         public int GetTotalRevenue(BillParams billParams)

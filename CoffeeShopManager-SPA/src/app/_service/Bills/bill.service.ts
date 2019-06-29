@@ -7,6 +7,7 @@ import { PaginatedResult } from 'src/app/_models/Pagination';
 import { Staff } from 'src/app/_models/Staff';
 import { map } from 'rxjs/operators';
 import { Response } from 'selenium-webdriver/http';
+import { BillDetail } from 'src/app/_models/BillDetail';
 
 
 const httpOptions = {
@@ -28,7 +29,7 @@ export class BillService {
   ) { }
 
   getBills(userParams?): Observable<PaginatedResult<Bill[]>> {
-    const paginatedResult: PaginatedResult<Bill []> = new PaginatedResult<Bill[]>();
+    let paginatedResult: PaginatedResult<Bill []> = new PaginatedResult<Bill[]>();
 
     let params = new HttpParams();
 
@@ -94,4 +95,10 @@ export class BillService {
   create(bill: Bill) {
     return this.http.post(this.baseUrl + 'bill/create', bill);
   }
+
+  getBillDetail(id: number): Observable<BillDetail[]>  {
+      // return this.http.get<BillDetail[]>(this.baseUrl + 'bill/bills', id)
+     // return this.http.get<BillDetail[]>(this.baseUrl + 'bill/bills', id);
+  return this.http.get<BillDetail[]>(this.baseUrl + 'bill/bills/' + id);
+  };
 }
