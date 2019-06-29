@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Bill } from 'src/app/_models/Bill';
 import { BillDetail } from 'src/app/_models/BillDetail';
 import { BillService } from 'src/app/_service/Bills/bill.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-bills',
@@ -163,9 +164,13 @@ export class BillsComponent implements OnInit {
       return;
     }
 
+    let today = new Date();
+    let jstoday = '';
+    jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0700');
     this.bill.memberId = 1;
     this.bill.staffId = 1;
     this.bill.value = this.totalPrice(this.orderList);
+    this.bill.createddate = today;
 
     this.orderList.forEach(order => {
       const detail: BillDetail = {
