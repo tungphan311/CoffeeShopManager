@@ -66,4 +66,7 @@ export class StaffEditComponent implements OnInit {
     this.staff.gender = gender;
     console.log(this.staff.gender);
   }
+  updateMainPhoto(photoUrl) {
+    this.staff.photo = photoUrl;
+  }
 }
