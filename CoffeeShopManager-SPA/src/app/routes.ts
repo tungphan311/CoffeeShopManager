@@ -3,7 +3,6 @@ import { HomeComponent } from './home/home.component';
 import { BillsComponent } from './CreateBill/bills/bills.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
-import { MembersComponent } from './members/members.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
 import { Revenue_reportComponent } from './revenue_report/revenue_report.component';
@@ -20,6 +19,8 @@ import { CartComponent } from './CreateBill/cart/cart.component';
 import { InvoiceComponent } from './CreateBill/invoice/invoice.component';
 import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
 import { RegisterComponent } from './register/register.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberListResolver } from './_resolvers/member-list.resolvers';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -41,7 +42,8 @@ export const appRoutes: Routes = [
             { path: 'create', component: StaffCreateComponent},
             { path: 'receipt', component: ReceiptsComponent },
             { path: 'payment', component: PaymentsComponent },
-            { path: 'member', component: MembersComponent },
+            { path: 'member', component: MemberListComponent,
+                resolve : { members: MemberListResolver}},
             { path: 'product_report', component: Product_reportComponent},
             { path: 'revenue_report', component: Revenue_reportComponent}
         ]

@@ -27,6 +27,5 @@ namespace CoffeeShopManager.API.Models
         
         public ICollection<Photo> Photos { get; set; }
 
-        public Team Team {get;set;}
     }
 }
