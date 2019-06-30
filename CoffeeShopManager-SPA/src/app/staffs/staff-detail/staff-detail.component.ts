@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
@@ -16,6 +16,7 @@ export class StaffDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[]; 
   galleryImages : NgxGalleryImage[];
   constructor(
+    private router: Router,
     private staffService: StaffService, 
     private alertify: AlertifyService, 
     private route : ActivatedRoute) { }
@@ -66,7 +67,15 @@ export class StaffDetailComponent implements OnInit {
     }
     return imageUrls;
   }
-  
+  deleteClick(){
+    this.staff.isDelete = true;
+    this.staffService.updateStaff(this.staff).subscribe(next => {
+    this.alertify.success('Profile deleted successfully');
+    this.router.navigate(['/staff']);
+    },error =>{
+      this.alertify.error(error);
+    })
+  }
 
 
 

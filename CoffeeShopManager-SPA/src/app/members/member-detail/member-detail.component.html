@@ -11,7 +11,8 @@
             <div class="btn-group d-flex">
               <button class="btn btn-primary w-100"
               [routerLink]="['/member/edit/',member.id]">Edit</button>
-              <button class="btn btn-success w-100">Delete</button>
+              <button class="btn btn-success w-100"
+              (click)=deleteClick()>Delete</button>
             </div>
           </div>
         </div>

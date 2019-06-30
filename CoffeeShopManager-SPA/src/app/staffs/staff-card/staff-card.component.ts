@@ -40,7 +40,7 @@ export class StaffCardComponent implements OnInit {
   deleteClick(){
     this.staff.isDelete = true;
     this.staffService.updateStaff(this.staff).subscribe(next => {
-    this.alertify.success('Profile updated successfully');
+    this.alertify.success('Profile deleted successfully');
     this.reload();
     },error =>{
       this.alertify.error(error);

@@ -26,7 +26,7 @@ export class MemberCardComponent implements OnInit {
   deleteClick(){
     this.member.isDelete = true;
     this.memberService.updateMember(this.member).subscribe(next => {
-    this.alertify.success('Profile updated successfully');
+    this.alertify.success('Profile deleted successfully');
     this.reload();
     },error =>{
       this.alertify.error(error);
@@ -34,6 +34,18 @@ export class MemberCardComponent implements OnInit {
   }
   defaultPhoto():void {
 
+  }
+  loadDate(member): string{
+    var dateString = '';
+    let date = new Date(this.member.dateOfBirth);
+
+    // console.log(this.staff.dateOfBirth);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    
+    dateString = day +'/'+ month +'/' + year;
+    return dateString;
   }
   ngOnInit() {
     

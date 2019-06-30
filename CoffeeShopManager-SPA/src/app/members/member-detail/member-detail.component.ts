@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/Member';
 import { MemberService } from 'src/app/_service/member.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-detail',
@@ -15,6 +15,7 @@ export class MemberDetailComponent implements OnInit {
   constructor(
     private memberService: MemberService, 
     private alertify: AlertifyService, 
+    private router : Router,
     private route : ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,12 +27,27 @@ export class MemberDetailComponent implements OnInit {
     });
     console.log(this.member);
   }
+  deleteClick(){
+    this.member.isDelete = true;
+    this.memberService.updateMember(this.member).subscribe(next => {
+    this.alertify.success('Profile deleted successfully');
+    this.router.navigate(['/member']);
+    },error =>{
+      this.alertify.error(error);
+    })
+  }
 
 
   loadDate(member): string{
     var dateString = '';
-    dateString = this.member.dateOfBirth.toString();
-    dateString = dateString.slice(0,10);
+    let date = new Date(this.member.dateOfBirth);
+
+    // console.log(this.staff.dateOfBirth);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    
+    dateString = day +'/'+ month +'/' + year;
     return dateString;
   }
 
