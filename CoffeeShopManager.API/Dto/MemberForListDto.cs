@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System;
 namespace CoffeeShopManager.API.Dto
 {
-    public class MemberFotListDto
+    public class MemberForListDto
     {
         public int Id { get; set; }
 
