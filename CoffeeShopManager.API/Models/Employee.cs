@@ -14,9 +14,7 @@ namespace CoffeeShopManager.API.Models
        public string Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-
-        // public string Age { get;set; }
-
+        
         public string Phone { get; set; }
 
         public string Email { get; set; }
