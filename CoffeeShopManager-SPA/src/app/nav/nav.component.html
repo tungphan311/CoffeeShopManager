@@ -9,13 +9,13 @@
         Lập hoá đơn
       </a>
     </li>
-    <li *ngIf="getAccessCode() != 'cashier' && getAccessCode() != 'manager'" class="nav-item" 
+    <li *ngIf="authService.decodedToken?.actort == 'admin' " class="nav-item" 
       routerLinkActive="router-link-active">
       <a class="nav-link" [routerLink]="['/staff']">
         Quản lý lý lịch
       </a>
     </li>
-    <li *ngIf="getAccessCode() != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
+    <li *ngIf="authService.decodedToken?.actort != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
       <a class="nav-link dropdown-toggle" dropdownToggle>Quản lý thu chi</a>
 
       <div class="dropdown-menu" *dropdownMenu>
@@ -27,7 +27,7 @@
         </a>
       </div>
     </li>
-    <li *ngIf="getAccessCode() != 'cashier'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
+    <li *ngIf="authService.decodedToken?.actort == 'admin'" class="nav-item dropdown" routerLinkActive="router-link-active" dropdown>
       <a class="nav-link dropdown-toggle" dropdownToggle>Thống kê</a>
 
       <div class="dropdown-menu" *dropdownMenu>
@@ -44,24 +44,24 @@
         Quản lý thành viên
       </a>
     </li>
-    <li *ngIf="getAccessCode() != 'cashier'" class="nav-item">
+    <li *ngIf="authService.decodedToken?.actort != 'cashier'" class="nav-item">
       <a class="nav-link disable">Quản lý nguyên liệu</a>
     </li>
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown" style="margin-right: 50px;" dropdown>
     <a class="dropdown-toggle text-light" dropdownToggle>
-      Welcome {{ authService.decodedToken?.unique_name}}
+      Welcome {{ authService.decodedToken?.unique_name }}
     </a>
   
     <div class="dropdown-menu mt-3" *dropdownMenu>
       <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Thông tin cá nhân</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" [routerLink]="['/register']" *ngIf="getAccessCode() != 'cashier' && getAccessCode() != 'manager'">
+      <a class="dropdown-item" [routerLink]="['/register']" *ngIf="authService.decodedToken?.actort == 'admin' ">
         <i class="fa fa-user"></i> 
         Thêm mới tài khoản 
       </a>
-      <div class="dropdown-divider" *ngIf="getAccessCode() != 'cashier' && getAccessCode() != 'manager'"></div>
+      <div class="dropdown-divider" *ngIf="authService.decodedToken?.actort == 'admin'"></div>
       <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
     </div>
   </div>

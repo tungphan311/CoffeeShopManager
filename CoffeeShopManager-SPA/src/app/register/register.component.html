@@ -3,16 +3,26 @@
     <div class="col-4">
       <form #registerForm="ngForm" (ngSubmit)="register()">
         <h2 class="text-center text-primary">Sign Up</h2>
-        <hr>
-      
+        <hr>     
         <div class="form-group">
           <input type="text" class="form-control" required name="Username" [(ngModel)]="model.username" placeholder="Username">
-        </div>
-      
+        </div>      
         <div class="form-group">
           <input type="password" class="form-control" required name="Password" [(ngModel)]="model.password" placeholder="Password">
         </div>
-      
+        <div class="form-group">
+          <select class="form-control" (change)="selectCode($event.target.value)">
+            <option value="all">--Vui lòng chọn quyền truy cập--</option>
+            <option *ngFor="let code of accessCodeList" value="{{code}}" [selected]="model.accessCode === code">{{getCode(code)}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" (change)="selectStaff($event.target.value)">
+            <option value="all">--Vui lòng chọn quyền truy cập--</option>
+            <option *ngFor="let staff of staffsHasNoAccount" value="{{staff}}" 
+              [selected]="model.staffId === staff">{{getStaffName(staff)}}</option>
+          </select>
+        </div>
         <div class="form-group text-center">
           <button class="btn btn-success" type="submit">Register</button>
           <button class="btn btn-dark" style="margin-left: 10px;" type="button" (click)="cancel()">Cancel</button>

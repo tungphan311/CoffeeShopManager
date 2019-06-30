@@ -74,5 +74,15 @@ namespace CoffeeShopManager.API.Controllers
             return StatusCode(201);
         
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllEmployees()
+        {
+            var employees = await _repo.GetAllEmployees();
+
+            var employeeToReturn = _mapper.Map<IEnumerable<StaffForListDto>>(employees);
+
+            return Ok(employeeToReturn);
+        }
     }
 }

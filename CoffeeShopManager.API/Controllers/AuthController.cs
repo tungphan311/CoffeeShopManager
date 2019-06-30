@@ -34,7 +34,9 @@ namespace CoffeeShopManager.API.Controllers
 
             var userToCreate = new User
             {
-                Username = userForRegisterDto.Username
+                Username = userForRegisterDto.Username,
+                AccessCode = userForRegisterDto.AccessCode,
+                StaffId = userForRegisterDto.StaffId
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
@@ -53,7 +55,9 @@ namespace CoffeeShopManager.API.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username)
+                new Claim(ClaimTypes.Name, userFromRepo.Username),
+                new Claim(ClaimTypes.Actor, userFromRepo.AccessCode),
+                new Claim(ClaimTypes.GivenName, userFromRepo.StaffId.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8

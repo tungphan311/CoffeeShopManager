@@ -1,33 +1,31 @@
-<!-- <div class="example-config" style="margin-top: 70px;">
-  <button kendo-button (click)="pdf.saveAs('invoice.pdf')">
+<div class="example-config text-center" style="margin-top: 80px;">
+  <button kendo-button class="btn btn-primary" (click)="pdf.saveAs('invoice.pdf')" >
     Save As PDF...
   </button>
-</div> -->
-<!-- <div class="items">
-  <kendo-grid [data]="data" scrollable="none">
-    <kendo-grid-column field="productName" title="Product">
-      <ng-template kendoGridFooterTemplate>
-        Total
-      </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="unitPrice" format="{0:c}" title="Price" width="120"
-                        [style]="rightAlign" [footerStyle]="rightAlign">
-    </kendo-grid-column>
-    <kendo-grid-column field="qty" title="Pcs." width="120"
-                        [style]="rightAlign" [footerStyle]="rightAlign">
-      <ng-template kendoGridFooterTemplate let-column="column">
-        {{ totals[column.field].sum }}
-      </ng-template>
-    </kendo-grid-column>
-    <kendo-grid-column field="total" format="{0:c}" title="Total" width="120"
-                        [style]="rightAlign" [footerStyle]="rightAlign">
-      <ng-template kendoGridFooterTemplate let-column="column">
-        {{ totals[column.field].sum | kendoNumber:'c' }}
-      </ng-template>
-    </kendo-grid-column>
-  </kendo-grid>
-</div> -->
+</div>
 
-<div class="signature">
-  Signature: ________________
+<div class="container">
+  <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+    <div class="items">
+      <kendo-grid [data]="data" scrollable="none">
+        <kendo-grid-column field="productName" title="Tên sản phẩm">
+          <ng-template kendoGridFooterTemplate>
+            Tổng cộng
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="unitPrice" format="{0:c}" title="Giá" width="120">
+        </kendo-grid-column>
+        <kendo-grid-column field="qty" title="Số lượng" width="120">  
+          <ng-template kendoGridFooterTemplate let-column="column">
+            {{ totals[column.field].sum }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="total" format="{0:c}" title="Thành tiền" width="120">
+          <ng-template kendoGridFooterTemplate let-column="column">
+            {{ totals[column.field].sum}}
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid>
+    </div>
+  </kendo-pdf-export>
 </div>

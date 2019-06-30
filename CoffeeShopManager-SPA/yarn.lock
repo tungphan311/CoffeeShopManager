@@ -4772,6 +4772,12 @@ ngx-bootstrap@^4.3.0:
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-4.3.0.tgz#4c2213c082787701711c991ae728adaed035e637"
   integrity sha512-ZPS6V2yLEeqB/7KIlVohS8qUdtFa1bgUB/sSPWRcXqOWU3EKhORetZoXG6m2F5ILYDe5hwQvBEjdHPlEz2piOg==
 
+ngx-float-button@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-float-button/-/ngx-float-button-1.0.0.tgz#04d46dd7697a85399b9b5494e37656e6bbcd2f08"
+  integrity sha512-Gp1Wrlix6UhtaNI6ME0dl1AxiwigF4tLER8PTOkMAu75yNa+PIWBOzn1xWB0Ay72Xt8p/dN4AOCXQsd9lkD8gA==
+  dependencies:
+    tslib "^1.9.0"
 ngx-gallery@^5.3.2:
   version "5.10.0"
   resolved "https://registry.yarnpkg.com/ngx-gallery/-/ngx-gallery-5.10.0.tgz#21f623cb788578dbb5a3625c869712de2b95258c"

@@ -15,6 +15,8 @@ namespace CoffeeShopManager.API.Models
 
         public DateTime DateOfBirth { get; set; }
 
+        // public string Age { get;set; }
+
         public string Phone { get; set; }
 
         public string Email { get; set; }
@@ -24,7 +26,9 @@ namespace CoffeeShopManager.API.Models
         public bool IsDelete { get; set; }
 
         public string Photo { get; set; }
-
+        
         public ICollection<Photo> Photos { get; set; }
+
+        public Team Team {get;set;}
     }
 }
