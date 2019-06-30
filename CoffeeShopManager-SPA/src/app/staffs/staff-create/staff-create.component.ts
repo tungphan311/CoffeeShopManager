@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TeamService } from 'src/app/_service/team.service';
 import { NgForm } from '@angular/forms';
 import { Team } from 'src/app/_models/Team';
+import { FileUploader } from 'ng2-file-upload';
+import { Photo } from 'src/app/_models/Photo';
+import { MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-staff-create',
@@ -15,6 +18,9 @@ import { Team } from 'src/app/_models/Team';
 export class StaffCreateComponent implements OnInit {
   @ViewChild('createForm') createForm :NgForm;
   @HostListener('window:beforeunload',['$event'])
+  uploader:FileUploader; 
+  hasBaseDropZoneOver = false;
+  currentMain: Photo;
   unloadNotification($event: any){
     if(this.createForm.valid){
       $event.returnValue = true;
@@ -26,6 +32,7 @@ export class StaffCreateComponent implements OnInit {
   staff: Staff;
   staffGender = '';
   genderlist = ['Male','Female','Other'] ;
+  events: string[] = [];
 
 
   constructor(
@@ -40,8 +47,17 @@ export class StaffCreateComponent implements OnInit {
       this.teams = result;
       console.log(this.teams);
     });
+    this.initializeUploader();
     // console.log(this.teams);
   }
+  initializeUploader() {
+    this.uploader = new FileUploader({});
+  }
+
+  fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+
 
   defaultPhoto(staff): Staff{
     // this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png";
@@ -55,6 +71,10 @@ export class StaffCreateComponent implements OnInit {
     }
 
     return false;
+  }
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.events.push(`${type}: ${event.value}`);
+    this.model.dateOfBirth = event.value;
   }
 
   createStaff(){

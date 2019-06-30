@@ -19,6 +19,8 @@ namespace CoffeeShopManager.API.Helpers
 
         public string Gender { get; set; }
 
+        public string Email { get;set; }
+
         // public string Age { get; set; }
 
         public string Team { get; set;}

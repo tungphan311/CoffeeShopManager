@@ -93,6 +93,8 @@ namespace CoffeeShopManager.API.Migrations
 
                     b.Property<string>("Gender");
 
+                    b.Property<bool>("IsDelete");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("Phone");

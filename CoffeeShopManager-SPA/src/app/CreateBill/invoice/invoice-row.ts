@@ -4,8 +4,9 @@ export class InvoiceRow {
     }
 
     constructor(
-    public productName: string,
-    public unitPrice: number,
-    public qty: number
+        public stt: number,
+        public productName: string,
+        public unitPrice: number,
+        public qty: number
     ) {}
 }

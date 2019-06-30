@@ -4,28 +4,63 @@
   </button>
 </div>
 
-<div class="container">
+<div class="container" style="margin-top: 10px;">
   <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
-    <div class="items">
+    <div class="row">
+      <div class="col-lg-3">
+        <img style="width: 80%" src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.15752-9/65444816_318607395682474_6416278826342416384_n.png?_nc_cat=108&_nc_oc=AQlFSy3TPrLbvvqixASQgxhBts0vKjyBO--m6JQ7ciUdA-xBScWGIZt_5XnpQlpuE70&_nc_ht=scontent.fsgn5-5.fna&oh=238c10954f4e10f244b0eebe82c2c402&oe=5DC1FFA5">
+      </div>
+      <div class="col-lg-9">
+        <h4><b>ABC Coffee & Tea</b></h4>
+        <p>Làng ĐHQG, P. Linh Trung, Q. Thủ Đức, Tp. Hồ Chí Minh</p>
+        <p>Liên hệ: 0349615643</p>
+      </div>
+    </div>
+    <div class="col-lg-12 text-center" style="margin-top: 10px;">
+      <h4>HOÁ ĐƠN</h4>
+    </div>
+    <div class="col-lg-5">Số chờ: {{id}}</div>
+    <div class="col-lg-5">
+      <p>Ngày: <span>{{jstoday}}</span></p> 
+    </div>
+    <div class="col-lg-6">
+      Thu ngân: <span>{{authService.decodedToken.family_name}}</span>
+    </div>
+    <div class="items" style="margin-top: 10px;">
       <kendo-grid [data]="data" scrollable="none">
-        <kendo-grid-column field="productName" title="Tên sản phẩm">
-          <ng-template kendoGridFooterTemplate>
-            Tổng cộng
-          </ng-template>
+        <kendo-grid-column field="stt" title="#"></kendo-grid-column>
+        <kendo-grid-column field="productName" title="SP">
         </kendo-grid-column>
-        <kendo-grid-column field="unitPrice" format="{0:c}" title="Giá" width="120">
+        <kendo-grid-column field="unitPrice" title="Giá" width="120">
         </kendo-grid-column>
         <kendo-grid-column field="qty" title="Số lượng" width="120">  
-          <ng-template kendoGridFooterTemplate let-column="column">
-            {{ totals[column.field].sum }}
-          </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="total" format="{0:c}" title="Thành tiền" width="120">
-          <ng-template kendoGridFooterTemplate let-column="column">
-            {{ totals[column.field].sum}}
-          </ng-template>
+        <kendo-grid-column field="total" title="Thành tiền" width="120">
         </kendo-grid-column>
       </kendo-grid>
+    </div>
+    <div style="margin-top: 10px;">
+      <span class="key">Tổng tiền: </span>
+      <span class="value">{{formatPrice(total)}}đ</span>
+      <br>
+    </div>
+    <div>
+      <span class="key"> Tiền mặt: </span>
+      <span class="value">{{formatPrice(paid)}}đ</span>
+      <br>
+    </div>
+    <hr style="margin-top: 5px;">
+    <div class="price col-lg-12">
+      <span class="key"> Trả lại khách: </span>
+      <span class="value">{{formatPrice(total - paid)}}đ</span>
+      <br>
+    </div>
+    <hr style="margin-top: 5px;">
+
+    <div class="text-center" style="font-weight: bold" style="margin-top: 20px;">
+      <p>Wifi: ABCCoffee</p>
+      <p>Password: 0349615643</p>
+      <p> HAVE A NICE DAY!!!</p>
     </div>
   </kendo-pdf-export>
 </div>

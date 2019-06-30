@@ -17,6 +17,8 @@ namespace CoffeeShopManager.API.Models
         public string Address { get; set; }
 
         public DateTime CreatedDate { get; set; }
+        
+        public bool IsDelete { get; set; }
 
         public string Photo { get; set; }
     }

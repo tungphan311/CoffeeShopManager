@@ -27,6 +27,7 @@ using CoffeeShopManager.API.Data.ProductTypes;
 using CoffeeShopManager.API.Data.ProductDetails;
 using CoffeeShopManager.API.Data.Staffs;
 using CoffeeShopManager.API.Data.BillDetails;
+using CoffeeShopManager.API.Data.Members;
 
 namespace CoffeeShopManager.API
 {
@@ -60,6 +61,7 @@ namespace CoffeeShopManager.API
             services.AddScoped<IProductDetailRepository, ProductDetailRepository>();
             services.AddScoped<IStaffRepository, StaffRepository>();
             services.AddScoped<IBillDetailRepository, BillDetailRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddAutoMapper();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {

@@ -3,7 +3,9 @@ import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material';
+
  
 @Component({
   selector: 'app-staff-edit',
@@ -18,7 +20,8 @@ export class StaffEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-  staff : Staff;
+  events: string[] = [];
+  staff: Staff;
   staffGender = '';
   genderlist = ['Male','Female','Other'] ;
   constructor(
@@ -65,5 +68,25 @@ export class StaffEditComponent implements OnInit {
   changeGender(gender) {
     this.staff.gender = gender;
     console.log(this.staff.gender);
+  }
+  updateMainPhoto(photoUrl) {
+    this.staff.photo = photoUrl;
+  }
+  loadDate(staff): string{
+    var dateString = '';
+    let date = new Date(this.staff.dateOfBirth);
+
+    // console.log(this.staff.dateOfBirth);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    
+    dateString = day +'/'+ month +'/' + year;
+    return dateString;
+  }
+  
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.events.push(`${type}: ${event.value}`);
+    this.staff.dateOfBirth = event.value;
   }
 }
