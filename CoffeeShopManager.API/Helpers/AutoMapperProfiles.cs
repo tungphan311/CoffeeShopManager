@@ -38,6 +38,10 @@ namespace CoffeeShopManager.API.Helpers
             CreateMap<StaffForEditDto, Employee>();
             CreateMap<StaffForCreateDto, Employee>();
             CreateMap<StaffForEditDto, Employee>();
+
+            CreateMap<MemberForEditDto, Member>();
+            CreateMap<MemberForCreateDto, Member>();
+            CreateMap<MemberForEditDto, Member>();
         }
     }
 }
