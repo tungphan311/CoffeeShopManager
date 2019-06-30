@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <a class="navbar-brand" href="#">
-    <img src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.15752-9/65444816_318607395682474_6416278826342416384_n.png?_nc_cat=108&_nc_oc=AQnFYriJC6HaxxhKbAYk_GNL3so_AnWhjCAPmd3kPpna1JbL1bnrxCqqLh8MhLjPy5Q&_nc_ht=scontent.fsgn2-3.fna&oh=535a9ada323df7cfacbfea9fc31e2173&oe=5DC1FFA5">
+    <img src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.15752-9/65444816_318607395682474_6416278826342416384_n.png?_nc_cat=108&_nc_oc=AQlFSy3TPrLbvvqixASQgxhBts0vKjyBO--m6JQ7ciUdA-xBScWGIZt_5XnpQlpuE70&_nc_ht=scontent.fsgn5-5.fna&oh=238c10954f4e10f244b0eebe82c2c402&oe=5DC1FFA5">
   </a>
 
   <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-    <li class="nav-item" routerLinkActive="router-link-active">
+    <li *ngIf="authService.decodedToken?.actort != 'manager' " class="nav-item" routerLinkActive="router-link-active">
       <a class="nav-link" [routerLink]="['/bill']">
         Lập hoá đơn
       </a>
@@ -50,6 +50,9 @@
   </ul>
 
   <div *ngIf="loggedIn()" class="dropdown" style="margin-right: 50px;" dropdown>
+    <span class="mr-1">
+      <!-- <img src="{{photoUrl || '../../assets/user.png'}}" alt=""> -->
+    </span>
     <a class="dropdown-toggle text-light" dropdownToggle>
       Welcome {{ authService.decodedToken?.unique_name }}
     </a>

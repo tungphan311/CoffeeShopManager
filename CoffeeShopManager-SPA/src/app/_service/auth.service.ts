@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
+import { StaffService } from './staff.service';
+import { Staff } from '../_models/Staff';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    private staffService: StaffService
   ) { }
 
   login(model: any) {
@@ -27,7 +30,6 @@ export class AuthService {
           if (user) {
             localStorage.setItem('token', user.token);
             this.decodedToken = this.jwtHelper.decodeToken(user.token);
-            // console.log(this.decodedToken);
           }
         })
       );

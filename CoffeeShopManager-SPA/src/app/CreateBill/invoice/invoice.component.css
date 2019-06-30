@@ -3,6 +3,21 @@ kendo-pdf-export {
     font-size: 12px;
 }
 
+span {
+    font-family: "DejaVu Sans", "Arial", sans-serif;
+    font-size: 12px;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans';
+    src: url('./DejaVuSans.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Aria;';
+    src: url('./arial.ttf') format('truetype');
+}
+
 .header {
     font-size: 30px;
     font-weight: bold;
@@ -25,3 +40,17 @@ kendo-pdf-export {
       width: 50%;
       margin-top: 10px;
   }
+
+.label {
+    padding: 5px;
+    font-weight: bold;
+    color: black;
+}
+
+span {
+    color: grey;
+}
+
+.value { float:right }
+.key { float:left }
+

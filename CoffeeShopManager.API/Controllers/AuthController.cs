@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using CoffeeShopManager.API.Data;
+using CoffeeShopManager.API.Data.Staffs;
 using CoffeeShopManager.API.Dto;
 using CoffeeShopManager.API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,10 @@ namespace CoffeeShopManager.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IStaffRepository _staffRepo;
+        public AuthController(IAuthRepository repo, IConfiguration config, IStaffRepository staffRepo)
         {
+            _staffRepo = staffRepo;
             _config = config;
             _repo = repo;
         }
@@ -48,6 +51,7 @@ namespace CoffeeShopManager.API.Controllers
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username, userForLoginDto.Password);
+            var staff = await _staffRepo.GetEmployee(userFromRepo.StaffId);
 
             if (userFromRepo == null)
                 return Unauthorized();
@@ -57,7 +61,8 @@ namespace CoffeeShopManager.API.Controllers
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username),
                 new Claim(ClaimTypes.Actor, userFromRepo.AccessCode),
-                new Claim(ClaimTypes.GivenName, userFromRepo.StaffId.ToString())
+                new Claim(ClaimTypes.GivenName, userFromRepo.StaffId.ToString()),
+                new Claim(ClaimTypes.Surname, staff.Name)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8

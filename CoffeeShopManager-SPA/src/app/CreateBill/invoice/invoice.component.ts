@@ -10,6 +10,8 @@ import { ProductDetailService } from 'src/app/_service/ProductDetails/product-de
 import { ProductService } from 'src/app/_service/Products/product.service';
 import { Products } from 'src/app/_models/Products';
 import { ProductDetail } from 'src/app/_models/ProductDetail';
+import { formatDate } from '@angular/common';
+import { AuthService } from 'src/app/_service/auth.service';
 
 @Component({
   selector: 'app-invoice',
@@ -22,6 +24,9 @@ export class InvoiceComponent implements OnInit {
   paid: number;
   orders: Order[] = [];
   data: InvoiceRow[] = [];
+  today = new Date();
+  jstoday = '';
+  total = 0;
 
   aggregates: any[] = [{
     field: 'qty', aggregate: 'sum'
@@ -32,7 +37,8 @@ export class InvoiceComponent implements OnInit {
   constructor(
     private router: Router,
     private detailService: ProductDetailService,
-    private productService: ProductService
+    private productService: ProductService,
+    public authService: AuthService
   ) {
     const navigaton = router.getCurrentNavigation();
     const state = navigaton.extras.state;
@@ -40,16 +46,19 @@ export class InvoiceComponent implements OnInit {
     this.id = state.id;
     this.paid = state.paid;
     this.orders = state.list;
+    this.jstoday = formatDate(this.today, 'dd/MM/yyyy (hh:mm) a', 'en-US', '+07');
 
     this.orders.forEach(order => {
       this.detailService.getProductDetailById(order.productDetailId).subscribe((detail: ProductDetail) => {
         this.productService.getProduct(detail.productId).subscribe((product: Products) => {
           const row: InvoiceRow = {
+            stt: this.orders.indexOf(order) + 1,
             productName: product.name,
             unitPrice: detail.price,
             qty: order.amount,
             total: order.amount * detail.price
           };
+          this.total += order.price;
           this.data.push(row);
         });
       });
@@ -61,5 +70,9 @@ export class InvoiceComponent implements OnInit {
 
   public get totals(): any {
     return aggregateBy(this.data, this.aggregates) || {};
+  }
+
+  formatPrice(num: number): string {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
   }
 }
