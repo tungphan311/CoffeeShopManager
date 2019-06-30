@@ -24,6 +24,6 @@ namespace CoffeeShopManager.API.Data.Bills
 
         Task<BillDetail> CreateBillDetail(BillDetail billDetail);
 
-        Task<PagedList<BillDetail>> GetBillDetails(int billID);
+        IEnumerable<BillDetail> GetBillDetails(int billID);
     }
 }

@@ -76,13 +76,13 @@ namespace CoffeeShopManager.API.Data.Bills
 
         }
 
-        public async Task<PagedList<BillDetail>> GetBillDetails(int billID)
+        public IEnumerable<BillDetail> GetBillDetails(int billID)
         {
-            var billDetails = _context.BillDetails.AsQueryable();
+            var billDetails =  _context.BillDetails.ToList();
 
-            billDetails=billDetails.Where(b => b.BillId == billID);
+            var billsToReturn = billDetails.FindAll(b => b.BillId == billID);
             
-            return await PagedList<BillDetail>.CreateAsync(billDetails, 1,100);
+            return billsToReturn;
         }
 
         public int GetTotalRevenue(BillParams billParams)

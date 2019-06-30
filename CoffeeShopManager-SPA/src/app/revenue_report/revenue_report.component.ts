@@ -327,6 +327,8 @@ sortByDate() {
     this.dateData[0] = result;
   });
   this.count = 3;
+  console.log(">>>>>>>>>>>>>>");
+  console.log(this.dateData);
   this.chartData = {
     labels: this.dateLabels,
     datasets: [{
