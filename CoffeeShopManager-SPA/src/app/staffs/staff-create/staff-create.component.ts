@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from 'src/app/_service/team.service';
 import { NgForm } from '@angular/forms';
 import { Team } from 'src/app/_models/Team';
@@ -31,11 +31,12 @@ export class StaffCreateComponent implements OnInit {
   model: any={};
   staff: Staff;
   staffGender = '';
-  genderlist = ['Male','Female','Other'] ;
+  genderlist = ['Nam','Nữ','Khác'] ;
   events: string[] = [];
 
 
   constructor(
+    private router: Router,
     private staffService: StaffService,
     private alertify: AlertifyService,
     private route: ActivatedRoute,
@@ -79,9 +80,9 @@ export class StaffCreateComponent implements OnInit {
 
   createStaff(){
     this.staffService.create(this.model).subscribe(next => {
-      this.alertify.success('Add empoyee successfully');
+      this.alertify.success('Thêm nhân viên thành công');
     this.createForm.reset(this.model);
-    location.reload();
+    this.router.navigate(['/staff']);
     },error =>{
       this.alertify.error(error);
     })

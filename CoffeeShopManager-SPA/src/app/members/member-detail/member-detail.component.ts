@@ -54,7 +54,7 @@ export class MemberDetailComponent implements OnInit {
 
 
   defaultPhoto(member) : Member {
-    if(this.member.gender==='Female')
+    if(this.member.gender==='Nữ')
       this.member.photo = "https://www.leesaccountants.co.uk/sites/www.leesaccountants.co.uk/files/images/grey_silhouette_female.png?1516283889";
     else this.member.photo = "https://moseschengo.com/wp-content/uploads/2015/03/avatar-male.jpg"
     return member;

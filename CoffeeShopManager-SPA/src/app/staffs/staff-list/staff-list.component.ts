@@ -13,7 +13,7 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    genderList= ['Male', 'Female'];
+    genderList= ['Nam', 'Nữ'];
     model= {selectedName: '',
     selectedPhone: '',
     selecetedAddress: '',

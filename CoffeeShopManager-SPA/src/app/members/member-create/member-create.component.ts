@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Member } from 'src/app/_models/Member';
 import { MemberService } from 'src/app/_service/member.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
@@ -19,11 +19,12 @@ export class MemberCreateComponent implements OnInit {
   model: any={};
   member: Member;
   memberGender = '';
-  genderlist = ['Male','Female','Other'] ;
+  genderlist = ['Nam','Nữ','Khác'] ;
   events: string[] = [];
 
 
   constructor(
+    private router: Router,
     private memberService: MemberService,
     private alertify: AlertifyService,
     private route: ActivatedRoute) {}
@@ -54,7 +55,7 @@ export class MemberCreateComponent implements OnInit {
     this.memberService.create(this.model).subscribe(next => {
       this.alertify.success('Add Member successfully');
     this.createForm.reset(this.model);
-    location.reload();
+    this.router.navigate(['/member']);
     },error =>{
       this.alertify.error(error);
     })

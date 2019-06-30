@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="row-title text-center mb-1" style="padding-top: 6%;font-weight: bold">
-        <h1>{{member.name}}'s Profile</h1>
+        <h1>Thông tin cá nhân của {{member.name}}</h1>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -10,9 +10,9 @@
           <div class="card-footer">
             <div class="btn-group d-flex">
               <button class="btn btn-primary w-100"
-              [routerLink]="['/member/edit/',member.id]">Edit</button>
+              [routerLink]="['/member/edit/',member.id]">Chỉnh sửa</button>
               <button class="btn btn-success w-100"
-              (click)=deleteClick()>Delete</button>
+              (click)=deleteClick()>Xóa</button>
             </div>
           </div>
         </div>
@@ -23,25 +23,25 @@
         <tabset class="member-tabset">
           <tab heading="About" id="tab1">   
             <div>
-              <strong>Date Of Birth :</strong>
+              <strong>Ngày sinh :</strong>
               <p>{{loadDate(member)}}</p>
             </div>
             <div>
-              <strong>Age :</strong>
+              <strong>Tuổi :</strong>
               <p>{{member.age}}</p>
             </div>
             <div>
-              <strong>Gender :</strong>
+              <strong>Giới tính :</strong>
               <p>{{member.gender}}</p>
             </div>
           </tab>
-          <tab heading="Contact">
+          <tab heading="Liên hệ">
             <div>
-              <strong>Phone :</strong>
+              <strong>Số điện thoại :</strong>
               <p>{{member.phone}}</p>
             </div>
             <div>
-              <strong>Address :</strong>
+              <strong>Địa chỉ :</strong>
               <p>{{member.address}}</p>
             </div>
           </tab>

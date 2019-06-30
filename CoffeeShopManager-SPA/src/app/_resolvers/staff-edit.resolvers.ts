@@ -17,7 +17,7 @@ export class StaffDetailResolver implements Resolve<Staff>{
     resolve(route: ActivatedRouteSnapshot) : Observable<Staff>{
         return this.staffService.getStaff(route.params['id']).pipe(
             catchError(error =>{
-                this.alertify.error('Problem retrieving data');
+                this.alertify.error('Lỗi lấy dữ liệu');
                 this.router.navigate(['/staff']);
                 return of(null); 
             })

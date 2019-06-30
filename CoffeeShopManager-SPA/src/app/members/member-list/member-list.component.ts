@@ -12,7 +12,7 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  genderList= ['Male', 'Female'];
+  genderList= ['Nam', 'Nữ'];
   model= {selectedName: '',
   selectedPhone: '',
   selecetedAddress: '',
@@ -126,7 +126,7 @@ resetFilter() {
 
 defaultPhoto(members) : Member[] {
   for(const interator of members){
-    if(interator.gender =='Female')
+    if(interator.gender =='Nữ')
       interator.photo = "https://www.leesaccountants.co.uk/sites/www.leesaccountants.co.uk/files/images/grey_silhouette_female.png?1516283889"
     else interator.photo = "https://moseschengo.com/wp-content/uploads/2015/03/avatar-male.jpg"
     console.log(interator.gender);

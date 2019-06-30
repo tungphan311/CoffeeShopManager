@@ -47,7 +47,7 @@ export class StaffEditComponent implements OnInit {
   }
   updateStaff(){
     this.staffService.updateStaff(this.staff).subscribe(next => {
-    this.alertify.success('Profile updated successfully');
+    this.alertify.success('Thông tin cập nhật thành công');
     this.editForm.reset(this.staff);
     this.reload();
     },error =>{

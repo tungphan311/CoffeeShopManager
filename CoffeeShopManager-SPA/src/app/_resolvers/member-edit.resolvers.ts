@@ -17,7 +17,7 @@ export class MemberEditResolver implements Resolve<Member>{
     resolve(route: ActivatedRouteSnapshot) : Observable<Member>{
         return this.memberService.getMember(route.params['id']).pipe(
             catchError(error =>{
-                this.alertify.error('Problem retrieving data');
+                this.alertify.error('Lỗi lấy dữ liệu');
                 this.router.navigate(['/member']);
                 return of(null); 
             })

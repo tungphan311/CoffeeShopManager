@@ -70,7 +70,7 @@ export class StaffDetailComponent implements OnInit {
   deleteClick(){
     this.staff.isDelete = true;
     this.staffService.updateStaff(this.staff).subscribe(next => {
-    this.alertify.success('Profile deleted successfully');
+    this.alertify.success('Xóa thành công');
     this.router.navigate(['/staff']);
     },error =>{
       this.alertify.error(error);

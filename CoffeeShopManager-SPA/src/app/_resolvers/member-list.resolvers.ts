@@ -19,7 +19,7 @@ export class MemberListResolver implements Resolve<Member[]>{
     resolve(route: ActivatedRouteSnapshot) : Observable<Member[]>{
         return this.memberService.getMembers(this.pageNumber, this.pageSize).pipe(
             catchError(error =>{
-                this.alertify.error('Problem retrieving data');
+                this.alertify.error('Lỗi lấy dữ liệu');
                 this.router.navigate(['/member']);
                 return of(null); 
             })
