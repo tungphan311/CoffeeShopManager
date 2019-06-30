@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TeamService } from 'src/app/_service/team.service';
 import { NgForm } from '@angular/forms';
 import { Team } from 'src/app/_models/Team';
+import { FileUploader } from 'ng2-file-upload';
+import { Photo } from 'src/app/_models/Photo';
 
 @Component({
   selector: 'app-staff-create',
@@ -15,6 +17,9 @@ import { Team } from 'src/app/_models/Team';
 export class StaffCreateComponent implements OnInit {
   @ViewChild('createForm') createForm :NgForm;
   @HostListener('window:beforeunload',['$event'])
+  uploader:FileUploader; 
+  hasBaseDropZoneOver = false;
+  currentMain: Photo;
   unloadNotification($event: any){
     if(this.createForm.valid){
       $event.returnValue = true;
@@ -42,6 +47,11 @@ export class StaffCreateComponent implements OnInit {
     });
     // console.log(this.teams);
   }
+
+  fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+
 
   defaultPhoto(staff): Staff{
     // this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png";

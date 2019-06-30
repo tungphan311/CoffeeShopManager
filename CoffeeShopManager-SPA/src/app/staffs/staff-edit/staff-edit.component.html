@@ -52,7 +52,8 @@
             <tab heading="Edit Photos">
               <app-photo-editor 
                 [staff]="staff"
-                [photos]="staff.photos"></app-photo-editor>
+                [photos]="staff.photos"
+                (getStaffPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
             </tab>
           </tabset>
         </div>
