@@ -13,7 +13,6 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_service/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { MerberListComponent } from './merber-list/merber-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorInterceptorProvider } from './_service/error.interceptor';
@@ -22,7 +21,6 @@ import { BillsComponent } from './CreateBill/bills/bills.component';
 import { ProductComponent } from './CreateBill/product/product.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
-import { MembersComponent } from './members/members.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
@@ -53,6 +51,15 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { MatSliderModule } from '@angular/material/slider';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberListResolver } from './_resolvers/member-list.resolvers';
+import { MemberEditResolver } from './_resolvers/member-edit.resolvers';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolvers';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberCreateComponent } from './members/member-create/member-create.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -66,7 +73,11 @@ export function tokenGetter() {
       NavComponent,
       HomeComponent,
       RegisterComponent,
-      MerberListComponent,
+      MemberListComponent,
+      MemberEditComponent,
+      MemberDetailComponent,
+      MemberCardComponent,
+      MemberCreateComponent,
       ListsComponent,
       LoginComponent,
       BillsComponent,
@@ -78,7 +89,6 @@ export function tokenGetter() {
       PhotoEditorComponent,
       ReceiptsComponent,
       PaymentsComponent,
-      MembersComponent,
       Product_reportComponent,
       Revenue_reportComponent,
       ProductComponent,
@@ -117,7 +127,7 @@ export function tokenGetter() {
       MatFormFieldModule,
       MatInputModule,
       MatButtonModule,
-      MatOptionModule, MatSelectModule, MatIconModule, GridModule,
+      MatOptionModule, MatSelectModule, MatIconModule, GridModule, MatSliderModule
    ],
    providers: [
       {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},
@@ -129,6 +139,9 @@ export function tokenGetter() {
       UserService,
       StaffService,
       ProductService,
+      MemberListResolver,
+      MemberEditResolver,
+      MemberDetailResolver,
       StaffDetailResolver,
       StaffListResolver,
       StaffEditResolver,

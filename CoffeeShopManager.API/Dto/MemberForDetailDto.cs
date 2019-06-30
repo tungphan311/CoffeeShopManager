@@ -5,13 +5,11 @@ using CoffeeShopManager.API.Models;
 
 namespace CoffeeShopManager.API.Dto
 {
-    public class StaffForDetailDto
+    public class MemberForDetailDto
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public int TeamId { get; set; }
 
         public string Gender { get; set; }
 
@@ -19,14 +17,10 @@ namespace CoffeeShopManager.API.Dto
 
         public string Phone { get; set; }
 
-        public string Email { get; set; }
-
         public string Address { get; set; }
-
-        public DateTime DateOfBirth { get; set; }
-
         public string Photo { get; set; }
 
-        public ICollection<PhotoForDetailDto> Photos { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

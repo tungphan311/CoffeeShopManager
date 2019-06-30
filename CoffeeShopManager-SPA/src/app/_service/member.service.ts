@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Staff } from '../_models/Staff';
+import { Member } from '../_models/Member';
 import { Team } from '../_models/Team';
 import { TeamService } from './team.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -19,9 +19,9 @@ const httpOptions = {
 @Injectable({
     providedIn: 'root'
   })
-  export class StaffService {
+  export class MemberService {
     baseUrl = environment.apiUrl;
-    staff: any;
+    member: any;
     // list
 
 
@@ -32,8 +32,8 @@ const httpOptions = {
       private _teamService: TeamService,
       ) { }
 
-    getStaffs(page?, itemsPerPage?): Observable<PaginatedResult<Staff[]>> {
-      const paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
+    getMembers(page?, itemsPerPage?): Observable<PaginatedResult<Member[]>> {
+      const paginatedResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
 
       let params = new HttpParams();
 
@@ -42,7 +42,7 @@ const httpOptions = {
         params = params.append('pageSize', itemsPerPage);
       }
 
-      return this.http.get<Staff[]>(this.baseUrl + 'staff/', { observe: 'response', params})
+      return this.http.get<Member[]>(this.baseUrl + 'member/', { observe: 'response', params})
         .pipe(
           map(response => {
             paginatedResult.result = response.body;
@@ -55,32 +55,29 @@ const httpOptions = {
         );
     }
 
-    getListStaff(staffParams?): Observable<PaginatedResult<Staff[]>> {
-      const paginatedResult: PaginatedResult<Staff []> = new PaginatedResult<Staff[]>();
+    getListMember(memberParams?): Observable<PaginatedResult<Member[]>> {
+      const paginatedResult: PaginatedResult<Member []> = new PaginatedResult<Member[]>();
 
       let params = new HttpParams();
 
 
-      if (staffParams.name !== '') {
-        params = params.append('name', staffParams.name);
+      if (memberParams.name !== '') {
+        params = params.append('name', memberParams.name);
       }
-      if (staffParams.phone !== '') {
-        params = params.append('phone', staffParams.phone);
+      if (memberParams.phone !== '') {
+        params = params.append('phone', memberParams.phone);
       }
-      if (staffParams.address !== '') {
-        params = params.append('address', staffParams.address);
+      if (memberParams.address !== '') {
+        params = params.append('address', memberParams.address);
       }
-      if (staffParams.gender !== '') {
-        params = params.append('gender', staffParams.gender);
+      if (memberParams.gender !== '') {
+        params = params.append('gender', memberParams.gender);
       }
-      if (staffParams.email !== '') {
-        params = params.append('email', staffParams.email);
-      }
-      // if (staffParams.age !== '') {
-      //   params = params.append('age', staffParams.age);
+      // if (memberParams.age !== '') {
+      //   params = params.append('age', memberParams.age);
       // }
 
-      return this.http.get<Staff[]>(this.baseUrl + 'staff', { observe: 'response', params })
+      return this.http.get<Member[]>(this.baseUrl + 'member', { observe: 'response', params })
         .pipe(
           map(response => {
             paginatedResult.result = response.body;
@@ -93,24 +90,24 @@ const httpOptions = {
           })
         );
     }
-    getStaff(id): Observable<Staff> {
-      return this.http.get<Staff>(this.baseUrl + 'staff/' + id);
+    getMember(id): Observable<Member> {
+      return this.http.get<Member>(this.baseUrl + 'member/' + id);
     }
-    updateStaff(staff: Staff) {
-      return this.http.put(this.baseUrl + 'staff/' + staff.id, staff);
+    updateMember(member: Member) {
+      return this.http.put(this.baseUrl + 'member/' + member.id, member);
     }
-    createStaffClick(): Observable<Staff> {
-      return this.http.get<Staff>(this.baseUrl + 'staff/' );
+    createMemberClick(): Observable<Member> {
+      return this.http.get<Member>(this.baseUrl + 'member/' );
     }
-    create(staff: Staff) {
-      return this.http.post(this.baseUrl + 'staff/create/', staff);
+    create(member: Member) {
+      return this.http.post(this.baseUrl + 'member/create/', member);
     }
-    setMainPhoto(staffId: number, id: number) {
-      return this.http.post(this.baseUrl + 'staff/' + staffId + '/photo/' + id + '/setMain', {});
+    setMainPhoto(memberId: number, id: number) {
+      return this.http.post(this.baseUrl + 'member/' + memberId + '/photo/' + id + '/setMain', {});
     }
 
-    getAllEmployees(): Observable<Staff[]> {
-      return this.http.get<Staff[]>(this.baseUrl + 'staff/all');
+    getAllMembers(): Observable<Member[]> {
+      return this.http.get<Member[]>(this.baseUrl + 'member/all');
     }
   }
 

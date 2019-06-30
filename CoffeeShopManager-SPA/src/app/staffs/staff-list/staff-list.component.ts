@@ -13,11 +13,13 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
+    genderList= ['Male', 'Female'];
     model= {selectedName: '',
     selectedPhone: '',
     selecetedAddress: '',
     selectedGender: '',
-    selectedAge: ''};
+    selectedAge: '',
+    selectedEmail: ''};
     selectedOption: Staff[];
     staffs: Staff[];
     // staffsForFilter: Staff[];
@@ -50,9 +52,14 @@ export class StaffListComponent implements OnInit {
     this.staffs = this.staffs.filter(x => x.address === this.selectedOption['address']);
   }
 
-  onSelectGender(event: TypeaheadMatch): void {
+  onSelectEmail(event: TypeaheadMatch): void {
     this.selectedOption = event.item;
-    this.staffs = this.staffs.filter(x => x.gender === this.selectedOption['gender']);
+    this.staffs = this.staffs.filter(x => x.email === this.selectedOption['email']);
+  }
+
+  onSelectGender(gender): void {
+    this.model.selectedGender = gender;
+    this.staffs = this.staffs.filter(x => x.gender = this.selectedOption['gender']);
   }
 
   // onSelectAge(event: TypeaheadMatch): void {
@@ -75,11 +82,24 @@ export class StaffListComponent implements OnInit {
     return true;
   }
 
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    // if (value >= 1000) {
+    //   return Math.round(value);
+    // }
+
+    return value;
+  }
+
   applyFilter() {
     let staffParams: any = {};
     staffParams.name = this.model.selectedName;
     staffParams.phone = this.model.selectedPhone;
     staffParams.address = this.model.selecetedAddress;
+    staffParams.email = this.model.selectedEmail;
     staffParams.gender = this.model.selectedGender;
     // staffParams.age = this.model.selectedAge;
     this.staffService.getListStaff(staffParams).subscribe(result => {
@@ -100,7 +120,7 @@ export class StaffListComponent implements OnInit {
 
 
   resetFilter() {
-    this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = '';
+    this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = this.model.selectedGender = this.model.selectedEmail = '';
     this.applyFilter();
   }
 

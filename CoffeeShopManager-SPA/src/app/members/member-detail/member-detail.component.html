@@ -1,16 +1,16 @@
 <div class="container mt-4">
   <div class="row-title text-center mb-1" style="padding-top: 6%;font-weight: bold">
-        <h1>{{staff.name}}'s Profile</h1>
+        <h1>{{member.name}}'s Profile</h1>
   </div>
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{staff.photo}}" alt="{{staff.name}}">
+        <img class="card-img-top img-thumbnail" src="{{member.photo}}" alt="{{member.name}}">
         <div class="card-body">
           <div class="card-footer">
             <div class="btn-group d-flex">
               <button class="btn btn-primary w-100"
-              [routerLink]="['/staff/edit/', staff.id ]">Edit</button>
+              [routerLink]="['/member/edit/',member.id]">Edit</button>
               <button class="btn btn-success w-100"
               (click)=deleteClick()>Delete</button>
             </div>
@@ -24,33 +24,26 @@
           <tab heading="About" id="tab1">   
             <div>
               <strong>Date Of Birth :</strong>
-              <p>{{loadDate(staff)}}</p>
+              <p>{{loadDate(member)}}</p>
             </div>
             <div>
               <strong>Age :</strong>
-              <p>{{staff.age}}</p>
+              <p>{{member.age}}</p>
             </div>
             <div>
               <strong>Gender :</strong>
-              <p>{{staff.gender}}</p>
+              <p>{{member.gender}}</p>
             </div>
           </tab>
           <tab heading="Contact">
             <div>
               <strong>Phone :</strong>
-              <p>{{staff.phone}}</p>
-            </div>
-            <div>
-              <strong>Email :</strong>
-              <p>{{staff.email}}</p>
+              <p>{{member.phone}}</p>
             </div>
             <div>
               <strong>Address :</strong>
-              <p>{{staff.address}}</p>
+              <p>{{member.address}}</p>
             </div>
-          </tab>
-          <tab heading="Photos">
-              <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </tab>
         </tabset>
       </div>

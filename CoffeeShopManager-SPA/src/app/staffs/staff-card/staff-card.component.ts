@@ -13,6 +13,7 @@ import { StaffService } from 'src/app/_service/staff.service';
 export class StaffCardComponent implements OnInit {
   @Input() staff: Staff;
   teamlist = [];
+  
 
   // tslint:disable-next-line:typedef-whitespace
   // tslint:disable-next-line:variable-name
@@ -39,11 +40,10 @@ export class StaffCardComponent implements OnInit {
   deleteClick(){
     this.staff.isDelete = true;
     this.staffService.updateStaff(this.staff).subscribe(next => {
-    this.alertify.success('Profile updated successfully');
-    //this.reload();
+    this.alertify.success('Profile deleted successfully');
+    this.reload();
     },error =>{
       this.alertify.error(error);
-      console.log(this.staff);
     })
   }
   defaultPhoto():void {

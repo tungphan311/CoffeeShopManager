@@ -1,11 +1,11 @@
-<button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-top: 1in; margin-left: 45%">Add Staff</button>
+<button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-top: 1in; margin-left: 45%">Add Member</button>
 
 <div class="container mt-3 ">
 
     <ul class="list-inline">       
         <li class="list-inline-item">
             <input [(ngModel)]="model.selectedName"
-            [typeahead]="staffs"
+            [typeahead]="members"
             typeaheadOptionField="name"
             (typeaheadOnSelect)="onSelectName($event)"         
             class="form-control"
@@ -14,7 +14,7 @@
         </li>
         <li class="list-inline-item">
             <input [(ngModel)]="model.selectedPhone"
-            [typeahead]="staffs"
+            [typeahead]="members"
             typeaheadOptionField="phone"
             (typeaheadOnSelect)="onSelectPhone($event)"
             class="form-control"
@@ -23,7 +23,7 @@
         </li>
         <li class="list-inline-item">
             <input [(ngModel)]="model.selecetedAddress"
-            [typeahead]="staffs"
+            [typeahead]="members"
             typeaheadOptionField="address"
             (typeaheadOnSelect)="onSelectAddress($event)"
             class="form-control"
@@ -41,15 +41,7 @@
     
 
     <ul class="list-inline">
-        <li class="list-inline-item">
-            <input [(ngModel)]="model.selectedEmail"
-            [typeahead]="staffs"
-            typeaheadOptionField="email"
-            (typeaheadOnSelect)="onSelectEmail($event)"         
-            class="form-control"
-            placeholder="Email"
-            (keypress)="onChange()">
-        </li> 
+        
         <li class="list-inline-item">
             <select class="form-control" (change)="onSelectGender($event.target.value)">
                 <option value="all">--Gender--</option>
@@ -67,11 +59,11 @@
         </li>
     </ul>
 
-    <h3 class="text-center text-primary">Staff List</h3>
+    <h3 class="text-center text-primary">Member List</h3>
     
     <div class="row">
-        <div *ngFor="let staff of staffs" class="col-1-5">
-            <app-staff-card [staff]="staff"></app-staff-card>
+        <div *ngFor="let member of members" class="col-1-5">
+            <app-member-card [member]="member"></app-member-card>
         </div>
     </div>
 </div>

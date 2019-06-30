@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Staff } from 'src/app/_models/Staff';
 import { StaffService } from 'src/app/_service/staff.service';
 import { AlertifyService } from 'src/app/_service/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
@@ -16,6 +16,7 @@ export class StaffDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[]; 
   galleryImages : NgxGalleryImage[];
   constructor(
+    private router: Router,
     private staffService: StaffService, 
     private alertify: AlertifyService, 
     private route : ActivatedRoute) { }
@@ -41,6 +42,19 @@ export class StaffDetailComponent implements OnInit {
     console.log(this.galleryImages);
   }
 
+  loadDate(staff): string{
+    var dateString = '';
+    let date = new Date(this.staff.dateOfBirth);
+
+    // console.log(this.staff.dateOfBirth);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    
+    dateString = day +'/'+ month +'/' + year;
+    return dateString;
+  }
+
   getImages(){
     const imageUrls =[];
     for(let i=0;i<this.staff.photos.length;i++){
@@ -53,12 +67,14 @@ export class StaffDetailComponent implements OnInit {
     }
     return imageUrls;
   }
-
-  loadDate(staff): string{
-    var dateString = '';
-    dateString = this.staff.dateOfBirth.toString();
-    dateString = dateString.slice(0,10);
-    return dateString;
+  deleteClick(){
+    this.staff.isDelete = true;
+    this.staffService.updateStaff(this.staff).subscribe(next => {
+    this.alertify.success('Profile deleted successfully');
+    this.router.navigate(['/staff']);
+    },error =>{
+      this.alertify.error(error);
+    })
   }
 
 

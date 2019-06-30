@@ -1,18 +1,17 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { Staff } from 'src/app/_models/Staff';
-import { StaffService } from 'src/app/_service/staff.service';
-import { AlertifyService } from 'src/app/_service/alertify.service';
+import { NgForm } from '@angular/forms';
+import { Member } from 'src/app/_models/Member';
+import { MemberService } from 'src/app/_service/member.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgForm, FormControl } from '@angular/forms';
+import { AlertifyService } from 'src/app/_service/alertify.service';
 import { MatDatepickerInputEvent } from '@angular/material';
 
- 
 @Component({
-  selector: 'app-staff-edit',
-  templateUrl: './staff-edit.component.html',
-  styleUrls: ['./staff-edit.component.css']
+  selector: 'app-member-edit',
+  templateUrl: './member-edit.component.html',
+  styleUrls: ['./member-edit.component.css']
 })
-export class StaffEditComponent implements OnInit {
+export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm :NgForm;
   @HostListener('window:beforeunload',['$event'])
   unloadNotification($event: any){
@@ -21,34 +20,34 @@ export class StaffEditComponent implements OnInit {
     }
   }
   events: string[] = [];
-  staff: Staff;
-  staffGender = '';
+  member: Member;
+  memberGender = '';
   genderlist = ['Male','Female','Other'] ;
   constructor(
-    private staffService: StaffService, 
+    private memberService: MemberService, 
     private alertify: AlertifyService, 
     private route : ActivatedRoute) { }
   ngOnInit() {
     this.route.data.subscribe(data =>{
-      this.staff = data['staff'];
-      this.defaultPhoto(this.staff);
+      this.member = data['member'];
+      this.defaultPhoto(this.member);
     });
   }
 
-  defaultPhoto(staff) : Staff {
-    if(this.staff.photo===""||this.staff.photo ===null){
-      this.staff.photo = "https://makitweb.com/demo/broken_image/images/noimage.png"
-    }
-    return staff;
+  defaultPhoto(member) : Member {
+    if(this.member.gender==='Female')
+      this.member.photo = "https://www.leesaccountants.co.uk/sites/www.leesaccountants.co.uk/files/images/grey_silhouette_female.png?1516283889";
+    else this.member.photo = "https://moseschengo.com/wp-content/uploads/2015/03/avatar-male.jpg"
+    return member;
   }
 
   reload(){
     location.reload();
   }
-  updateStaff(){
-    this.staffService.updateStaff(this.staff).subscribe(next => {
+  updateMember(){
+    this.memberService.updateMember(this.member).subscribe(next => {
     this.alertify.success('Profile updated successfully');
-    this.editForm.reset(this.staff);
+    this.editForm.reset(this.member);
     this.reload();
     },error =>{
       this.alertify.error(error);
@@ -58,7 +57,7 @@ export class StaffEditComponent implements OnInit {
 
   getGender(input, output): boolean {
     if (input === output) {
-      this.staffGender = output;
+      this.memberGender = output;
       return true;
     }
 
@@ -66,15 +65,12 @@ export class StaffEditComponent implements OnInit {
   }
 
   changeGender(gender) {
-    this.staff.gender = gender;
-    console.log(this.staff.gender);
+    this.member.gender = gender;
   }
-  updateMainPhoto(photoUrl) {
-    this.staff.photo = photoUrl;
-  }
-  loadDate(staff): string{
+
+  loadDate(member): string{
     var dateString = '';
-    let date = new Date(this.staff.dateOfBirth);
+    let date = new Date(this.member.dateOfBirth);
 
     // console.log(this.staff.dateOfBirth);
     var day = date.getDate();
@@ -87,6 +83,6 @@ export class StaffEditComponent implements OnInit {
   
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events.push(`${type}: ${event.value}`);
-    this.staff.dateOfBirth = event.value;
+    this.member.dateOfBirth = event.value;
   }
 }
