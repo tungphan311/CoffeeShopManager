@@ -28,7 +28,5 @@ namespace CoffeeShopManager.API.Dto
         public string Photo { get; set; }
 
         public ICollection<PhotoForDetailDto> Photos { get; set; }
-
-        public Team Team { get; set; }
     }
 }

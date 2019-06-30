@@ -41,6 +41,19 @@ export class StaffDetailComponent implements OnInit {
     console.log(this.galleryImages);
   }
 
+  loadDate(staff): string{
+    var dateString = '';
+    let date = new Date(this.staff.dateOfBirth);
+
+    // console.log(this.staff.dateOfBirth);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    
+    dateString = day +'/'+ month +'/' + year;
+    return dateString;
+  }
+
   getImages(){
     const imageUrls =[];
     for(let i=0;i<this.staff.photos.length;i++){
@@ -54,12 +67,6 @@ export class StaffDetailComponent implements OnInit {
     return imageUrls;
   }
 
-  loadDate(staff): string{
-    var dateString = '';
-    dateString = this.staff.dateOfBirth.toString();
-    dateString = dateString.slice(0,10);
-    return dateString;
-  }
 
 
 

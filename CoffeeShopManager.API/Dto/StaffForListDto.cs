@@ -19,13 +19,14 @@ namespace CoffeeShopManager.API.Dto
         public string Address {get;set;}
 
         public int Age { get; set; }
+        
         public bool IsDelete { get; set; }
 
         public string DateOfBirth {get;set;}
 
         //public string Phone { get; set; }
 
-        //public string Email { get; set; }
+        public string Email { get; set; }
 
         //public string Address { get; set; }
 

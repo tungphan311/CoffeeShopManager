@@ -41,10 +41,9 @@ export class StaffCardComponent implements OnInit {
     this.staff.isDelete = true;
     this.staffService.updateStaff(this.staff).subscribe(next => {
     this.alertify.success('Profile updated successfully');
-    //this.reload();
+    this.reload();
     },error =>{
       this.alertify.error(error);
-      console.log(this.staff);
     })
   }
   defaultPhoto():void {

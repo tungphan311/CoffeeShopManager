@@ -1,3 +1,18 @@
-<p>
-  member-card works!
-</p>
+<div class="card mb-4">
+  <div class="card-img-wrapper">
+    <img class="card-img-top" src="{{member.photo}}" alt="{{member.name}}">
+    <ul class="list-inline member-icons animate text-center">
+      <li class="list-inline-item"><button class="btn btn-primary" [routerLink]="['/member/', member.id]"><i class="fa fa-eye"></i></button></li>
+      <li class="list-inline-item"><button class="btn btn-primary"
+        [routerLink]="['/member/edit/', member.id ]"><i class="fa fa-edit"></i></button></li>
+      <li class="list-inline-item"><button class="btn btn-primary"
+        (click)=deleteClick()><i class="fa fa-times-rectangle"></i></button></li>
+    </ul>
+  </div>
+  <div class="card-body p-1">
+    <h6 class = "card-title text-center mb-1"><i class="fa fa-staff"></i>
+      {{member.name}} , {{member.age}}
+    </h6>
+    <p class = "card-text text-muted text-center">{{member.dateOfBirth}}</p>
+  </div>
+</div>

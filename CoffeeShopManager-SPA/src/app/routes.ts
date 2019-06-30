@@ -25,6 +25,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolvers';
 import { MemberCreateComponent } from './members/member-create/member-create.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolvers';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -49,9 +50,9 @@ export const appRoutes: Routes = [
             { path: 'member', component: MemberListComponent,
                 resolve : { members: MemberListResolver}},
             { path: 'member/:id', component: MemberDetailComponent,
-                resolve : { staff: StaffDetailResolver }},
+                resolve : { member: MemberDetailResolver }},
             { path: 'member/edit/:id', component: MemberEditComponent,
-                resolve : { staff: MemberEditResolver }, canDeactivate: [PreventUnsavedChanges]},
+                resolve : { member: MemberEditResolver }, canDeactivate: [PreventUnsavedChanges]},
             { path: 'add', component: MemberCreateComponent},
             { path: 'product_report', component: Product_reportComponent},
             { path: 'revenue_report', component: Revenue_reportComponent}

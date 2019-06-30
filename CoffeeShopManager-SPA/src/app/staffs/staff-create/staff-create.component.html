@@ -53,9 +53,14 @@
             </option>
           </select>
           <h4>Date Of Birth</h4>
-          <input type="date" 
-            [(ngModel)]="model.dateofbirth" [ngModelOptions]="{standalone: true}" required>
-          <h4>Phone Number</h4>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth"
+            (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
           <textarea name="Phone"  rows="1" class="form-control"
             [(ngModel)]="model.phone" required></textarea>
           <h4>Email</h4>

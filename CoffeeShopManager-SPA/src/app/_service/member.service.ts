@@ -21,7 +21,7 @@ const httpOptions = {
   })
   export class MemberService {
     baseUrl = environment.apiUrl;
-    staff: any;
+    member: any;
     // list
 
 
@@ -94,7 +94,7 @@ const httpOptions = {
       return this.http.get<Member>(this.baseUrl + 'member/' + id);
     }
     updateMember(member: Member) {
-      return this.http.put(this.baseUrl + 'member/' + member, member);
+      return this.http.put(this.baseUrl + 'member/' + member.id, member);
     }
     createMemberClick(): Observable<Member> {
       return this.http.get<Member>(this.baseUrl + 'member/' );

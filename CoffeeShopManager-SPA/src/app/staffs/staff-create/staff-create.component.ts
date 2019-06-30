@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { Team } from 'src/app/_models/Team';
 import { FileUploader } from 'ng2-file-upload';
 import { Photo } from 'src/app/_models/Photo';
+import { MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-staff-create',
@@ -31,6 +32,7 @@ export class StaffCreateComponent implements OnInit {
   staff: Staff;
   staffGender = '';
   genderlist = ['Male','Female','Other'] ;
+  events: string[] = [];
 
 
   constructor(
@@ -69,6 +71,10 @@ export class StaffCreateComponent implements OnInit {
     }
 
     return false;
+  }
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.events.push(`${type}: ${event.value}`);
+    this.model.dateOfBirth = event.value;
   }
 
   createStaff(){

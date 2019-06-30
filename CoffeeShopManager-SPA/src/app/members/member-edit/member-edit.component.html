@@ -1,3 +1,59 @@
-<p>
-  member-edit works!
-</p>
+<div class="container mt-4">
+  <div class="row-title text-center mb-1" style="padding-top: 6%;font-weight: bold">
+      <h1>{{member.name}}'s Profile</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{member.photo}}" alt="{{member.name}}">
+        <div class="card-body">
+          <div class="card-footer">
+            <div class="btn-group d-flex">
+              <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block w-200">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Edit Profile" id="tab1">
+            <form #editForm = "ngForm" id="editForm" (ngSubmit)="updateMember()">
+              <h4>Name</h4>
+              <textarea name="Name"  rows="1" class="form-control"
+                [(ngModel)]="member.name" required></textarea>
+              <h4>Gender</h4>
+              <select (change)="changeGender($event.target.value)" required>
+                <option *ngFor="let gender of genderlist" value="{{gender}}" 
+                  [selected]="getGender(member.gender, gender)">
+                  {{gender}}
+                </option>
+              </select>
+              <!-- <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option *ngFor="let gender of genderlist" value="{{gender}}">
+                  {{gender}}
+                </option>
+              </select> -->
+              <h4>Date Of Birth</h4>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="{{loadDate(member)}}"
+                (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <h4>Phone Number</h4>
+              <textarea name="Phone"  rows="1" class="form-control"
+                [(ngModel)]="member.phone" required></textarea>
+              <h4>Address</h4>
+              <textarea name="Adddress"  rows="1" class="form-control"
+                [(ngModel)]="member.address" required></textarea>
+            </form>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
