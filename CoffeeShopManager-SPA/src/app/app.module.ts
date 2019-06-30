@@ -22,7 +22,6 @@ import { BillsComponent } from './CreateBill/bills/bills.component';
 import { ProductComponent } from './CreateBill/product/product.component';
 import { ReceiptsComponent } from './receipts/receipts.component';
 import { PaymentsComponent } from './payments/payments.component';
-import { MembersComponent } from './members/members.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guard/auth.guard';
 import { Product_reportComponent } from './product_report/product_report.component';
@@ -53,6 +52,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { PhotoEditorComponent } from './staffs/photo-editor/photo-editor.component';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { MatSliderModule } from '@angular/material/slider';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -78,7 +78,6 @@ export function tokenGetter() {
       PhotoEditorComponent,
       ReceiptsComponent,
       PaymentsComponent,
-      MembersComponent,
       Product_reportComponent,
       Revenue_reportComponent,
       ProductComponent,
@@ -117,7 +116,7 @@ export function tokenGetter() {
       MatFormFieldModule,
       MatInputModule,
       MatButtonModule,
-      MatOptionModule, MatSelectModule, MatIconModule, GridModule,
+      MatOptionModule, MatSelectModule, MatIconModule, GridModule, MatSliderModule
    ],
    providers: [
       {provide: MAT_DATE_LOCALE, useValue: 'vi-VN'},

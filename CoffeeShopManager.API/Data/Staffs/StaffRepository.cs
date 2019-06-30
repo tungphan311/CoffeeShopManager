@@ -57,7 +57,12 @@ namespace CoffeeShopManager.API.Data.Staffs
 
             if (employeeParams.Gender != null) 
             {
-                employees = employees.Where(e => e.Gender.ToLower().Contains(employeeParams.Gender));
+                employees = employees.Where(e => e.Gender.Contains(employeeParams.Gender));
+            }
+
+            if (employeeParams.Email != null) 
+            {
+                employees = employees.Where(e => e.Email.ToLower().Contains(employeeParams.Email));
             }
 
             // if (employeeParams.Age != null) {

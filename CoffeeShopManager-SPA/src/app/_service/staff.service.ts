@@ -73,6 +73,9 @@ const httpOptions = {
       if (staffParams.gender !== '') {
         params = params.append('gender', staffParams.gender);
       }
+      if (staffParams.email !== '') {
+        params = params.append('email', staffParams.email);
+      }
       // if (staffParams.age !== '') {
       //   params = params.append('age', staffParams.age);
       // }
