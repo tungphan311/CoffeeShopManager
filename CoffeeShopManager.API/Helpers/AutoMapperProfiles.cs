@@ -20,6 +20,16 @@ namespace CoffeeShopManager.API.Helpers
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
 
+            CreateMap<Member, MemberForListDto>()
+                .ForMember(dest => dest.Age, opt =>{
+                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+                });
+            CreateMap<Member, MemberForDetailDto>()
+                .ForMember(dest => dest.Age, opt =>{
+                    opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
+                });
+
+
             // CreateMap<Employee, StaffForFilterDto>()
             //     .ForMember(dest => dest.Age, opt =>{
             //         opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());

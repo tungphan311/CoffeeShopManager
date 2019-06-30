@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class MemberListResolver implements Resolve<Member[]>{
     pageNumber = 1;
     pageSize = 10;
-    staffs : Member[];
+    members : Member[];
 
     constructor(
         private memberService: MemberService, 
@@ -20,7 +20,7 @@ export class MemberListResolver implements Resolve<Member[]>{
         return this.memberService.getMembers(this.pageNumber, this.pageSize).pipe(
             catchError(error =>{
                 this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/staff']);
+                this.router.navigate(['/member']);
                 return of(null); 
             })
         )

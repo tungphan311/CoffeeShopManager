@@ -1,0 +1,87 @@
+<button class="btn btn-primary" (click)="toCreatePage()" style="width: 200px;height: 50px;margin-top: 1in; margin-left: 45%">Add Staff</button>
+
+<div class="container mt-3 ">
+
+    <ul class="list-inline">       
+        <li class="list-inline-item">
+            <input [(ngModel)]="model.selectedName"
+            [typeahead]="members"
+            typeaheadOptionField="name"
+            (typeaheadOnSelect)="onSelectName($event)"         
+            class="form-control"
+            placeholder="Name"
+            (keypress)="onChange()">
+        </li>
+        <li class="list-inline-item">
+            <input [(ngModel)]="model.selectedPhone"
+            [typeahead]="members"
+            typeaheadOptionField="phone"
+            (typeaheadOnSelect)="onSelectPhone($event)"
+            class="form-control"
+            placeholder="Phone"
+            (keypress)="onChange()">
+        </li>
+        <li class="list-inline-item">
+            <input [(ngModel)]="model.selecetedAddress"
+            [typeahead]="members"
+            typeaheadOptionField="address"
+            (typeaheadOnSelect)="onSelectAddress($event)"
+            class="form-control"
+            placeholder="Address"
+            (keypress)="onChange()">
+        </li>
+        <li class="list-inline-item">
+            <button class="btn btn-outline-success" (click)="applyFilter()">Search</button>
+        </li>
+        <li class="list-inline-item">
+            <button class="btn btn-outline-danger" (click)="resetFilter()">Reset</button>
+        </li>
+    </ul>
+
+    
+
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <input [(ngModel)]="model.selectedEmail"
+            [typeahead]="members"
+            typeaheadOptionField="email"
+            (typeaheadOnSelect)="onSelectEmail($event)"         
+            class="form-control"
+            placeholder="Email"
+            (keypress)="onChange()">
+        </li> 
+        <li class="list-inline-item">
+            <select class="form-control" (change)="onSelectGender($event.target.value)">
+                <option value="all">--Gender--</option>
+                <option *ngFor="let gender of genderList" value="{{gender}}" 
+                  [selected]="model.selectedGender === gender">{{gender}}</option>
+            </select>
+        </li>
+        <li class="list-inline-item">
+            <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1000"
+            min="1"
+            max="100"></mat-slider>
+        </li>
+    </ul>
+
+    <h3 class="text-center text-primary">Staff List</h3>
+    
+    <div class="row">
+        <div *ngFor="let member of members" class="col-1-5">
+            <!-- <app-member-card [member]="member"></app-member-card> -->
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true" 
+                [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+</div>

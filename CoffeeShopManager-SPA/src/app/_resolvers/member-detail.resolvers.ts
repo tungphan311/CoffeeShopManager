@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class MemberEditResolver implements Resolve<Member>{
+export class MemberDetailResolver implements Resolve<Member>{
     constructor(
         private memberService: MemberService, 
         private router :Router, 

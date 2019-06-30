@@ -8,6 +8,7 @@ export interface Member {
     gender: string;
     phone: string;
     address: string;
+    isDelete: boolean;
     dateOfBirth: Date;
     createdDate: Date;
     photos?: Photo[];
