@@ -66,7 +66,7 @@ export class StaffDetailComponent implements OnInit {
     }
     return imageUrls;
   }
-
+  
 
 
 
