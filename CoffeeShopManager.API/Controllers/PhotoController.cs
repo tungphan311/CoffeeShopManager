@@ -103,7 +103,6 @@ namespace CoffeeShopManager.API.Controllers
                 return BadRequest("This is already the main photo");
             var currenMainPhoto = await _repo.GetMainPhotoForEmployee(staffId);
             currenMainPhoto.IsMain = false;
-
             photoFromRepo.IsMain = true;
             staff.Photo = photoFromRepo.Url;
             if (await _repo.SaveAll())
