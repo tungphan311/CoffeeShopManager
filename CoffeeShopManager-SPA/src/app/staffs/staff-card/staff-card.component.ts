@@ -13,6 +13,7 @@ import { StaffService } from 'src/app/_service/staff.service';
 export class StaffCardComponent implements OnInit {
   @Input() staff: Staff;
   teamlist = [];
+  
 
   // tslint:disable-next-line:typedef-whitespace
   // tslint:disable-next-line:variable-name

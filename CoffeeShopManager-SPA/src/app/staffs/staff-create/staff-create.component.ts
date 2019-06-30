@@ -45,7 +45,11 @@ export class StaffCreateComponent implements OnInit {
       this.teams = result;
       console.log(this.teams);
     });
+    this.initializeUploader();
     // console.log(this.teams);
+  }
+  initializeUploader() {
+    this.uploader = new FileUploader({});
   }
 
   fileOverBase(e:any):void {
