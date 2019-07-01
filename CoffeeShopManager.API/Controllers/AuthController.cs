@@ -62,7 +62,7 @@ namespace CoffeeShopManager.API.Controllers
                 new Claim(ClaimTypes.Name, userFromRepo.Username),
                 new Claim(ClaimTypes.Actor, userFromRepo.AccessCode),
                 new Claim(ClaimTypes.GivenName, userFromRepo.StaffId.ToString()),
-                new Claim(ClaimTypes.Surname, staff.Name)
+               // new Claim(ClaimTypes.Surname, staff.Name)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
