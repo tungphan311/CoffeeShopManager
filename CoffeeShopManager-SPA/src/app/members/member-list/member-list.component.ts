@@ -108,7 +108,7 @@ applyFilter() {
 }
 
 onChange() {
-  console.log('Change');
+
   this.getMembers();
 }
 

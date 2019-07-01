@@ -110,7 +110,7 @@ const httpOptions = {
     }
 
     getAllEmployees(): Observable<Staff[]> {
-      return this.http.get<Staff[]>(this.baseUrl + 'staff/all');
+      return this.http.get<Staff[]>(this.baseUrl + 'staff/');
     }
   }
 

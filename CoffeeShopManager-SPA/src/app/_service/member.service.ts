@@ -107,7 +107,7 @@ const httpOptions = {
     }
 
     getAllMembers(): Observable<Member[]> {
-      return this.http.get<Member[]>(this.baseUrl + 'member/all');
+      return this.http.get<Member[]>(this.baseUrl + 'member/');
     }
   }
 

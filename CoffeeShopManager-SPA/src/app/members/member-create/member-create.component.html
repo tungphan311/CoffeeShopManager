@@ -6,17 +6,17 @@
     <div class="center">
       <form #createForm = "ngForm" id="createForm" (ngSubmit)="createStaff()" >
           <h4>Tên</h4>
-          <input name="Name" class="form-control"
+          <input name="Name" class="form-control" required
             [(ngModel)]="model.name" required>
           <h4>Giới tính</h4>
-          <select [(ngModel)]="model.gender" [ngModelOptions]="{standalone: true}" class="form-control">
+          <select [(ngModel)]="model.gender" [ngModelOptions]="{standalone: true}"  required class="form-control">
             <option *ngFor="let gender of genderlist" value="{{gender}}">
               {{gender}}
             </option>
           </select>
           <h4>Ngày sinh</h4>
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Ngày tháng năm"
+            <input matInput [matDatepicker]="picker" required placeholder="Ngày tháng năm"
             (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
             <mat-datepicker-toggle matSuffix [for]="picker">
               <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
@@ -24,11 +24,11 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <h4>Số điện thoại</h4>
-          <textarea name="Phone"  rows="1" class="form-control"
-            [(ngModel)]="model.phone" required></textarea>
+          <input name="Phone"  rows="1" class="form-control"
+            [(ngModel)]="model.phone" required>
           <h4>Địa chỉ</h4>
-          <textarea name="Adddress"  rows="1" class="form-control"
-            [(ngModel)]="model.address" required></textarea>
+          <input name="Adddress"  rows="1" class="form-control"
+            [(ngModel)]="model.address" required>
       </form>
     </div>
   </div>

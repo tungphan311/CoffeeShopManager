@@ -53,7 +53,8 @@ export const appRoutes: Routes = [
                 resolve : { member: MemberDetailResolver }},
             { path: 'member/edit/:id', component: MemberEditComponent,
                 resolve : { member: MemberEditResolver }, canDeactivate: [PreventUnsavedChanges]},
-            { path: 'add', component: MemberCreateComponent},
+            { path: 'add', component: MemberCreateComponent,
+                resolve : { members: MemberListResolver}},
             { path: 'product_report', component: Product_reportComponent},
             { path: 'revenue_report', component: Revenue_reportComponent}
         ]

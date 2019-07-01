@@ -26,6 +26,7 @@ export class StaffCreateComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  staffs : Staff[];
   team : Team;
   teams : Team[];
   model: any={};
@@ -33,7 +34,8 @@ export class StaffCreateComponent implements OnInit {
   staffGender = '';
   genderlist = ['Nam','Nữ','Khác'] ;
   events: string[] = [];
-
+  regEmail = new RegExp(/^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/gm);
+  regExp = new RegExp(/[0]+(86|32|33|34|35|36|37|38|39|70|76|78|79|77|81|82|83|85|84|56|59|58|97|96|98|90|93|89|88|91|94|92)([0-9]{7})\b/g);
 
   constructor(
     private router: Router,
@@ -46,17 +48,53 @@ export class StaffCreateComponent implements OnInit {
     // this.defaultPhoto(this.staff);
     this._teamService.getTeams().subscribe(result => {
       this.teams = result;
-      console.log(this.teams);
     });
-    this.initializeUploader();
-    // console.log(this.teams);
+    this.getStaffs();
   }
   initializeUploader() {
     this.uploader = new FileUploader({});
   }
+  getStaffs() {
+    this.staffService.getAllEmployees().subscribe(data =>{
+      this.staffs = data;
+    });
+  }
 
   fileOverBase(e:any):void {
     this.hasBaseDropZoneOver = e;
+  }
+  createTime(): Date{   
+    var today = new Date();
+    return today;
+  }
+
+  check(model:any, staffs: Staff[]): boolean{
+    if(model.dateOfBirth>=this.createTime()){
+      this.alertify.error('Ngày sinh không hợp lệ')
+      return false;
+    }
+    if(!model.phone.match(this.regExp)) {
+      this.alertify.error('Số điện thoại không hợp lệ')
+      return false;
+    }
+    for(const iterator of staffs){
+      if(iterator.phone === model.phone){
+        this.alertify.error('Số điện thoại đã được đăng ký')
+        return false; 
+      }
+    }
+    if(!model.email.match(this.regEmail)){
+      this.alertify.error('Email không hợp lệ')
+      return false;
+    }
+    for(const iterator of staffs){
+      if(iterator.email === model.email){
+        this.alertify.error('Email đã được đăng ký')
+        return false; 
+      }
+    }
+  
+    return true;
   }
 
 
@@ -79,12 +117,14 @@ export class StaffCreateComponent implements OnInit {
   }
 
   createStaff(){
-    this.staffService.create(this.model).subscribe(next => {
-      this.alertify.success('Thêm nhân viên thành công');
-    this.createForm.reset(this.model);
-    this.router.navigate(['/staff']);
-    },error =>{
-      this.alertify.error(error);
-    })
+    if(this.check(this.model, this.staffs)===true){
+      this.staffService.create(this.model).subscribe(next => {
+        this.alertify.success('Thêm nhân viên thành công');
+      this.createForm.reset(this.model);
+      this.router.navigate(['/staff']);
+      },error =>{
+        this.alertify.error(error);
+      })
+    }
   }
 }
