@@ -15,7 +15,7 @@ import { TeamService } from 'src/app/_service/team.service';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    genderList= ['Nam', 'Nữ'];
+    genderList= ['Male', 'Female'];
     teamIdList= [1, 2];
     model= {selectedName: '',
     selectedPhone: '',
@@ -164,6 +164,14 @@ export class StaffListComponent implements OnInit {
       return 'Quản lý';
     } else if (teamId === 2) {
       return 'Thu ngân';
+    } 
+  }
+
+  getGender(gender): string {
+    if (gender === 'Male') {
+      return 'Nam';
+    } else if (gender === 'Female') {
+      return 'Nữ';
     } 
   }
 }
