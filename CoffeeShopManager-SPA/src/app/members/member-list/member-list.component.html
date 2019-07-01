@@ -31,10 +31,10 @@
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
-            <button class="btn btn-outline-success" (click)="applyFilter()">Search</button>
+            <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
         </li>
         <li class="list-inline-item">
-            <button class="btn btn-outline-danger" (click)="resetFilter()">Reset</button>
+            <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
         </li>
     </ul>
 
@@ -44,7 +44,7 @@
         
         <li class="list-inline-item">
             <select class="form-control" (change)="onSelectGender($event.target.value)">
-                <option value="all">--Gender--</option>
+                <option value="all">--Chọn giới tính--</option>
                 <option *ngFor="let gender of genderList" value="{{gender}}" 
                   [selected]="model.selectedGender === gender">{{gender}}</option>
             </select>
