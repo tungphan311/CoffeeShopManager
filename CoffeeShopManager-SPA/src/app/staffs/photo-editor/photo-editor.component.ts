@@ -12,17 +12,17 @@ import { AlertifyService } from 'src/app/_service/alertify.service';
   styleUrls: ['./photo-editor.component.css']
 })
 export class PhotoEditorComponent implements OnInit {
-  @Input()photos : Photo[];
-  @Input()staff : Staff;
+  @Input()photos: Photo[];
+  @Input()staff: Staff;
   @Output() getStaffPhotoChange = new EventEmitter<string>();
-  uploader:FileUploader; 
+  uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment;
   currentMain: Photo;
 
   constructor(
-    private staffService :StaffService,
-    private alertify : AlertifyService
+    private staffService: StaffService,
+    private alertify: AlertifyService
   ) { }
 
   ngOnInit() {
@@ -31,21 +31,20 @@ export class PhotoEditorComponent implements OnInit {
     console.log(this.uploader);
   }
 
-  fileOverBase(e:any):void {
+  fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
 
-  
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: 'http://localhost:5000/api/staff/'+ this.staff.id +'/photo',
-      isHTML5:true,
+      url: 'http://localhost:5000/api/staff/' + this.staff.id + '/photo',
+      isHTML5: true,
       allowedFileType: ['image'],
       removeAfterUpload: true,
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024
-    })
-    this.uploader.onAfterAddingFile = (file) =>{file.withCredentials = false;}; 
+    });
+    this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Photo = JSON.parse(response);
@@ -60,15 +59,16 @@ export class PhotoEditorComponent implements OnInit {
       }
     };
   }
-  setMainPhoto(photo: Photo){
-    this.staffService.setMainPhoto(this.staff.id, photo.id).subscribe(()=>{
-      this.currentMain = this.photos.filter(p => p.isMain ===true)[0];
+
+  setMainPhoto(photo: Photo) {
+    this.staffService.setMainPhoto(this.staff.id, photo.id).subscribe(() => {
+      this.currentMain = this.photos.filter(p => p.isMain === true)[0];
       this.currentMain.isMain = false;
       photo.isMain = true;
       this.getStaffPhotoChange.emit(photo.url);
-    },error =>{
+    }, error => {
       this.alertify.error(error);
     });
   }
-  
+
 }

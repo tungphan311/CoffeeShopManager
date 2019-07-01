@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_service/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm, FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { iterator } from '@progress/kendo-angular-grid/dist/es2015/utils';
 
  
 @Component({
@@ -133,8 +134,11 @@ export class StaffEditComponent implements OnInit {
     }
     for(const iterator of staffs){
       if(iterator.phone === model.phone){
-        this.alertify.error('Số điện thoại đã được đăng ký')
-        return false; 
+        if(iterator.id != model.id){
+          this.alertify.error('Số điện thoại đã được đăng ký')
+          return false; 
+        }
+       
       }
     }
     if(!model.email.match(this.regEmail)){
@@ -143,8 +147,11 @@ export class StaffEditComponent implements OnInit {
     }
     for(const iterator of staffs){
       if(iterator.email === model.email){
-        this.alertify.error('Email đã được đăng ký')
-        return false; 
+        if(iterator.id!= model.id){
+          this.alertify.error('Email đã được đăng ký')
+          return false; 
+        }
+        
       }
     }
     
