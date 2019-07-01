@@ -105,12 +105,13 @@ const httpOptions = {
     create(staff: Staff) {
       return this.http.post(this.baseUrl + 'staff/create/', staff);
     }
+
     setMainPhoto(staffId: number, id: number) {
       return this.http.post(this.baseUrl + 'staff/' + staffId + '/photo/' + id + '/setMain', {});
     }
 
     getAllEmployees(): Observable<Staff[]> {
-      return this.http.get<Staff[]>(this.baseUrl + 'staff/all');
+      return this.http.get<Staff[]>(this.baseUrl + 'staff/');
     }
   }
 
