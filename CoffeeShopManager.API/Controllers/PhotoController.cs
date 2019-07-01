@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CloudinaryDotNet;
@@ -79,8 +80,8 @@ namespace CoffeeShopManager.API.Controllers
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            // if (!staffFromRepo.Photos.Any(u => u.IsMain))
-            //     photo.IsMain = true;
+            if (!staffFromRepo.Photos.Any(u => u.IsMain))
+                photo.IsMain = true;
 
             staffFromRepo.Photos.Add(photo);
 
@@ -96,17 +97,26 @@ namespace CoffeeShopManager.API.Controllers
         [HttpPost("{id}/setMain")]
         public async Task<IActionResult> SetMainPhoto(int staffId, int id){
             var staff = await _repo.GetEmployee(staffId);
-            // if(!staff.Photos.Any(p => p.Id = id ))
-            //     return
+
+            if(!staff.Photos.Any(p => p.Id == id ))
+                return Unauthorized();
+
             var photoFromRepo = await _repo.GetPhoto(id);
+
             if (photoFromRepo.IsMain)
-                return BadRequest("This is already the main photo");
+                return BadRequest("This is already main photo");
+
             var currenMainPhoto = await _repo.GetMainPhotoForEmployee(staffId);
+
             currenMainPhoto.IsMain = false;
+            staff.Photo = "";
+
             photoFromRepo.IsMain = true;
             staff.Photo = photoFromRepo.Url;
+
             if (await _repo.SaveAll())
                 return NoContent();
+
             return BadRequest("Could not set photo to Main");
         }
     }
