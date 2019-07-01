@@ -1,0 +1,62 @@
+[
+    {
+        "Amount": 1,
+        "BillId": 18,
+        "Id": 5,
+        "ProductDetailId": 7
+    },
+    {
+        "Amount": 1,
+        "BillId": 18,
+        "Id": 6,
+        "ProductDetailId": 5
+    },
+    {
+        "Amount": 1,
+        "BillId": 18,
+        "Id": 7,
+        "ProductDetailId": 11
+    },
+    {
+        "Amount": 1,
+        "BillId": 19,
+        "Id": 8,
+        "ProductDetailId": 7
+    },
+    {
+        "Amount": 1,
+        "BillId": 20,
+        "Id": 9,
+        "ProductDetailId": 7
+    },
+    {
+        "Amount": 1,
+        "BillId": 20,
+        "Id": 10,
+        "ProductDetailId": 6
+    },
+    {
+        "Amount": 1,
+        "BillId": 21,
+        "Id": 11,
+        "ProductDetailId": 4
+    },
+    {
+        "Amount": 2,
+        "BillId": 22,
+        "Id": 12,
+        "ProductDetailId": 7
+    },
+    {
+        "Amount": 1,
+        "BillId": 22,
+        "Id": 13,
+        "ProductDetailId": 6
+    },
+    {
+        "Amount": 1,
+        "BillId": 23,
+        "Id": 14,
+        "ProductDetailId": 6
+    }
+]

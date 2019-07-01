@@ -96,5 +96,68 @@
         "MemberId": 0,
         "StaffId": 0,
         "Value": 200
+    },
+    {
+        "CreatedDate": "0001-01-01 00:00:00",
+        "Id": 15,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 29000
+    },
+    {
+        "CreatedDate": "0001-01-01 00:00:00",
+        "Id": 16,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 40000
+    },
+    {
+        "CreatedDate": "0001-01-01 00:00:00",
+        "Id": 17,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 174000
+    },
+    {
+        "CreatedDate": "2019-06-29 07:30:09.509",
+        "Id": 18,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 112000
+    },
+    {
+        "CreatedDate": "2019-06-29 07:33:54.64",
+        "Id": 19,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 29000
+    },
+    {
+        "CreatedDate": "2019-06-29 07:35:20.06",
+        "Id": 20,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 54000
+    },
+    {
+        "CreatedDate": "2019-06-29 07:36:35.891",
+        "Id": 21,
+        "MemberId": 1,
+        "StaffId": 1,
+        "Value": 40000
+    },
+    {
+        "CreatedDate": "2019-06-30 03:04:52.009",
+        "Id": 22,
+        "MemberId": 1,
+        "StaffId": 0,
+        "Value": 83000
+    },
+    {
+        "CreatedDate": "2019-06-30 03:08:02.519",
+        "Id": 23,
+        "MemberId": 1,
+        "StaffId": 0,
+        "Value": 25000
     }
 ]
