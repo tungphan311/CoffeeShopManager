@@ -68,15 +68,67 @@ export class Product_reportComponent implements OnInit {
       }]
   };
 }
-
-getData(chart: Chart) {
+getDataForMonth(chart: Chart) {
     let today = new Date();
     let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
 
     let userParams: any = {};
     // userParams.month = today.getMonth() + 1;
-    userParams.month = 0;
+    userParams.month = today.getMonth() + 1;
+    userParams.day = 0;
+    userParams.year = today.getFullYear();
+
+    let bills: Bill[] = [];
+    let billDetails: BillDetail[] =[];
+
+
+    this.billService.getBills(userParams).subscribe((res: PaginatedResult<Bill[]>) => {
+        this.bill = res.result;
+        this.bill.forEach(element => {
+            this.billService.getBillDetail(element.id).subscribe(result => {
+                result.forEach(element => {
+                    billDetails.push(element);
+                    for (let i = 0; i < billDetails.length; i++) {
+                        for (let k = i + 1; k < billDetails.length; k++)
+                        {
+                            if (billDetails[i].productDetailId === billDetails[k].productDetailId) {
+                                billDetails[i].amount += billDetails[k].amount;
+                                billDetails.splice(k, 1);
+                                this.billDetailResult.push(billDetails[i].amount);
+
+                                billDetails.forEach(bill => {
+                                    this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) =>{
+                                        this.productService.getProduct(detail.productId).subscribe((product: Products) =>{
+                                            this.billDetailLabel.push(product.name);
+                                        })
+                                    })
+                                })
+                                // tslint:disable-next-line: only-arrow-functions
+                                this.billDetailResult.sort(function(a, b){return b - a});
+                             }
+                        }
+                     }
+                });
+                console.log(this.billDetailResult);
+                console.log(this.billDetailLabel);
+                this.billDetailLabel.slice(0,4);
+                chart.update();
+            })
+        });
+    })
+}
+
+getDataForDate(chart: Chart) {
+    let today = new Date();
+    let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
+
+    let userParams: any = {};
+    // userParams.month = today.getMonth() + 1;
+
     // userParams.day = today.getDate();
+
+    // userParams.year = today.getFullYear();
+    userParams.month = today.getMonth() + 1;
     userParams.day = 0;
     userParams.year = today.getFullYear();
 
@@ -121,10 +173,17 @@ getData(chart: Chart) {
 }
 exportToExcel()
 {
+
+    let dataList = [];
+    dataList.length=5;
+
+    this.billDetailResult.forEach(element => {
+        dataList.unshift(element);
+    });
     this.billDetailLabel.length=5;
     this.billDetailLabel.unshift("Sản phẩm");
-    // this.billDetailResult.unshift("Doanh Thu");
-    this.data = [this.billDetailLabel, this.billDetailResult];
+    dataList.unshift("Doanh Thu");
+    this.data = [this.billDetailLabel, dataList];
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
 
     /* generate workbook and add the worksheet */
@@ -156,7 +215,8 @@ public ngAfterViewInit() {
       }
   });
 
-  this.getData(myChart);
+//   this.getDataForMonth(myChart);
+  this.getDataForDate(myChart);
 }
 
 }

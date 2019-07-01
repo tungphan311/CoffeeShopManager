@@ -135,7 +135,6 @@ addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
   userParams.month = month;
   userParams.day = day;
   userParams.year = year;
-  console.log(userParams);
   this.billService.getTotal(userParams).subscribe(result => {
     let temp_array: number[];
     temp_array = [0];
@@ -296,6 +295,7 @@ sortByYear() {
   this.drawChart();
 }
 sortByDate() {
+  let now = new Date();
   let userParams: any = {};
   const day = this.today.getDate();
   const month = this.today.getMonth() + 1;
@@ -306,29 +306,33 @@ sortByDate() {
   this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[5] = result;
   });
-  userParams.day -= 1;
+  userParams.day = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1).getDate() ;
+  userParams.month = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2).getMonth() +1 ;
+  console.log(userParams.month);
   this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[4] = result;
   });
-  userParams.day -= 1;
+  userParams.day = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 3).getDate() ;
+  userParams.month = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 3).getMonth() +1 ;
   this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[3] = result;
   });
-  userParams.day -= 1;
+  userParams.day = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 4).getDate() ;
+  userParams.month = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 4).getMonth() +1 ;
   this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[2] = result;
   });
-  userParams.day -= 1;
+  userParams.day = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 5).getDate() ;
+  userParams.month = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 5).getMonth() +1 ;
   this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[1] = result;
   });
-  userParams.day -= 1;
+  userParams.day = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6).getDate() ;
+  userParams.month = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6).getMonth() +1 ;
   this.billService.getTotal(userParams).subscribe(result => {
     this.dateData[0] = result;
   });
   this.count = 3;
-  console.log(">>>>>>>>>>>>>>");
-  console.log(this.dateData);
   this.chartData = {
     labels: this.dateLabels,
     datasets: [{
