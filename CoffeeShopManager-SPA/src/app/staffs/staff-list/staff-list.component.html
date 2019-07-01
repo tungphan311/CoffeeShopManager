@@ -52,9 +52,16 @@
         </li> 
         <li class="list-inline-item">
             <select class="form-control" (change)="onSelectGender($event.target.value)">
-                <option value="all">--CHọn giới tính--</option>
+                <option value="all">--Chọn giới tính--</option>
                 <option *ngFor="let gender of genderList" value="{{gender}}" 
                   [selected]="model.selectedGender === gender">{{gender}}</option>
+            </select>
+        </li>
+        <li class="list-inline-item">
+            <select class="form-control" (change)="onSelectTeamId($event.target.value)">
+                <option value="all">--Chọn quyền truy cập--</option>
+                <option *ngFor="let teamId of teamIdList" value="{{teamId}}" 
+                  [selected]="model.selectedTeamId === teamId">{{getTeamId(teamId)}}</option>
             </select>
         </li>
         <li class="list-inline-item">

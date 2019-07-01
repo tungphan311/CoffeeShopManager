@@ -11,7 +11,7 @@ namespace CoffeeShopManager.API.Models
 
         public int TeamId { get; set; }
 
-       public string Gender { get; set; }
+        public string Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
         

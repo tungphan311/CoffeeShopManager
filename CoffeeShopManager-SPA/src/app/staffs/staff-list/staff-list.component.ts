@@ -6,6 +6,8 @@ import { error } from 'util';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
 import { TypeaheadMatch } from 'ngx-bootstrap';
+import { Team } from 'src/app/_models/Team';
+import { TeamService } from 'src/app/_service/team.service';
 
 @Component({
   selector: 'app-staff-list',
@@ -14,12 +16,14 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 })
 export class StaffListComponent implements OnInit {
     genderList= ['Nam', 'Nữ'];
+    teamIdList= [1, 2];
     model= {selectedName: '',
     selectedPhone: '',
     selecetedAddress: '',
     selectedGender: '',
     selectedAge: '',
-    selectedEmail: ''};
+    selectedEmail: '',
+    selectedTeamId: 0};
     selectedOption: Staff[];
     staffs: Staff[];
     // staffsForFilter: Staff[];
@@ -28,7 +32,7 @@ export class StaffListComponent implements OnInit {
     pagination: Pagination;
 
   constructor(private staffService: StaffService, private alertify: AlertifyService, private route: ActivatedRoute,
-    private routelink: Router) { }
+    private routelink: Router, private _teamService: TeamService) { }
 
   ngOnInit() {
     
@@ -62,10 +66,11 @@ export class StaffListComponent implements OnInit {
     this.staffs = this.staffs.filter(x => x.gender = this.selectedOption['gender']);
   }
 
-  // onSelectAge(event: TypeaheadMatch): void {
-  //   this.selectedOption = event.item;
-  //   this.staffs = this.staffs.filter(x => x.age === this.selectedOption['age']);
-  // }
+  onSelectTeamId(teamId): void {
+    this.model.selectedTeamId = teamId;
+    this.staffs = this.staffs.filter(x => x.teamId = this.selectedOption['teamId']);
+  }
+
 
   getStaffs() {
     this.route.data.subscribe(data =>{
@@ -101,6 +106,7 @@ export class StaffListComponent implements OnInit {
     staffParams.address = this.model.selecetedAddress;
     staffParams.email = this.model.selectedEmail;
     staffParams.gender = this.model.selectedGender;
+    staffParams.teamId = this.model.selectedTeamId;
     // staffParams.age = this.model.selectedAge;
     this.staffService.getListStaff(staffParams).subscribe(result => {
       this.staffs = result.result;
@@ -120,7 +126,9 @@ export class StaffListComponent implements OnInit {
 
 
   resetFilter() {
-    this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = this.model.selectedGender = this.model.selectedEmail = '';
+    this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress
+      = this.model.selectedGender = this.model.selectedEmail = '';
+    this.model.selectedTeamId = 0;
     this.applyFilter();
   }
 
@@ -149,5 +157,13 @@ export class StaffListComponent implements OnInit {
   toCreatePage(){
     // debugger
     this.routelink.navigate(['/create']);
+  }
+
+  getTeamId(teamId): string {
+    if (teamId === 1) {
+      return 'Quản lý';
+    } else if (teamId === 2) {
+      return 'Thu ngân';
+    } 
   }
 }

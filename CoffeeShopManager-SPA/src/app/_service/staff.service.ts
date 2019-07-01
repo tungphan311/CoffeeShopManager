@@ -76,6 +76,9 @@ const httpOptions = {
       if (staffParams.email !== '') {
         params = params.append('email', staffParams.email);
       }
+      if (staffParams.teamId !== '') {
+        params = params.append('teamId', staffParams.teamId);
+      }
 
       return this.http.get<Staff[]>(this.baseUrl + 'staff', { observe: 'response', params })
         .pipe(

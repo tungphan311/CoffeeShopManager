@@ -23,6 +23,6 @@ namespace CoffeeShopManager.API.Helpers
 
         // public string Age { get; set; }
 
-        public string Team { get; set;}
+        public int TeamId { get; set;}
     }
 }

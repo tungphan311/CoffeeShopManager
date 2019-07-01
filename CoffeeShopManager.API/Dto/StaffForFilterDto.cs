@@ -14,6 +14,6 @@ namespace CoffeeShopManager.API.Dto
 
         // public string Age { get; set; }
 
-        public string Team { get; set;}
+        public string TeamId { get; set;}
     }
 }
