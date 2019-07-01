@@ -65,7 +65,7 @@ namespace CoffeeShopManager.API.Data.Staffs
                 employees = employees.Where(e => e.Email.ToLower().Contains(employeeParams.Email));
             }
 
-            if (employeeParams.TeamId != null)
+            if (employeeParams.TeamId != 0)
             {
                 employees = employees.Where(e => e.TeamId.Equals(employeeParams.TeamId));
             }
