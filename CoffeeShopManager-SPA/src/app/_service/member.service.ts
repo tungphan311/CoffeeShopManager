@@ -73,9 +73,6 @@ const httpOptions = {
       if (memberParams.gender !== '') {
         params = params.append('gender', memberParams.gender);
       }
-      // if (memberParams.age !== '') {
-      //   params = params.append('age', memberParams.age);
-      // }
 
       return this.http.get<Member[]>(this.baseUrl + 'member', { observe: 'response', params })
         .pipe(
@@ -107,7 +104,7 @@ const httpOptions = {
     }
 
     getAllMembers(): Observable<Member[]> {
-      return this.http.get<Member[]>(this.baseUrl + 'member/all');
+      return this.http.get<Member[]>(this.baseUrl + 'member/');
     }
   }
 

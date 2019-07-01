@@ -121,9 +121,9 @@ getData(chart: Chart) {
 }
 exportToExcel()
 {
-    this.billDetailLabel.length = 5;
-    this.billDetailLabel.unshift('Sản phẩm');
-    // this.billDetailResult.unshift('Doanh Thu');
+    this.billDetailLabel.length=5;
+    this.billDetailLabel.unshift("Sản phẩm");
+    // this.billDetailResult.unshift("Doanh Thu");
     this.data = [this.billDetailLabel, this.billDetailResult];
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
 

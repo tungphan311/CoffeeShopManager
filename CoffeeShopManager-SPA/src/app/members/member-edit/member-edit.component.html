@@ -9,7 +9,7 @@
         <div class="card-body">
           <div class="card-footer">
             <div class="btn-group d-flex">
-              <button [disabled]="!editForm.dirty" form = "editForm" class="btn btn-success btn-block w-200">Lưu thay đổi</button>
+              <button [disabled]="!editForm.dirty&&formChange()" form = "editForm" class="btn btn-success btn-block w-200">Lưu thay đổi</button>
             </div>
           </div>
         </div>
@@ -18,13 +18,13 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="Edit Profile" id="tab1">
+          <tab heading="Chỉnh sửa thông tin" id="tab1">
             <form #editForm = "ngForm" id="editForm" (ngSubmit)="updateMember()">
               <h4>Tên</h4>
-              <textarea name="Name"  rows="1" class="form-control"
-                [(ngModel)]="member.name" required></textarea>
+              <input name="Name"  rows="1" class="form-control"
+                [(ngModel)]="member.name" required (change)=infoChange()>
               <h4>Giới tính</h4>
-              <select (change)="changeGender($event.target.value)" required>
+              <select (change)="changeGender($event.target.value)" required class="form-control">
                 <option *ngFor="let gender of genderlist" value="{{gender}}" 
                   [selected]="getGender(member.gender, gender)">
                   {{gender}}
@@ -45,11 +45,11 @@
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <h4>Số điện thoại</h4>
-              <textarea name="Phone"  rows="1" class="form-control"
-                [(ngModel)]="member.phone" required></textarea>
+              <input name="Phone"  rows="1" class="form-control"
+                [(ngModel)]="member.phone" required>
               <h4>Địa chỉ</h4>
-              <textarea name="Adddress"  rows="1" class="form-control"
-                [(ngModel)]="member.address" required></textarea>
+              <input name="Adddress"  rows="1" class="form-control"
+                [(ngModel)]="member.address" required>
             </form>
           </tab>
         </tabset>

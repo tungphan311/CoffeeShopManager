@@ -76,9 +76,6 @@ const httpOptions = {
       if (staffParams.email !== '') {
         params = params.append('email', staffParams.email);
       }
-      // if (staffParams.age !== '') {
-      //   params = params.append('age', staffParams.age);
-      // }
 
       return this.http.get<Staff[]>(this.baseUrl + 'staff', { observe: 'response', params })
         .pipe(
@@ -111,7 +108,7 @@ const httpOptions = {
     }
 
     getAllEmployees(): Observable<Staff[]> {
-      return this.http.get<Staff[]>(this.baseUrl + 'staff/all');
+      return this.http.get<Staff[]>(this.baseUrl + 'staff/');
     }
   }
 
