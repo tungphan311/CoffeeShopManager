@@ -15,7 +15,7 @@ import { TeamService } from 'src/app/_service/team.service';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    genderList= ['Male', 'Female'];
+    genderList= ['Nam', 'Nữ'];
     teamIdList= [1, 2];
     model= {selectedName: '',
     selectedPhone: '',
