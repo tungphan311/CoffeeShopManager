@@ -37,7 +37,7 @@ namespace CoffeeShopManager.API.Data
             var bills= JsonConvert.DeserializeObject<List<Bill>>(billData);
 
             var memberData = System.IO.File.ReadAllText("Data/Seed/Members.json");
-            var members= JsonConvert.DeserializeObject<List<Member>>(billData);
+            var members= JsonConvert.DeserializeObject<List<Member>>(memberData);
 
             foreach (var user in users)
             {
