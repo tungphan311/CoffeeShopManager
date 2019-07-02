@@ -30,14 +30,14 @@
                   {{gender}}
                 </option>
               </select> -->
-              <select [(ngModel)]="member.gender" [ngModelOptions]="{standalone: true}"  class="form-control">
+              <select [(ngModel)]="member.gender" [ngModelOptions]="{standalone: true}"  (change)="infoChange()" class="form-control">
                 <option *ngFor="let gender of genderlist" value="{{gender}}">
                   {{gender}}
                 </option>
               </select>
               <h4>Ngày sinh</h4>
               <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="{{loadDate()}}"
+                <input matInput [matDatepicker]="picker" [value]="loadDate()"
                 (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
                 <mat-datepicker-toggle matSuffix [for]="picker">
                   <mat-icon matDatepickerToggleIcon>date_range</mat-icon>

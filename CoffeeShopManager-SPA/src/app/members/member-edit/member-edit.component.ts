@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Member } from 'src/app/_models/Member';
 import { MemberService } from 'src/app/_service/member.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+
 
 @Component({
   selector: 'app-member-edit',
@@ -14,6 +15,7 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm :NgForm;
+  
   @HostListener('window:beforeunload',['$event'])
   unloadNotification($event: any){
     if(this.editForm.dirty){
@@ -35,7 +37,9 @@ export class MemberEditComponent implements OnInit {
   constructor(
     private memberService: MemberService, 
     private alertify: AlertifyService, 
-    private route : ActivatedRoute) { }
+    private route : ActivatedRoute, private router: Router) { 
+      // router.events.subscribe((val) => this.openSnackBar('999','iiii'));
+    }
   ngOnInit() {
     this.getMembers();
     this.route.data.subscribe(data =>{
@@ -48,6 +52,12 @@ export class MemberEditComponent implements OnInit {
     });
   }
 
+  // openSnackBar(message: string, action: string) {
+  //   this._snackBar.open(message, action, {
+  //     duration: 2000,
+  //   });
+  // }
+
   infoChange():void{
     console.log('imhere');
     // console.log(this.currentmember.dateOfBirth.toString());
@@ -55,11 +65,22 @@ export class MemberEditComponent implements OnInit {
     if (this.currentmember.name!=this.member.name
       ||this.currentmember.address!=this.member.address
       ||this.currentmember.phone!=this.member.phone
-      ||this.dateToString(this.currentmember.dateOfBirth)!=this.dateToString(this.member.dateOfBirth)
+      ||this.currentmember.gender!=this.member.gender
+      ||!this.compareDate(this.currentmember.dateOfBirth, this.member.dateOfBirth)
       ){
       this.isinfochanged=true;}
       else{
       this.isinfochanged=false;}
+  }
+
+  compareDate(d1: Date, d2: Date): Boolean {
+    //d1.setTime(0);
+    d1 = new Date(d1);
+    d2 = new Date(d2);
+    d1.setHours(0,0,0,0);
+    d2.setHours(0,0,0,0);
+    console.log(d1.toDateString() == d2.toDateString());
+    return d1.toDateString() == d2.toDateString();
   }
 
   // formChange():boolean{
@@ -128,28 +149,29 @@ export class MemberEditComponent implements OnInit {
     this.isinfochanged=false;
   }
 
-  dateToString(date):string{
-    var dateString = '';
-
-    // console.log(this.staff.dateOfBirth);
-    var day = date.getDate();
-    var month = date.getMonth()+1;
-    var year = date.getFullYear();
+  dateToString(date: Date):string{
+    console.log(date.getDate());
+    let dateString = '';
+    
+    let month = date.getMonth()+1;
+    let year = date.getFullYear();
+    let day = date.getDate();
     
     dateString = day +'/'+ month +'/' + year;
     return dateString;
   }
-  loadDate(): string{
+  loadDate(): Date{
     var dateString = '';
     let date = new Date(this.member.dateOfBirth);
 
     // console.log(this.staff.dateOfBirth);
-    var day = date.getDate();
-    var month = date.getMonth()+1;
-    var year = date.getFullYear();
+    // console.log(date.getDate());
+    // var day = date.getDate();
+    // var month = date.getMonth()+1;
+    // var year = date.getFullYear();
     
-    dateString = day +'/'+ month +'/' + year;
-    return dateString;
+    // dateString = day +'/'+ month +'/' + year;
+    return date;
   }
   getMembers() {
     this.memberService.getAllMembers().subscribe(data =>{
