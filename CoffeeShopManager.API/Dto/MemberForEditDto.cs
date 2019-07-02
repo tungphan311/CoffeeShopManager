@@ -19,5 +19,7 @@ namespace CoffeeShopManager.API.Dto
         public bool IsDelete { get; set; }
 
         public DateTime CreatedDate {get;set;}
+
+        public int Point { get; set; }
     }
 }
