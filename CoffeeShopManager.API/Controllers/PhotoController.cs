@@ -82,7 +82,9 @@ namespace CoffeeShopManager.API.Controllers
 
             if (!staffFromRepo.Photos.Any(u => u.IsMain))
                 photo.IsMain = true;
-
+            if(staffFromRepo.Photo ==""||staffFromRepo.Photo==null||staffFromRepo.Photo=="https://makitweb.com/demo/broken_image/images/noimage.png"){
+                staffFromRepo.Photo = photoForCreationDto.Url;
+            }
             staffFromRepo.Photos.Add(photo);
 
             if (await _repo.SaveAll())
