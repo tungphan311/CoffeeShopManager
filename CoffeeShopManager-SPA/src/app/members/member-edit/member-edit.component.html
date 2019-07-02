@@ -9,7 +9,7 @@
         <div class="card-body">
           <div class="card-footer">
             <div class="btn-group d-flex">
-              <button [disabled]="!editForm.dirty&&formChange()" form = "editForm" class="btn btn-success btn-block w-200">Lưu thay đổi</button>
+              <button [disabled]="!isinfochanged" form = "editForm" class="btn btn-success btn-block w-200">Lưu thay đổi</button>
             </div>
           </div>
         </div>
@@ -22,19 +22,19 @@
             <form #editForm = "ngForm" id="editForm" (ngSubmit)="updateMember()">
               <h4>Tên</h4>
               <input name="Name"  rows="1" class="form-control"
-                [(ngModel)]="member.name" required (change)=infoChange()>
+                [(ngModel)]="member.name" required (keyup)="infoChange()">
               <h4>Giới tính</h4>
-              <select (change)="changeGender($event.target.value)" required class="form-control">
+              <!-- <select (change)="changeGender($event.target.value)" (onchange)="infoChange()" required class="form-control"> 
                 <option *ngFor="let gender of genderlist" value="{{gender}}" 
                   [selected]="getGender(member.gender, gender)">
                   {{gender}}
                 </option>
-              </select>
-              <!-- <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}" class="form-control">
+              </select> -->
+              <select [(ngModel)]="member.gender" [ngModelOptions]="{standalone: true}" (change)="genderChange()" class="form-control">
                 <option *ngFor="let gender of genderlist" value="{{gender}}">
                   {{gender}}
                 </option>
-              </select> -->
+              </select>
               <h4>Ngày sinh</h4>
               <mat-form-field>
                 <input matInput [matDatepicker]="picker" placeholder="{{loadDate(member)}}"
@@ -45,10 +45,10 @@
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <h4>Số điện thoại</h4>
-              <input name="Phone"  rows="1" class="form-control"
+              <input name="Phone"  rows="1" class="form-control" (keyup)="infoChange()"
                 [(ngModel)]="member.phone" required>
               <h4>Địa chỉ</h4>
-              <input name="Adddress"  rows="1" class="form-control"
+              <input name="Adddress"  rows="1" class="form-control" (keyup)="infoChange()"
                 [(ngModel)]="member.address" required>
             </form>
           </tab>

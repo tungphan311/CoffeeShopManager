@@ -70,13 +70,13 @@ namespace CoffeeShopManager.API.Data.Staffs
                 employees = employees.Where(e => e.TeamId.Equals(employeeParams.TeamId));
             }
 
-            // if (employeeParams.Age != null) {
-            //     if (employeeParams.Age.All(char.IsDigit)) 
-            //     {
-            //         employees = employees.Where(e => e.Age.Contains(employeeParams.Age));
-            //     }   
-            // }
+            if (employeeParams.Age != 0)
+            {   
+               
+                employees = employees.Where(e => e.DateOfBirth.CalculateAge()==employeeParams.Age);
+            }
 
+        
             return await PagedList<Employee>.CreateAsync(employees, employeeParams.PageNumber, employeeParams.PageSize);
         }
 
