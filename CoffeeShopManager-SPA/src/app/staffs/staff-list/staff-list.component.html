@@ -9,7 +9,7 @@
             typeaheadOptionField="name"
             (typeaheadOnSelect)="onSelectName($event)"         
             class="form-control"
-            placeholder="Name"
+            placeholder="Nhập tên"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
@@ -18,7 +18,7 @@
             typeaheadOptionField="phone"
             (typeaheadOnSelect)="onSelectPhone($event)"
             class="form-control"
-            placeholder="Phone"
+            placeholder="Nhập số điện thoại"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
@@ -27,51 +27,52 @@
             typeaheadOptionField="address"
             (typeaheadOnSelect)="onSelectAddress($event)"
             class="form-control"
-            placeholder="Address"
+            placeholder="Nhập địa chỉ"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
-            <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
-        </li>
-        <li class="list-inline-item">
-            <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
-        </li>
+                <input [(ngModel)]="model.selectedEmail"
+                [typeahead]="staffs"
+                typeaheadOptionField="email"
+                (typeaheadOnSelect)="onSelectEmail($event)"         
+                class="form-control"
+                placeholder="Nhập e-mail"
+                (keypress)="onChange()">
+        </li> 
+            <li class="list-inline-item">
+                <select class="form-control mt-2" (change)="onSelectGender($event.target.value)">
+                    <option value="all">--Chọn giới tính--</option>
+                    <option *ngFor="let gender of genderList" value="{{gender}}" 
+                      [selected]="model.selectedGender === gender">{{gender}}</option>
+                </select>
+            </li>
+            <li class="list-inline-item">
+                <select class="form-control mt-2" (change)="onSelectTeamId($event.target.value)">
+                    <!-- <option value="all"></option> -->
+                    <option *ngFor="let teamId of teamIdList" value="{{teamId}}" 
+                      [selected]="model.selectedTeamId === teamId">{{getTeamId(teamId)}}</option>
+                </select>
+            </li>
+            <li class="list-inline-item"> Chọn tuổi: 
+                <mat-slider [(ngModel)]="model.selectedAge"
+                (change)="onSelectAge($event.target.value)"
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1000"
+                min="1"
+                max="100"></mat-slider>
+            </li>
     </ul>
 
     
 
     <ul class="list-inline">
-        <li class="list-inline-item">
-            <input [(ngModel)]="model.selectedEmail"
-            [typeahead]="staffs"
-            typeaheadOptionField="email"
-            (typeaheadOnSelect)="onSelectEmail($event)"         
-            class="form-control"
-            placeholder="Email"
-            (keypress)="onChange()">
-        </li> 
-        <li class="list-inline-item">
-            <select class="form-control" (change)="onSelectGender($event.target.value)">
-                <option value="all">--Chọn giới tính--</option>
-                <option *ngFor="let gender of genderList" value="{{gender}}" 
-                  [selected]="model.selectedGender === gender">{{gender}}</option>
-            </select>
-        </li>
-        <li class="list-inline-item">
-            <select class="form-control" (change)="onSelectTeamId($event.target.value)">
-                <option value="all">--Chọn quyền truy cập--</option>
-                <option *ngFor="let teamId of teamIdList" value="{{teamId}}" 
-                  [selected]="model.selectedTeamId === teamId">{{getTeamId(teamId)}}</option>
-            </select>
-        </li>
-        <li class="list-inline-item">
-            <mat-slider
-            thumbLabel
-            [displayWith]="formatLabel"
-            tickInterval="1000"
-            min="1"
-            max="100"></mat-slider>
-        </li>
+            <li class="list-inline-item">
+                <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
+                </li>
+            <li class="list-inline-item">
+                <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
+            </li>
     </ul>
 
     <h3 class="text-center text-primary">Danh Sách Nhân Viên</h3>

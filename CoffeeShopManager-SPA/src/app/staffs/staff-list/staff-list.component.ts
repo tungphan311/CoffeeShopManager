@@ -16,14 +16,15 @@ import { TeamService } from 'src/app/_service/team.service';
 })
 export class StaffListComponent implements OnInit {
     genderList= ['Nam', 'Nữ'];
-    teamIdList= [1, 2];
+    teamIdList= [0, 1, 2];
+    ageList: number[];
     model= {selectedName: '',
     selectedPhone: '',
     selecetedAddress: '',
     selectedGender: '',
-    selectedAge: '',
     selectedEmail: '',
-    selectedTeamId: 0};
+    selectedTeamId: 0,
+    selectedAge: 0};
     selectedOption: Staff[];
     staffs: Staff[];
     // staffsForFilter: Staff[];
@@ -71,6 +72,11 @@ export class StaffListComponent implements OnInit {
     this.staffs = this.staffs.filter(x => x.teamId = this.selectedOption['teamId']);
   }
 
+  onSelectAge(age): void {
+    this.model.selectedTeamId = age;
+    this.staffs = this.staffs.filter(x => x.age = this.selectedOption['age']);
+  }
+
 
   getStaffs() {
     this.route.data.subscribe(data =>{
@@ -107,7 +113,7 @@ export class StaffListComponent implements OnInit {
     staffParams.email = this.model.selectedEmail;
     staffParams.gender = this.model.selectedGender;
     staffParams.teamId = this.model.selectedTeamId;
-    // staffParams.age = this.model.selectedAge;
+    staffParams.age = this.model.selectedAge;
     this.staffService.getListStaff(staffParams).subscribe(result => {
       this.staffs = result.result;
       this.staffs = this.defaultPhoto(result.result);
@@ -128,7 +134,7 @@ export class StaffListComponent implements OnInit {
   resetFilter() {
     this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress
       = this.model.selectedGender = this.model.selectedEmail = '';
-    this.model.selectedTeamId = 0;
+    this.model.selectedTeamId = this.model.selectedAge = 0;
     this.applyFilter();
   }
 
@@ -164,7 +170,9 @@ export class StaffListComponent implements OnInit {
       return 'Quản lý';
     } else if (teamId === 2) {
       return 'Thu ngân';
-    } 
+    } else if (teamId === 0) {
+      return '--Chọn quyền truy cập--'
+    }
   }
 
   getGender(gender): string {

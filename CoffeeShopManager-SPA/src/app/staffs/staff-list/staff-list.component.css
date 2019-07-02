@@ -3,3 +3,6 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+mat-slider {
+    width: 300px;
+}

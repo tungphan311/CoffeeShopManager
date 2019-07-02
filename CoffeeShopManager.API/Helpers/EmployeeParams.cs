@@ -1,3 +1,5 @@
+using System;
+
 namespace CoffeeShopManager.API.Helpers
 {
     public class EmployeeParams
@@ -24,5 +26,7 @@ namespace CoffeeShopManager.API.Helpers
         public int TeamId { get; set;}
 
         public int Age { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
     }
 }
