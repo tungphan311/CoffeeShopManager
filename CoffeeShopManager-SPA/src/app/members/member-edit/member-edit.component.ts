@@ -38,7 +38,7 @@ export class MemberEditComponent implements OnInit {
     private memberService: MemberService, 
     private alertify: AlertifyService, 
     private route : ActivatedRoute, private router: Router) { 
-      // router.events.subscribe((val) => this.openSnackBar('999','iiii'));
+      
     }
   ngOnInit() {
     this.getMembers();
@@ -142,12 +142,6 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
-  genderChange(): void{
-    if(this.currentmember.gender!=this.member.gender)
-    this.isinfochanged=true;
-    else
-    this.isinfochanged=false;
-  }
 
   dateToString(date: Date):string{
     console.log(date.getDate());
@@ -163,14 +157,6 @@ export class MemberEditComponent implements OnInit {
   loadDate(): Date{
     var dateString = '';
     let date = new Date(this.member.dateOfBirth);
-
-    // console.log(this.staff.dateOfBirth);
-    // console.log(date.getDate());
-    // var day = date.getDate();
-    // var month = date.getMonth()+1;
-    // var year = date.getFullYear();
-    
-    // dateString = day +'/'+ month +'/' + year;
     return date;
   }
   getMembers() {

@@ -74,5 +74,14 @@ export class PhotoEditorComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
+  deletePhoto(id: number){
+    this.alertify.confirm(' Bạn có chắc muốn xóa ảnh này', () => {
+      this.staffService.deletePhoto(this.staff.id,id).subscribe(()=>{
+        this.photos.splice(this.photos.findIndex(p => p.id === id),1);
+        this.alertify.success(' Xóa ảnh thành công ')
+      },error =>{
+        this.alertify.error(' Xóa ảnh thất bại ');
+      });
+    });
+  }
 }

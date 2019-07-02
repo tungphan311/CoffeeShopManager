@@ -121,5 +121,31 @@ namespace CoffeeShopManager.API.Controllers
 
             return BadRequest("Could not set photo to Main");
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int staffId, int id){
+            var staff = await _repo.GetEmployee(staffId);
+
+            if(!staff.Photos.Any(p => p.Id == id ))
+                return Unauthorized();
+
+            var photoFromRepo = await _repo.GetPhoto(id);
+
+            if (photoFromRepo.IsMain)
+                return BadRequest("Không thể xóa ảnh đại diện ");
+
+            if(photoFromRepo.PublicId !=null){
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+                var result = _cloudinary.Destroy(deleteParams);
+                 if(result.Result == "ok"){
+                    _repo.Delete(photoFromRepo);
+                }
+            }
+            if(photoFromRepo.PublicId == null){
+                _repo.Delete(photoFromRepo);
+            }
+            if(await _repo.SaveAll()) 
+                return Ok();
+            return BadRequest(" Xóa hình ảnh thất bại ");
+        }
     }
 }

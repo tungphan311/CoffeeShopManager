@@ -9,7 +9,7 @@
           <div class="card-body">
             <div class="card-footer">
               <div class="btn-group d-flex">
-                <button [disabled]="!editForm.dirty&&formChange()" form = "editForm" class="btn btn-success btn-block w-200">Lưu thay đổi</button>
+                <button [disabled]="!isinfochanged" form = "editForm" class="btn btn-success btn-block w-200">Lưu thay đổi</button>
               </div>
             </div>
           </div>
@@ -21,23 +21,23 @@
             <tab heading="Chỉnh sửa thông tin" id="tab1">
               <form #editForm = "ngForm" id="editForm" (ngSubmit)="updateStaff()">
                 <h4>Tên</h4>
-                <input name="Name"  rows="1" class="form-control"
+                <input name="Name"  rows="1" class="form-control" (keyup)="infoChange()"
                   [(ngModel)]="staff.name" required>
                 <h4>Giới tính</h4>
-                <select (change)="changeGender($event.target.value)" required class="form-control">
+                <!-- <select (change)="changeGender($event.target.value)" required class="form-control">
                   <option *ngFor="let gender of genderlist" value="{{gender}}" 
                     [selected]="getGender(staff.gender, gender)">
                     {{gender}}
                   </option>
-                </select>
-                <!-- <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}" class="form-control">
+                </select> -->
+                <select [(ngModel)]="staff.gender" [ngModelOptions]="{standalone: true}" (change)="infoChange()" class="form-control">
                   <option *ngFor="let gender of genderlist" value="{{gender}}">
                     {{gender}}
                   </option>
-                </select> -->
+                </select>
                 <h4>Ngày sinh</h4>
                 <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="{{loadDate(staff)}}"
+                  <input matInput [matDatepicker]="picker" [value]="loadDate()"
                   (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
                   <mat-datepicker-toggle matSuffix [for]="picker">
                     <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
@@ -45,14 +45,14 @@
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <h4>Số điện thoại</h4>
-                <input name="Phone"  rows="1" class="form-control"
+                <input name="Phone"  rows="1" class="form-control" (keyup)="infoChange()"
                   [(ngModel)]="staff.phone" required>
                   
                 <h4>Email</h4>
-                <input name="Email"  rows="1" class="form-control"
+                <input name="Email"  rows="1" class="form-control" (keyup)="infoChange()"
                   [(ngModel)]="staff.email" required>
                 <h4>Địa chỉ</h4>
-                <input name="Adddress"  rows="1" class="form-control"
+                <input name="Adddress"  rows="1" class="form-control" (keyup)="infoChange()"
                   [(ngModel)]="staff.address" required>
               </form>
             </tab>
