@@ -5,6 +5,7 @@ import { MemberService } from 'src/app/_service/member.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_service/alertify.service';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 @Component({
   selector: 'app-member-edit',
@@ -29,6 +30,7 @@ export class MemberEditComponent implements OnInit {
   regExp = new RegExp(/[0]+(86|32|33|34|35|36|37|38|39|70|76|78|79|77|81|82|83|85|84|56|59|58|97|96|98|90|93|89|88|91|94|92)([0-9]{7})\b/g);
   genderchange: boolean;
   datechange: boolean;
+  isinfochanged=false;
 
   constructor(
     private memberService: MemberService, 
@@ -40,20 +42,30 @@ export class MemberEditComponent implements OnInit {
       this.member = data['member'];
       this.defaultPhoto(this.member);
     });
-    this.currentmember = this.member;
+    this.memberService.getMember(this.member.id).subscribe(data =>{
+      this.currentmember = data;
+      this.currentmember.dateOfBirth=new Date(this.currentmember.dateOfBirth.toString());
+    });
   }
 
-  infoChange():boolean{
-    if(this.member != this.currentmember){
-      console.log(this.member); return false;
-    }
-      
+  infoChange():void{
+    console.log('imhere');
+    // console.log(this.currentmember.dateOfBirth.toString());
+    // console.log(this.member.dateOfBirth.toString());
+    if (this.currentmember.name!=this.member.name
+      ||this.currentmember.address!=this.member.address
+      ||this.currentmember.phone!=this.member.phone
+      ||this.dateToString(this.currentmember.dateOfBirth)!=this.dateToString(this.member.dateOfBirth)
+      ){
+      this.isinfochanged=true;}
+      else{
+      this.isinfochanged=false;}
   }
 
-  formChange():boolean{
-    if(this.genderchange||this.datechange) return false;
-    else return true;
-  }
+  // formChange():boolean{
+  //   if(this.genderchange||this.datechange) return false;
+  //   else return true;
+  // }
 
   dateChange():boolean{
     return true;
@@ -109,27 +121,25 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
-
-  getGender(input, output): boolean {
-    if (input === output) {
-      this.memberGender = output;
-      return true;
-    }
-
-    return false;
+  genderChange(): void{
+    if(this.currentmember.gender!=this.member.gender)
+    this.isinfochanged=true;
+    else
+    this.isinfochanged=false;
   }
 
-  genderOnChange():boolean{
-    return true;
+  dateToString(date):string{
+    var dateString = '';
+
+    // console.log(this.staff.dateOfBirth);
+    var day = date.getDate();
+    var month = date.getMonth()+1;
+    var year = date.getFullYear();
+    
+    dateString = day +'/'+ month +'/' + year;
+    return dateString;
   }
-
-
-  changeGender(gender) {
-    this.member.gender = gender;
-    this.genderchange = this.genderOnChange();
-  }
-
-  loadDate(member): string{
+  loadDate(): string{
     var dateString = '';
     let date = new Date(this.member.dateOfBirth);
 
@@ -150,6 +160,7 @@ export class MemberEditComponent implements OnInit {
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events.push(`${type}: ${event.value}`);
     this.member.dateOfBirth = event.value;
-    this.datechange = this.dateChange();
+    if (type=='change')
+    this.infoChange();
   }
 }
