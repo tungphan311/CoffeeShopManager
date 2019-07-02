@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
           <select class="form-control" (change)="selectStaff($event.target.value)">
-            <option value="all">--Vui lòng chọn quyền truy cập--</option>
+            <option value="all">--Vui lòng chọn nhân viên--</option>
             <option *ngFor="let staff of staffsHasNoAccount" value="{{staff}}" 
               [selected]="model.staffId === staff">{{getStaffName(staff)}}</option>
           </select>
