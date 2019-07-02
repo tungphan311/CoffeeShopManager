@@ -21,5 +21,7 @@ namespace CoffeeShopManager.API.Models
         public bool IsDelete { get; set; }
 
         public string Photo { get; set; }
+
+        public int Point { get; set; }
     }
 }

@@ -22,5 +22,7 @@ namespace CoffeeShopManager.API.Dto
 
         public DateTime DateOfBirth { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public int Point { get; set; }
     }
 }

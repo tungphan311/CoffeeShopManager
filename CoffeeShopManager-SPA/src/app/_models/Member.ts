@@ -12,4 +12,5 @@ export interface Member {
     dateOfBirth: Date;
     createdDate: Date;
     photos?: Photo[];
+    point: number;
 }
