@@ -29,8 +29,8 @@ export class Product_reportComponent implements OnInit {
   labels: any;
   dataChart: any;
   bill: Bill[] = [];
-  billDetailResult: number[]=[];
-  billDetailLabel: string[]=[];
+  billDetailResult: number[] = [];
+  billDetailLabel: string[] = [];
   billDetail: BillDetail[] = [];
   public constructor(
     private billService: BillService,
@@ -43,7 +43,15 @@ export class Product_reportComponent implements OnInit {
 }
 
   public ngOnInit() {
-  this.chartData = {
+
+
+    for (let i = 0; i < 6; i++) {
+        this.productService.getProduct(i).subscribe(result =>{
+            this.billDetailLabel.push(result.name);
+        })
+    }
+    console.log(this.billDetailLabel);
+    this.chartData = {
       labels: this.billDetailLabel,
       datasets: [{
           label: '',
@@ -79,7 +87,7 @@ getDataForMonth(chart: Chart) {
     userParams.year = today.getFullYear();
 
     let bills: Bill[] = [];
-    let billDetails: BillDetail[] =[];
+    let billDetails: BillDetail[] = [];
 
 
     this.billService.getBills(userParams).subscribe((res: PaginatedResult<Bill[]>) => {
@@ -97,8 +105,8 @@ getDataForMonth(chart: Chart) {
                                 this.billDetailResult.push(billDetails[i].amount);
 
                                 billDetails.forEach(bill => {
-                                    this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) =>{
-                                        this.productService.getProduct(detail.productId).subscribe((product: Products) =>{
+                                    this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) => {
+                                        this.productService.getProduct(detail.productId).subscribe((product: Products) => {
                                             this.billDetailLabel.push(product.name);
                                         })
                                     })
@@ -111,7 +119,7 @@ getDataForMonth(chart: Chart) {
                 });
                 console.log(this.billDetailResult);
                 console.log(this.billDetailLabel);
-                this.billDetailLabel.slice(0,4);
+                this.billDetailLabel.slice(0, 4);
                 chart.update();
             })
         });
@@ -128,12 +136,12 @@ getDataForDate(chart: Chart) {
     // userParams.day = today.getDate();
 
     // userParams.year = today.getFullYear();
-    userParams.month = today.getMonth() + 1;
+    userParams.month = 6;
     userParams.day = 0;
     userParams.year = today.getFullYear();
 
     let bills: Bill[] = [];
-    let billDetails: BillDetail[] =[];
+    let billDetails: BillDetail[] = [];
 
 
     this.billService.getBills(userParams).subscribe((res: PaginatedResult<Bill[]>) => {
@@ -150,22 +158,22 @@ getDataForDate(chart: Chart) {
                                 billDetails.splice(k, 1);
                                 this.billDetailResult.push(billDetails[i].amount);
 
-                                billDetails.forEach(bill => {
-                                    this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) =>{
-                                        this.productService.getProduct(detail.productId).subscribe((product: Products) =>{
-                                            this.billDetailLabel.push(product.name);
-                                        })
-                                    })
-                                })
+                                // billDetails.forEach(bill => {
+                                //     this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) => {
+                                //         this.productService.getProduct(detail.productId).subscribe((product: Products) => {
+                                //             this.billDetailLabel.push(product.name);
+                                //         })
+                                //     })
+                                // })
                                 // tslint:disable-next-line: only-arrow-functions
                                 this.billDetailResult.sort(function(a, b){return b - a});
                              }
                         }
                      }
                 });
-                console.log(this.billDetailResult);
-                console.log(this.billDetailLabel);
-                this.billDetailLabel.slice(0,4);
+                // console.log(this.billDetailResult);
+                // console.log(this.billDetailLabel);
+                // this.billDetailLabel.slice(0, 4);
                 chart.update();
             })
         });
@@ -175,12 +183,12 @@ exportToExcel()
 {
 
     let dataList = [];
-    dataList.length=5;
+    dataList.length = 5;
 
     this.billDetailResult.forEach(element => {
         dataList.unshift(element);
     });
-    this.billDetailLabel.length=5;
+    this.billDetailLabel.length = 5;
     this.billDetailLabel.unshift("Sản phẩm");
     dataList.unshift("Doanh Thu");
     this.data = [this.billDetailLabel, dataList];
