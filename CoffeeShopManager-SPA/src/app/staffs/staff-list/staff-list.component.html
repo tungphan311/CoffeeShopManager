@@ -3,7 +3,7 @@
 <div class="container mt-3 ">
 
     <ul class="list-inline">       
-        <li class="list-inline-item">
+        <li class="list-inline-item padding-right: 2px" style="width: 24%">
             <input [(ngModel)]="model.selectedName"
             [typeahead]="staffs"
             typeaheadOptionField="name"
@@ -12,16 +12,16 @@
             placeholder="Nhập tên"
             (keypress)="onChange()">
         </li>
-        <li class="list-inline-item">
+        <li class="list-inline-item padding-right: 2px" style="width: 14%">
             <input [(ngModel)]="model.selectedPhone"
             [typeahead]="staffs"
             typeaheadOptionField="phone"
             (typeaheadOnSelect)="onSelectPhone($event)"
             class="form-control"
-            placeholder="Nhập số điện thoại"
+            placeholder="Nhập sđt"
             (keypress)="onChange()">
         </li>
-        <li class="list-inline-item">
+        <li class="list-inline-item equal-width">
             <input [(ngModel)]="model.selecetedAddress"
             [typeahead]="staffs"
             typeaheadOptionField="address"
@@ -30,48 +30,45 @@
             placeholder="Nhập địa chỉ"
             (keypress)="onChange()">
         </li>
-        <li class="list-inline-item">
+        <li class="list-inline-item equal-width">
                 <input [(ngModel)]="model.selectedEmail"
                 [typeahead]="staffs"
                 typeaheadOptionField="email"
                 (typeaheadOnSelect)="onSelectEmail($event)"         
                 class="form-control"
                 placeholder="Nhập e-mail"
-                (keypress)="onChange()">
+            (keypress)="onChange()">
         </li> 
-            <li class="list-inline-item">
-                <select class="form-control mt-2" (change)="onSelectGender($event.target.value)">
+    </ul>
+    <ul class="list-inline">
+            <li class="list-inline-item padding-right: 2px" style="width: 13%">
+                    <input [(ngModel)]="model.selectedAge"
+                    [typeahead]="staffs"
+                    typeaheadOptionField="age"
+                    (typeaheadOnSelect)="onSelectAge($event)"
+                    class="form-control"
+                    placeholder="Nhập tuổi"
+                    (keypress)="onChange()">
+            </li>
+            <li class="list-inline-item padding-right: 2px" style="width: 21%">
+                <select class="form-control" (change)="onSelectGender($event.target.value)">
                     <option value="all">--Chọn giới tính--</option>
                     <option *ngFor="let gender of genderList" value="{{gender}}" 
-                      [selected]="model.selectedGender === gender">{{gender}}</option>
+                      [selected]="model.selectedGender === gender">{{getGender(gender)}}</option>
                 </select>
             </li>
-            <li class="list-inline-item">
-                <select class="form-control mt-2" (change)="onSelectTeamId($event.target.value)">
-                    <!-- <option value="all"></option> -->
+            <li class="list-inline-item padding-right: 2px" style="width: 23%">
+                <select class="form-control" (change)="onSelectTeamId($event.target.value)">
+                    <option value="all">--Chọn quyền truy cập--</option>
                     <option *ngFor="let teamId of teamIdList" value="{{teamId}}" 
                       [selected]="model.selectedTeamId === teamId">{{getTeamId(teamId)}}</option>
                 </select>
             </li>
-            <li class="list-inline-item"> Chọn tuổi: 
-                <mat-slider [(ngModel)]="model.selectedAge"
-                (change)="onSelectAge($event.target.value)"
-                thumbLabel
-                [displayWith]="formatLabel"
-                tickInterval="1000"
-                min="1"
-                max="100"></mat-slider>
+            <li class="list-inline-item" style="width: 19%">
+                <button class="btn btn-outline-success" style="width: 100%" (click)="applyFilter()">Tìm</button>
             </li>
-    </ul>
-
-    
-
-    <ul class="list-inline">
-            <li class="list-inline-item">
-                <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
-                </li>
-            <li class="list-inline-item">
-                <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
+            <li class="list-inline-item" style="width: 19%">
+                <button class="btn btn-outline-danger" style="width: 100%" (click)="resetFilter()">Khôi phục</button>
             </li>
     </ul>
 

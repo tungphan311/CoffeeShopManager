@@ -6,3 +6,7 @@
 mat-slider {
     width: 300px;
 }
+.equal-width {
+    width: 29%;
+    padding-right: 2px;
+}

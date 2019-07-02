@@ -3,7 +3,7 @@
 <div class="container mt-3 ">
 
     <ul class="list-inline">       
-        <li class="list-inline-item">
+        <li class="list-inline-item equal-width">
             <input [(ngModel)]="model.selectedName"
             [typeahead]="members"
             typeaheadOptionField="name"
@@ -12,7 +12,7 @@
             placeholder="Nhập tên"
             (keypress)="onChange()">
         </li>
-        <li class="list-inline-item">
+        <li class="list-inline-item equal-width">
             <input [(ngModel)]="model.selectedPhone"
             [typeahead]="members"
             typeaheadOptionField="phone"
@@ -21,7 +21,7 @@
             placeholder="Nhập số điện thoại"
             (keypress)="onChange()">
         </li>
-        <li class="list-inline-item">
+        <li class="list-inline-item padding-right: 2px" style="width: 40%">
             <input [(ngModel)]="model.selecetedAddress"
             [typeahead]="members"
             typeaheadOptionField="address"
@@ -30,38 +30,32 @@
             placeholder="Nhập địa chỉ"
             (keypress)="onChange()">
         </li>
-        <li class="list-inline-item">
-                <select class="form-control" (change)="onSelectGender($event.target.value)">
-                    <option value="all">--Chọn giới tính--</option>
-                    <option *ngFor="let gender of genderList" value="{{gender}}" 
-                      [selected]="model.selectedGender === gender">{{gender}}</option>
-                </select>
-            </li>
-            <li class="list-inline-item">
-                Chọn tuổi: <mat-slider [(ngModel)]="model.selectedAge"
-                (change)="onSelectedAge($event.target.value)"
-                thumbLabel
-                [displayWith]="formatLabel"
-                tickInterval="1000"
-                min="1"
-                max="100"></mat-slider>
-            </li>
     </ul>
     <ul class="list-inline">
-            <li class="list-inline-item">
-                    <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
-                    </li>
-                <li class="list-inline-item">
-                    <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
-                </li>
+        <li class="list-inline-item equal-width">
+            <select class="form-control" (change)="onSelectGender($event.target.value)">
+                <option value="all">--Chọn giới tính--</option>
+                <option *ngFor="let gender of genderList" value="{{gender}}" 
+                    [selected]="model.selectedGender === gender">{{gender}}</option>
+            </select>
+        </li>
+        <li class="list-inline-item equal-width">
+            <input [(ngModel)]="model.selectedAge"
+            [typeahead]="members"
+            typeaheadOptionField="age"
+            (typeaheadOnSelect)="onSelectAge($event)"         
+            class="form-control"
+            placeholder="Nhập tuổi"
+            (keypress)="onChange()">
+        </li> 
+        <li class="list-inline-item" style="width: 20%">
+            <button class="btn btn-outline-success" style="width: 100%" (click)="applyFilter()">Tìm</button>
+        </li>
+        <li class="list-inline-item" style="width: 19%">
+            <button class="btn btn-outline-danger" style="width: 100%" (click)="resetFilter()">Khôi phục</button>
+        </li>
     </ul>
-
     
-
-    <ul class="list-inline">
-        
-    </ul>
-
     <h3 class="text-center text-primary">Danh Sách Thành Viên</h3>
     
     <div class="row">

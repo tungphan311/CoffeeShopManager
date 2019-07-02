@@ -6,8 +6,6 @@ import { error } from 'util';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pagination, PaginatedResult } from 'src/app/_models/Pagination';
 import { TypeaheadMatch } from 'ngx-bootstrap';
-import { Team } from 'src/app/_models/Team';
-import { TeamService } from 'src/app/_service/team.service';
 
 @Component({
   selector: 'app-staff-list',
@@ -15,8 +13,8 @@ import { TeamService } from 'src/app/_service/team.service';
   styleUrls: ['./staff-list.component.css']
 })
 export class StaffListComponent implements OnInit {
-    genderList= ['Nam', 'Nữ'];
-    teamIdList= [0, 1, 2];
+    genderList= ['Male', 'Female', 'Others'];
+    teamIdList= [1, 2];
     ageList: number[];
     model= {selectedName: '',
     selectedPhone: '',
@@ -24,7 +22,7 @@ export class StaffListComponent implements OnInit {
     selectedGender: '',
     selectedEmail: '',
     selectedTeamId: 0,
-    selectedAge: 0};
+    selectedAge: ''};
     selectedOption: Staff[];
     staffs: Staff[];
     // staffsForFilter: Staff[];
@@ -33,10 +31,9 @@ export class StaffListComponent implements OnInit {
     pagination: Pagination;
 
   constructor(private staffService: StaffService, private alertify: AlertifyService, private route: ActivatedRoute,
-    private routelink: Router, private _teamService: TeamService) { }
+    private routelink: Router) { }
 
   ngOnInit() {
-    
     this.getStaffs();
     this.defaultPhoto(this.staffs);
     console.log(this.staffs);
@@ -72,8 +69,12 @@ export class StaffListComponent implements OnInit {
     this.staffs = this.staffs.filter(x => x.teamId = this.selectedOption['teamId']);
   }
 
-  onSelectAge(age): void {
-    this.model.selectedTeamId = age;
+  // onSelectAge(age): void {
+  //   this.model.selectedTeamId = age;
+  //   this.staffs = this.staffs.filter(x => x.age = this.selectedOption['age']);
+  // }
+  onSelectAge(event: TypeaheadMatch): void {
+    this.selectedOption = event.item;
     this.staffs = this.staffs.filter(x => x.age = this.selectedOption['age']);
   }
 
@@ -133,8 +134,8 @@ export class StaffListComponent implements OnInit {
 
   resetFilter() {
     this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress
-      = this.model.selectedGender = this.model.selectedEmail = '';
-    this.model.selectedTeamId = this.model.selectedAge = 0;
+      = this.model.selectedGender = this.model.selectedEmail = this.model.selectedAge= '';
+    this.model.selectedTeamId = 0; 
     this.applyFilter();
   }
 
@@ -170,8 +171,6 @@ export class StaffListComponent implements OnInit {
       return 'Quản lý';
     } else if (teamId === 2) {
       return 'Thu ngân';
-    } else if (teamId === 0) {
-      return '--Chọn quyền truy cập--'
     }
   }
 
@@ -180,6 +179,8 @@ export class StaffListComponent implements OnInit {
       return 'Nam';
     } else if (gender === 'Female') {
       return 'Nữ';
-    } 
+    } else if (gender === 'Others') {
+      return 'Khác';
+    }
   }
 }

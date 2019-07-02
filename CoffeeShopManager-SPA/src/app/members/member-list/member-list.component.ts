@@ -17,7 +17,7 @@ export class MemberListComponent implements OnInit {
   selectedPhone: '',
   selecetedAddress: '',
   selectedGender: '',
-  selectedAge: 0};
+  selectedAge: ''};
   selectedOption: Member[];
   members: Member[];
 
@@ -55,8 +55,8 @@ onSelectGender(gender): void {
   this.members = this.members.filter(x => x.gender = this.selectedOption['gender']);
 }
 
-onSelectedAge(age): void {
-  this.model.selectedAge = age;
+onSelectAge(event: TypeaheadMatch): void {
+  this.selectedOption = event.item;
   this.members = this.members.filter(x => x.age === this.selectedOption['age']);
 }
 
@@ -113,8 +113,8 @@ pageChanged(event: any): void {
 
 
 resetFilter() {
-  this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = this.model.selectedGender  = '';
-  this.model.selectedAge = 0;
+  this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = this.model.selectedGender
+  = this.model.selectedAge = '';
   this.applyFilter();
 }
 
