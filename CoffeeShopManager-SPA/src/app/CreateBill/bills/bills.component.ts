@@ -13,6 +13,8 @@ import { BillDetail } from 'src/app/_models/BillDetail';
 import { BillService } from 'src/app/_service/Bills/bill.service';
 import { formatDate } from '@angular/common';
 import { AuthService } from 'src/app/_service/auth.service';
+import { Member } from 'src/app/_models/Member';
+import { MemberService } from 'src/app/_service/member.service';
 
 @Component({
   selector: 'app-bills',
@@ -27,6 +29,10 @@ export class BillsComponent implements OnInit {
   products: Products[];
   orderList: Order[] = [];
   buttons: boolean[] = [];
+  focus = false;
+  key = 0;
+  value = '';
+  members =   [];
 
   bill: any = {};
 
@@ -39,7 +45,8 @@ export class BillsComponent implements OnInit {
     private alertify: AlertifyService,
     private router: Router,
     private billService: BillService,
-    private authService: AuthService
+    private authService: AuthService,
+    private memberService: MemberService
   ) { }
 
   ngOnInit() {
@@ -48,6 +55,7 @@ export class BillsComponent implements OnInit {
     this.buttons[0] = true;
     this.bill.billDetails = [];
     this.loadProducts(this.buttons);
+    this.loadMembers();
   }
 
   loadProducts(buttons: boolean[]) {
@@ -59,6 +67,13 @@ export class BillsComponent implements OnInit {
           this.alertify.error(error);
         });
       }
+    });
+  }
+
+  loadMembers() {
+    this.memberService.getAllMembers().subscribe(result => {
+      this.members = result;
+      console.log(result);
     });
   }
 
@@ -134,10 +149,6 @@ export class BillsComponent implements OnInit {
       return false;
     }
 
-    // if (num % 1000 !== 0 || num < this.totalPrice) {
-    //   return false;
-    // }
-
     return true;
   }
 
@@ -186,10 +197,22 @@ export class BillsComponent implements OnInit {
     });
 
     this.billService.create(this.bill).subscribe(result => {
-      this.alertify.success('Success');
+      this.alertify.success('Thêm hoá đơn thành công');
     }, error => {
       this.alertify.error(error);
     });
+
+    if (this.key > 0) {
+      this.memberService.getMember(this.key).subscribe((member: Member) => {
+        member.point += Math.round(this.totalPrice(this.orderList) / 10000);
+
+        this.memberService.updateMember(member).subscribe(result => {
+          this.alertify.success('Tích điểm thành công');
+        }, error => {
+          this.alertify.error(error);
+        });
+      });
+    }
 
     this.router.navigate(['/bill/invoice'],
       {
@@ -200,5 +223,12 @@ export class BillsComponent implements OnInit {
         }
       });
     this.id = this.paid = '';
+  }
+
+  setQuery(item) {
+    this.value = item.name;
+    this.key = item.id;
+    console.log(this.key);
+    this.focus = false;
   }
 }

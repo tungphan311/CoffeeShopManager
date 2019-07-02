@@ -29,9 +29,10 @@ export class Product_reportComponent implements OnInit {
   labels: any;
   dataChart: any;
   bill: Bill[] = [];
-  billDetailResult: number[]=[];
-  billDetailLabel: string[]=[];
+  billDetailResult: number[] = [];
+  billDetailLabel: string[] = [];
   billDetail: BillDetail[] = [];
+  userParams: any = {};
   public constructor(
     private billService: BillService,
     private productService: ProductService,
@@ -43,7 +44,22 @@ export class Product_reportComponent implements OnInit {
 }
 
   public ngOnInit() {
-  this.chartData = {
+    let today = new Date();
+    let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
+
+    // userParams.month = today.getMonth() + 1;
+    this.userParams.month = today.getMonth();
+    this.userParams.day = 0;
+    this.userParams.year = today.getFullYear();
+
+
+    for (let i = 0; i < 6; i++) {
+        this.productService.getProduct(i).subscribe(result => {
+            this.billDetailLabel.push(result.name);
+        })
+    }
+    console.log(this.billDetailLabel);
+    this.chartData = {
       labels: this.billDetailLabel,
       datasets: [{
           label: '',
@@ -68,75 +84,36 @@ export class Product_reportComponent implements OnInit {
       }]
   };
 }
-getDataForMonth(chart: Chart) {
+setUserParamsToDate() {
     let today = new Date();
     let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
 
-    let userParams: any = {};
     // userParams.month = today.getMonth() + 1;
-    userParams.month = today.getMonth() + 1;
-    userParams.day = 0;
-    userParams.year = today.getFullYear();
+    this.userParams.month = today.getMonth() + 1;
+    this.userParams.day = today.getDate();
+    this.userParams.year = today.getFullYear();
+    this.ngAfterViewInit();
+}
+setUserParamsToMonth() {
+    let today = new Date();
+    let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
 
-    let bills: Bill[] = [];
-    let billDetails: BillDetail[] =[];
-
-
-    this.billService.getBills(userParams).subscribe((res: PaginatedResult<Bill[]>) => {
-        this.bill = res.result;
-        this.bill.forEach(element => {
-            this.billService.getBillDetail(element.id).subscribe(result => {
-                result.forEach(element => {
-                    billDetails.push(element);
-                    for (let i = 0; i < billDetails.length; i++) {
-                        for (let k = i + 1; k < billDetails.length; k++)
-                        {
-                            if (billDetails[i].productDetailId === billDetails[k].productDetailId) {
-                                billDetails[i].amount += billDetails[k].amount;
-                                billDetails.splice(k, 1);
-                                this.billDetailResult.push(billDetails[i].amount);
-
-                                billDetails.forEach(bill => {
-                                    this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) =>{
-                                        this.productService.getProduct(detail.productId).subscribe((product: Products) =>{
-                                            this.billDetailLabel.push(product.name);
-                                        })
-                                    })
-                                })
-                                // tslint:disable-next-line: only-arrow-functions
-                                this.billDetailResult.sort(function(a, b){return b - a});
-                             }
-                        }
-                     }
-                });
-                console.log(this.billDetailResult);
-                console.log(this.billDetailLabel);
-                this.billDetailLabel.slice(0,4);
-                chart.update();
-            })
-        });
-    })
+    // userParams.month = today.getMonth() + 1;
+    this.userParams.month = 6;
+    this.userParams.day = 0;
+    this.userParams.year = today.getFullYear();
+    this.ngAfterViewInit();
 }
 
-getDataForDate(chart: Chart) {
-    let today = new Date();
-    let jstoday = formatDate(today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+07');
 
-    let userParams: any = {};
-    // userParams.month = today.getMonth() + 1;
+getDataForChart(chart: Chart) {
 
-    // userParams.day = today.getDate();
-
-    // userParams.year = today.getFullYear();
-    userParams.month = today.getMonth() + 1;
-    userParams.day = 0;
-    userParams.year = today.getFullYear();
 
     let bills: Bill[] = [];
-    let billDetails: BillDetail[] =[];
+    let billDetails: BillDetail[] = [];
 
 
-    this.billService.getBills(userParams).subscribe((res: PaginatedResult<Bill[]>) => {
+    this.billService.getBills(this.userParams).subscribe((res: PaginatedResult<Bill[]>) => {
         this.bill = res.result;
         this.bill.forEach(element => {
             this.billService.getBillDetail(element.id).subscribe(result => {
@@ -150,22 +127,22 @@ getDataForDate(chart: Chart) {
                                 billDetails.splice(k, 1);
                                 this.billDetailResult.push(billDetails[i].amount);
 
-                                billDetails.forEach(bill => {
-                                    this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) =>{
-                                        this.productService.getProduct(detail.productId).subscribe((product: Products) =>{
-                                            this.billDetailLabel.push(product.name);
-                                        })
-                                    })
-                                })
+                                // billDetails.forEach(bill => {
+                                //     this.detailService.getProductDetailById(bill.productDetailId).subscribe((detail: ProductDetail) => {
+                                //         this.productService.getProduct(detail.productId).subscribe((product: Products) => {
+                                //             this.billDetailLabel.push(product.name);
+                                //         })
+                                //     })
+                                // })
                                 // tslint:disable-next-line: only-arrow-functions
                                 this.billDetailResult.sort(function(a, b){return b - a});
                              }
                         }
                      }
                 });
-                console.log(this.billDetailResult);
-                console.log(this.billDetailLabel);
-                this.billDetailLabel.slice(0,4);
+                // console.log(this.billDetailResult);
+                // console.log(this.billDetailLabel);
+                // this.billDetailLabel.slice(0, 4);
                 chart.update();
             })
         });
@@ -175,13 +152,13 @@ exportToExcel()
 {
 
     let dataList = [];
-    dataList.length=5;
 
     this.billDetailResult.forEach(element => {
         dataList.unshift(element);
     });
-    this.billDetailLabel.length=5;
+    this.billDetailLabel.length = 5;
     this.billDetailLabel.unshift("Sản phẩm");
+    dataList.length = 5;
     dataList.unshift("Doanh Thu");
     this.data = [this.billDetailLabel, dataList];
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
@@ -192,9 +169,12 @@ exportToExcel()
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
-    this.labels.shift();
-    this.dataChart.shift();
-    this.data = [this.labels, this.dataChart];
+    // this.labels.shift();
+    // this.dataChart.shift();
+    // this.data = [this.labels, this.dataChart];
+    this.billDetailLabel.shift();
+    dataList.shift();
+    this.data = [this.billDetailLabel, dataList];
 }
 
 
@@ -211,12 +191,14 @@ public ngAfterViewInit() {
                       beginAtZero: true
                   }
               }]
-          }
+          },
+          events: ['click']
       }
   });
 
 //   this.getDataForMonth(myChart);
-  this.getDataForDate(myChart);
+  this.getDataForChart(myChart);
+  this.chartData = {};
 }
 
 }

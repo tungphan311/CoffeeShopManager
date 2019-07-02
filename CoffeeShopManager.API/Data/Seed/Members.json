@@ -1,12 +1,13 @@
 [
     {
         "Address": "ktx khu A",
-        "CreatedDate": "22/11/2019",
-        "DateOfBirth": "11/2/1198",
+        "CreatedDate": "2019-01-22 00:00:00",
+        "DateOfBirth": "1998-02-11 00:00:00",
         "Gender": "female",
         "Id": 1,
         "Name": "hoang",
         "Phone": "46454",
-        "Photo": null
+        "Photo": null,
+        "Point": 0
     }
 ]

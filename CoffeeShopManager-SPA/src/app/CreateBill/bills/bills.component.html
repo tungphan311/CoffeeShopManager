@@ -41,6 +41,11 @@
             <div *ngIf="!required(paid)" style="color: red"> * Vui lòng nhập số tiền khách đưa</div>
             <div *ngIf="!isPaidValid(paid) && required(paid)" style="color: red"> * Vui lòng nhập đúng cú pháp</div>
           </div>
+          <input type="text" *ngIf="orderList.length > 0" class="form-control" style="margin-top: 10px;"
+            placeholder="Tìm thành viên" [(ngModel)]="value" (keypress)="focus=true">
+          <div id="search-results" *ngIf="focus">
+            <div class="search-result" *ngFor="let item of members" (click)="setQuery(item)">{{item.name}} - {{item.phone}}</div>
+          </div>
         </div>
         <div class="card-body">
           <div *ngIf="orderList.length == 0">

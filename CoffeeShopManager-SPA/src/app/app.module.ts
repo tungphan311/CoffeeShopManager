@@ -60,6 +60,10 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberCreateComponent } from './members/member-create/member-create.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { BillService } from './_service/Bills/bill.service';
+import { ProductDetailService } from './_service/ProductDetails/product-detail.service';
+import { ProductTypeService } from './_service/ProductTypes/product-type.service';
+import { MemberService } from './_service/member.service';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -145,6 +149,10 @@ export function tokenGetter() {
       StaffDetailResolver,
       StaffListResolver,
       StaffEditResolver,
+      BillService,
+      ProductDetailService,
+      ProductTypeService,
+      MemberService
    ],
    bootstrap: [
       AppComponent
