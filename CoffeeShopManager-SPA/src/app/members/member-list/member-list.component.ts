@@ -17,7 +17,7 @@ export class MemberListComponent implements OnInit {
   selectedPhone: '',
   selecetedAddress: '',
   selectedGender: '',
-  selectedAge: '',};
+  selectedAge: 0};
   selectedOption: Member[];
   members: Member[];
 
@@ -55,6 +55,11 @@ onSelectGender(gender): void {
   this.members = this.members.filter(x => x.gender = this.selectedOption['gender']);
 }
 
+onSelectedAge(age): void {
+  this.model.selectedAge = age;
+  this.members = this.members.filter(x => x.age === this.selectedOption['age']);
+}
+
 
 getMembers() {
   this.route.data.subscribe(data =>{
@@ -89,6 +94,7 @@ applyFilter() {
   memberParams.phone = this.model.selectedPhone;
   memberParams.address = this.model.selecetedAddress;
   memberParams.gender = this.model.selectedGender;
+  memberParams.age = this.model.selectedAge;
   this.memberService.getListMember(memberParams).subscribe(result => {
     this.members = result.result;
     this.members = this.defaultPhoto(result.result);
@@ -108,6 +114,7 @@ pageChanged(event: any): void {
 
 resetFilter() {
   this.model.selectedName = this.model.selectedPhone = this.model.selecetedAddress = this.model.selectedGender  = '';
+  this.model.selectedAge = 0;
   this.applyFilter();
 }
 

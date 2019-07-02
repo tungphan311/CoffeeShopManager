@@ -61,6 +61,11 @@ namespace CoffeeShopManager.API.Data.Members
                 members = members.Where(e => e.Gender.Contains(memberParams.Gender));
             }
 
+            if (memberParams.Age != 0)
+            {
+                members = members.Where(e => e.DateOfBirth.CalculateAge()==memberParams.Age);
+            }
+
             return await PagedList<Member>.CreateAsync(members, memberParams.PageNumber, memberParams.PageSize);
         }
 

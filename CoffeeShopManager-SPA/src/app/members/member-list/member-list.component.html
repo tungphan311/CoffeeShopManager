@@ -9,7 +9,7 @@
             typeaheadOptionField="name"
             (typeaheadOnSelect)="onSelectName($event)"         
             class="form-control"
-            placeholder="Name"
+            placeholder="Nhập tên"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
@@ -18,7 +18,7 @@
             typeaheadOptionField="phone"
             (typeaheadOnSelect)="onSelectPhone($event)"
             class="form-control"
-            placeholder="Phone"
+            placeholder="Nhập số điện thoại"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
@@ -27,30 +27,33 @@
             typeaheadOptionField="address"
             (typeaheadOnSelect)="onSelectAddress($event)"
             class="form-control"
-            placeholder="Address"
+            placeholder="Nhập địa chỉ"
             (keypress)="onChange()">
         </li>
         <li class="list-inline-item">
                 <select class="form-control" (change)="onSelectGender($event.target.value)">
-                    <option value="all">--Gender--</option>
+                    <option value="all">--Chọn giới tính--</option>
                     <option *ngFor="let gender of genderList" value="{{gender}}" 
                       [selected]="model.selectedGender === gender">{{gender}}</option>
                 </select>
             </li>
             <li class="list-inline-item">
-                <mat-slider
+                Chọn tuổi: <mat-slider [(ngModel)]="model.selectedAge"
+                (change)="onSelectedAge($event.target.value)"
                 thumbLabel
                 [displayWith]="formatLabel"
                 tickInterval="1000"
                 min="1"
                 max="100"></mat-slider>
             </li>
+    </ul>
+    <ul class="list-inline">
             <li class="list-inline-item">
-                <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
+                    <button class="btn btn-outline-success" (click)="applyFilter()">Tìm</button>
+                    </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
                 </li>
-            <li class="list-inline-item">
-                <button class="btn btn-outline-danger" (click)="resetFilter()">Khôi phục</button>
-            </li>
     </ul>
 
     

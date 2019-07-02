@@ -1,3 +1,5 @@
+using System;
+
 namespace CoffeeShopManager.API.Helpers
 {
     public class MemberParams
@@ -19,5 +21,8 @@ namespace CoffeeShopManager.API.Helpers
 
         public string Gender { get; set; }
 
+        public int Age { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
     }
 }
