@@ -82,7 +82,9 @@ namespace CoffeeShopManager.API.Controllers
 
             if (!staffFromRepo.Photos.Any(u => u.IsMain))
                 photo.IsMain = true;
-
+            if(staffFromRepo.Photo ==""||staffFromRepo.Photo==null||staffFromRepo.Photo=="https://makitweb.com/demo/broken_image/images/noimage.png"){
+                staffFromRepo.Photo = photoForCreationDto.Url;
+            }
             staffFromRepo.Photos.Add(photo);
 
             if (await _repo.SaveAll())
@@ -118,6 +120,32 @@ namespace CoffeeShopManager.API.Controllers
                 return NoContent();
 
             return BadRequest("Could not set photo to Main");
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int staffId, int id){
+            var staff = await _repo.GetEmployee(staffId);
+
+            if(!staff.Photos.Any(p => p.Id == id ))
+                return Unauthorized();
+
+            var photoFromRepo = await _repo.GetPhoto(id);
+
+            if (photoFromRepo.IsMain)
+                return BadRequest("Không thể xóa ảnh đại diện ");
+
+            if(photoFromRepo.PublicId !=null){
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+                var result = _cloudinary.Destroy(deleteParams);
+                 if(result.Result == "ok"){
+                    _repo.Delete(photoFromRepo);
+                }
+            }
+            if(photoFromRepo.PublicId == null){
+                _repo.Delete(photoFromRepo);
+            }
+            if(await _repo.SaveAll()) 
+                return Ok();
+            return BadRequest(" Xóa hình ảnh thất bại ");
         }
     }
 }

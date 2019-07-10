@@ -21,6 +21,8 @@ export class StaffEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  isinfochanged=false;
+  currentstaff: Staff;
   staffs: Staff[];
   genderchange: boolean;
   datechange: boolean;
@@ -40,6 +42,42 @@ export class StaffEditComponent implements OnInit {
       this.defaultPhoto(this.staff);
     });
     this.getStaffs();
+    this.staffService.getStaff(this.staff.id).subscribe(data =>{
+      this.currentstaff = data;
+      this.currentstaff.dateOfBirth=new Date(this.currentstaff.dateOfBirth.toString());
+    });
+  }
+
+  infoChange():void{
+    console.log('imhere');
+    // console.log(this.currentmember.dateOfBirth.toString());
+    // console.log(this.member.dateOfBirth.toString());
+    if (this.currentstaff.name!=this.staff.name
+      ||this.currentstaff.address!=this.staff.address
+      ||this.currentstaff.phone!=this.staff.phone
+      ||this.currentstaff.gender!=this.staff.gender
+      ||this.currentstaff.email!=this.staff.email
+      ||!this.compareDate(this.currentstaff.dateOfBirth, this.staff.dateOfBirth)
+      ){
+      this.isinfochanged=true;}
+      else{
+      this.isinfochanged=false;}
+  }
+
+  compareDate(d1: Date, d2: Date): Boolean {
+    //d1.setTime(0);
+    d1 = new Date(d1);
+    d2 = new Date(d2);
+    d1.setHours(0,0,0,0);
+    d2.setHours(0,0,0,0);
+    console.log(d1.toDateString() == d2.toDateString());
+    return d1.toDateString() == d2.toDateString();
+  }
+
+  loadDate(): Date{
+    var dateString = '';
+    let date = new Date(this.staff.dateOfBirth);
+    return date;
   }
 
   getStaffs() {
@@ -71,58 +109,25 @@ export class StaffEditComponent implements OnInit {
   }
 
 
-  getGender(input, output): boolean {
-    if (input === output) {
-      this.staffGender = output;
-      return true;
-    }
 
-    return false;
-  }
 
-  changeGender(gender) {
-    this.staff.gender = gender;
-
-    this.genderchange = this.genderOnChange();
-  }
   updateMainPhoto(photoUrl) {
     this.staff.photo = photoUrl;
   }
-  loadDate(staff): string{
-    var dateString = '';
-    let date = new Date(this.staff.dateOfBirth);
 
-    // console.log(this.staff.dateOfBirth);
-    var day = date.getDate();
-    var month = date.getMonth()+1;
-    var year = date.getFullYear();
-    
-    dateString = day +'/'+ month +'/' + year;
-    return dateString;
-  }
   
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events.push(`${type}: ${event.value}`);
     this.staff.dateOfBirth = event.value;
-    this.datechange = this.dateChange();
+    if (type=='change')
+    this.infoChange();
   }
 
-
-  formChange():boolean{
-    if(this.genderchange||this.datechange) return false;
-    else return true;
-  }
   createTime(): Date{   
     var today = new Date();
     return today;
   }
-  genderOnChange():boolean{
-    return true;
-  }
 
-  dateChange():boolean{
-    return true;
-  }
   check(model:any, staffs: Staff[]): boolean{
     if(model.dateOfBirth>=this.createTime()){
       this.alertify.error('Ngày sinh không hợp lệ')

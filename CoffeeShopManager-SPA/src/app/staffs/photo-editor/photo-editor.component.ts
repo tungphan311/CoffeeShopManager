@@ -35,6 +35,8 @@ export class PhotoEditorComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
+
+
   initializeUploader() {
     this.uploader = new FileUploader({
       url: 'http://localhost:5000/api/staff/' + this.staff.id + '/photo',
@@ -56,6 +58,7 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
+        if(this.staff.photo ==="https://makitweb.com/demo/broken_image/images/noimage.png") this.staff.photo = photo.url;
       }
     };
   }
@@ -65,10 +68,20 @@ export class PhotoEditorComponent implements OnInit {
       this.currentMain = this.photos.filter(p => p.isMain === true)[0];
       this.currentMain.isMain = false;
       photo.isMain = true;
+      // if(this.staff.photo ==="https://makitweb.com/demo/broken_image/images/noimage.png") this.staff.photo = photo.url;
       this.getStaffPhotoChange.emit(photo.url);
     }, error => {
       this.alertify.error(error);
     });
   }
-
+  deletePhoto(id: number){
+    this.alertify.confirm(' Bạn có chắc muốn xóa ảnh này', () => {
+      this.staffService.deletePhoto(this.staff.id,id).subscribe(()=>{
+        this.photos.splice(this.photos.findIndex(p => p.id === id),1);
+        this.alertify.success(' Xóa ảnh thành công ')
+      },error =>{
+        this.alertify.error(' Xóa ảnh thất bại ');
+      });
+    });
+  }
 }

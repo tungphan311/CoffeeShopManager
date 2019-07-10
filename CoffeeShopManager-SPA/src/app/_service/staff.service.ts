@@ -116,5 +116,8 @@ const httpOptions = {
     getAllEmployees(): Observable<Staff[]> {
       return this.http.get<Staff[]>(this.baseUrl + 'staff/');
     }
+    deletePhoto(staffId: number, id: number){
+      return this.http.delete(this.baseUrl + 'staff/' + staffId +'/photo/' +id);
+    }
   }
 
